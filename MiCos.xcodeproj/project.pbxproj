@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		492279B01B90E2F00062C695 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492279AF1B90E2F00062C695 /* AppDelegate.swift */; };
+		492279B21B90E2F00062C695 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492279B11B90E2F00062C695 /* ViewController.swift */; };
+		492279B51B90E2F00062C695 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492279B31B90E2F00062C695 /* Main.storyboard */; };
+		492279B71B90E2F00062C695 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 492279B61B90E2F00062C695 /* Images.xcassets */; };
+		492279BA1B90E2F00062C695 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 492279B81B90E2F00062C695 /* LaunchScreen.xib */; };
+		492279C61B90E2F00062C695 /* MiCosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492279C51B90E2F00062C695 /* MiCosTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		492279C01B90E2F00062C695 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 492279A21B90E2F00062C695 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 492279A91B90E2F00062C695;
+			remoteInfo = MiCos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		492279AA1B90E2F00062C695 /* MiCos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiCos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		492279AE1B90E2F00062C695 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		492279AF1B90E2F00062C695 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		492279B11B90E2F00062C695 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		492279B41B90E2F00062C695 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		492279B61B90E2F00062C695 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		492279B91B90E2F00062C695 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		492279BF1B90E2F00062C695 /* MiCosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiCosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		492279C41B90E2F00062C695 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		492279C51B90E2F00062C695 /* MiCosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiCosTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		492279A71B90E2F00062C695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		492279BC1B90E2F00062C695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		492279A11B90E2F00062C695 = {
+			isa = PBXGroup;
+			children = (
+				492279AC1B90E2F00062C695 /* MiCos */,
+				492279C21B90E2F00062C695 /* MiCosTests */,
+				492279AB1B90E2F00062C695 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		492279AB1B90E2F00062C695 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				492279AA1B90E2F00062C695 /* MiCos.app */,
+				492279BF1B90E2F00062C695 /* MiCosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		492279AC1B90E2F00062C695 /* MiCos */ = {
+			isa = PBXGroup;
+			children = (
+				492279AF1B90E2F00062C695 /* AppDelegate.swift */,
+				492279B11B90E2F00062C695 /* ViewController.swift */,
+				492279B31B90E2F00062C695 /* Main.storyboard */,
+				492279B61B90E2F00062C695 /* Images.xcassets */,
+				492279B81B90E2F00062C695 /* LaunchScreen.xib */,
+				492279AD1B90E2F00062C695 /* Supporting Files */,
+			);
+			path = MiCos;
+			sourceTree = "<group>";
+		};
+		492279AD1B90E2F00062C695 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				492279AE1B90E2F00062C695 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		492279C21B90E2F00062C695 /* MiCosTests */ = {
+			isa = PBXGroup;
+			children = (
+				492279C51B90E2F00062C695 /* MiCosTests.swift */,
+				492279C31B90E2F00062C695 /* Supporting Files */,
+			);
+			path = MiCosTests;
+			sourceTree = "<group>";
+		};
+		492279C31B90E2F00062C695 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				492279C41B90E2F00062C695 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		492279A91B90E2F00062C695 /* MiCos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 492279C91B90E2F00062C695 /* Build configuration list for PBXNativeTarget "MiCos" */;
+			buildPhases = (
+				492279A61B90E2F00062C695 /* Sources */,
+				492279A71B90E2F00062C695 /* Frameworks */,
+				492279A81B90E2F00062C695 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MiCos;
+			productName = MiCos;
+			productReference = 492279AA1B90E2F00062C695 /* MiCos.app */;
+			productType = "com.apple.product-type.application";
+		};
+		492279BE1B90E2F00062C695 /* MiCosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 492279CC1B90E2F00062C695 /* Build configuration list for PBXNativeTarget "MiCosTests" */;
+			buildPhases = (
+				492279BB1B90E2F00062C695 /* Sources */,
+				492279BC1B90E2F00062C695 /* Frameworks */,
+				492279BD1B90E2F00062C695 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				492279C11B90E2F00062C695 /* PBXTargetDependency */,
+			);
+			name = MiCosTests;
+			productName = MiCosTests;
+			productReference = 492279BF1B90E2F00062C695 /* MiCosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		492279A21B90E2F00062C695 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Samuel Coby Anderson";
+				TargetAttributes = {
+					492279A91B90E2F00062C695 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					492279BE1B90E2F00062C695 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 492279A91B90E2F00062C695;
+					};
+				};
+			};
+			buildConfigurationList = 492279A51B90E2F00062C695 /* Build configuration list for PBXProject "MiCos" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 492279A11B90E2F00062C695;
+			productRefGroup = 492279AB1B90E2F00062C695 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				492279A91B90E2F00062C695 /* MiCos */,
+				492279BE1B90E2F00062C695 /* MiCosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		492279A81B90E2F00062C695 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				492279B51B90E2F00062C695 /* Main.storyboard in Resources */,
+				492279BA1B90E2F00062C695 /* LaunchScreen.xib in Resources */,
+				492279B71B90E2F00062C695 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		492279BD1B90E2F00062C695 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		492279A61B90E2F00062C695 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				492279B21B90E2F00062C695 /* ViewController.swift in Sources */,
+				492279B01B90E2F00062C695 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		492279BB1B90E2F00062C695 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				492279C61B90E2F00062C695 /* MiCosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		492279C11B90E2F00062C695 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 492279A91B90E2F00062C695 /* MiCos */;
+			targetProxy = 492279C01B90E2F00062C695 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		492279B31B90E2F00062C695 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				492279B41B90E2F00062C695 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		492279B81B90E2F00062C695 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				492279B91B90E2F00062C695 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		492279C71B90E2F00062C695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		492279C81B90E2F00062C695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		492279CA1B90E2F00062C695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MiCos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		492279CB1B90E2F00062C695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MiCos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		492279CD1B90E2F00062C695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MiCosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MiCos.app/MiCos";
+			};
+			name = Debug;
+		};
+		492279CE1B90E2F00062C695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MiCosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MiCos.app/MiCos";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		492279A51B90E2F00062C695 /* Build configuration list for PBXProject "MiCos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				492279C71B90E2F00062C695 /* Debug */,
+				492279C81B90E2F00062C695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		492279C91B90E2F00062C695 /* Build configuration list for PBXNativeTarget "MiCos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				492279CA1B90E2F00062C695 /* Debug */,
+				492279CB1B90E2F00062C695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		492279CC1B90E2F00062C695 /* Build configuration list for PBXNativeTarget "MiCosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				492279CD1B90E2F00062C695 /* Debug */,
+				492279CE1B90E2F00062C695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 492279A21B90E2F00062C695 /* Project object */;
+}
