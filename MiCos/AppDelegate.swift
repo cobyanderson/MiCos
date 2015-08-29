@@ -7,16 +7,111 @@
 //
 
 import UIKit
+import Parse
+import Bolts
+import ParseUI
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    var parseLoginHelper: ParseLoginHelper!
+    
+    override init() {
+        super.init()
+        
+        parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
+            // Initialize the ParseLoginHelper with a callback
+            if let error = error {
+                // 1
+               
+            } else  if let user = user {
+                
+                let installation = PFInstallation.currentInstallation()
+                installation["user"] = user
+                installation.saveInBackground()
+                
+                // if login was successful, display the TabBarController
+                // 2
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let mainViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! UIViewController
+                // 3
+                self.window?.rootViewController!.presentViewController(mainViewController, animated:true, completion:nil)
+            }
+        }
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
+        
+        Parse.setApplicationId("ptL6M8uCH8bdfi3ahQJmtM9oMdhDTzA8khp8kzaR",
+            clientKey: "L8SbAeOmjjR6DdD4nu9Ffc08feWy3uF036taEbYI")
+        
+        let userNotificationTypes = (UIUserNotificationType.Alert |  UIUserNotificationType.Badge |  UIUserNotificationType.Sound);
+        
+        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+        
+        let user = PFUser.currentUser()
+        
+        let startViewController: UIViewController;
+        
+        if (user != nil) {
+            // 3
+            // if we have a user, set the TabBarController to be the initial View Controller
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            startViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! UIViewController
+        } else {
+            // 4
+           
+            // Otherwise set the LoginViewController to be the first
+            let loginViewController = PFLogInViewController()
+            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+            loginViewController.delegate = parseLoginHelper
+            loginViewController.signUpController?.delegate = parseLoginHelper
+            
+            //Customization!
+            
+            var logoImage = UIImageView()
+            logoImage.image = UIImage(named: "logo")
+            logoImage.contentMode = UIViewContentMode.ScaleAspectFit
+            
+            loginViewController.logInView?.logo = logoImage
+            
+            loginViewController.logInView?.signUpButton?.removeFromSuperview()
+            loginViewController.logInView?.facebookButton?.removeFromSuperview()
+            loginViewController.logInView?.passwordForgottenButton?.backgroundColor = UIColor.whiteColor()
+            loginViewController.logInView?.tintColor = UIColor.orangeColor()
+            
+                
+                
+            startViewController = loginViewController
+        }
+        
+        // 5
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window?.rootViewController = startViewController;
+        self.window?.makeKeyAndVisible()
+        
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        // Store the deviceToken in the current Installation and save it to Parse
+        let installation = PFInstallation.currentInstallation()
+        
+        if let user = PFUser.currentUser() {
+            installation["user"] = user
+        }
+        
+        installation.setDeviceTokenFromData(deviceToken)
+        installation.saveInBackground()
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        PFPush.handlePush(userInfo)
     }
 
     func applicationWillResignActive(application: UIApplication) {
