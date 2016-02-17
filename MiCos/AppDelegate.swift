@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // if login was successful, display the TabBarController
                 // 2
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let mainViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! UIViewController
+                let mainViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") 
                 // 3
                 self.window?.rootViewController!.presentViewController(mainViewController, animated:true, completion:nil)
             }
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("ptL6M8uCH8bdfi3ahQJmtM9oMdhDTzA8khp8kzaR",
             clientKey: "L8SbAeOmjjR6DdD4nu9Ffc08feWy3uF036taEbYI")
         
-        let userNotificationTypes = (UIUserNotificationType.Alert |  UIUserNotificationType.Badge |  UIUserNotificationType.Sound);
+        let userNotificationTypes: UIUserNotificationType = ([UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]);
         
         let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(settings)
@@ -62,19 +62,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 3
             // if we have a user, set the TabBarController to be the initial View Controller
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            startViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! UIViewController
+            startViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") 
         } else {
             // 4
            
             // Otherwise set the LoginViewController to be the first
             let loginViewController = PFLogInViewController()
-            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+            loginViewController.fields = [.UsernameAndPassword, .LogInButton, .SignUpButton, .PasswordForgotten, .Facebook]
             loginViewController.delegate = parseLoginHelper
             loginViewController.signUpController?.delegate = parseLoginHelper
             
             //Customization!
             
-            var logoImage = UIImageView()
+            let logoImage = UIImageView()
             logoImage.image = UIImage(named: "logo")
             logoImage.contentMode = UIViewContentMode.ScaleAspectFit
             
