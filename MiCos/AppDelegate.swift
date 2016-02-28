@@ -13,6 +13,7 @@ import ParseUI
 import FBSDKCoreKit
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -44,6 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+//        let barAppearace = UIBarButtonItem.appearance()
+//        barAppearace.setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), forBarMetrics:UIBarMetrics.Default)
+      
         
         Parse.setApplicationId("ptL6M8uCH8bdfi3ahQJmtM9oMdhDTzA8khp8kzaR",
             clientKey: "L8SbAeOmjjR6DdD4nu9Ffc08feWy3uF036taEbYI")
