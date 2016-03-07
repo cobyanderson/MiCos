@@ -67,40 +67,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 3
             // if we have a user, set the TabBarController to be the initial View Controller
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            startViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") 
+            startViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController")
+            
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            self.window?.rootViewController = startViewController;
+            self.window?.makeKeyAndVisible()
+            
+            return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+            
         } else {
             // 4
-           
+            presentLogInView()
             // Otherwise set the LoginViewController to be the first
-            let loginViewController = PFLogInViewController()
-            loginViewController.fields = [.UsernameAndPassword, .LogInButton, .SignUpButton, .PasswordForgotten, .Facebook]
-            loginViewController.delegate = parseLoginHelper
-            loginViewController.signUpController?.delegate = parseLoginHelper
-            
-            //Customization!
-            
-            let logoImage = UIImageView()
-            logoImage.image = UIImage(named: "logo")
-            logoImage.contentMode = UIViewContentMode.ScaleAspectFit
-            
-            loginViewController.logInView?.logo = logoImage
-            
-            loginViewController.logInView?.signUpButton?.removeFromSuperview()
-            loginViewController.logInView?.facebookButton?.removeFromSuperview()
-            loginViewController.logInView?.passwordForgottenButton?.backgroundColor = UIColor.whiteColor()
-            loginViewController.logInView?.tintColor = UIColor.orangeColor()
-            
-                
-                
-            startViewController = loginViewController
         }
         
-        // 5
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.rootViewController = startViewController;
-        self.window?.makeKeyAndVisible()
+        //sketchy
+         return false
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    
+       
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -140,7 +125,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    func presentLogInView() {
+        
+        let startViewController: UIViewController;
+        
+        let loginViewController = PFLogInViewController()
+        loginViewController.fields = [.UsernameAndPassword, .LogInButton, .SignUpButton, .PasswordForgotten, .Facebook]
+        loginViewController.delegate = parseLoginHelper
+        loginViewController.signUpController?.delegate = parseLoginHelper
+        
+        //Customization!
+        
+        let logoImage = UIImageView()
+        logoImage.image = UIImage(named: "logo")
+        logoImage.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        loginViewController.logInView?.logo = logoImage
+        
+        loginViewController.logInView?.signUpButton?.removeFromSuperview()
+        loginViewController.logInView?.facebookButton?.removeFromSuperview()
+        loginViewController.logInView?.passwordForgottenButton?.backgroundColor = UIColor.whiteColor()
+        loginViewController.logInView?.tintColor = UIColor.orangeColor()
+        
+        startViewController = loginViewController
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window?.rootViewController = startViewController;
+        self.window?.makeKeyAndVisible()
+        
+        
+//        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        
+    }
 
 }
 

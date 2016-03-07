@@ -176,6 +176,7 @@
 		49C48AF51C77E602009BBE69 /* TransitionZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48AD81C77E602009BBE69 /* TransitionZoom.swift */; };
 		49C48AF61C77E602009BBE69 /* UnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48AD91C77E602009BBE69 /* UnwindSegue.swift */; };
 		49C870B11C7FD2BC00EAEF55 /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C870B01C7FD2BC00EAEF55 /* CircularLoaderView.swift */; };
+		49D024951C8D10C200342F18 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D024941C8D10C200342F18 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -405,6 +406,7 @@
 		49C48AD81C77E602009BBE69 /* TransitionZoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionZoom.swift; sourceTree = "<group>"; };
 		49C48AD91C77E602009BBE69 /* UnwindSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegue.swift; sourceTree = "<group>"; };
 		49C870B01C7FD2BC00EAEF55 /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
+		49D024941C8D10C200342F18 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -472,6 +474,7 @@
 			children = (
 				492279B61B90E2F00062C695 /* Images.xcassets */,
 				492279AF1B90E2F00062C695 /* AppDelegate.swift */,
+				49D024941C8D10C200342F18 /* SettingsViewController.swift */,
 				492279B11B90E2F00062C695 /* ViewController.swift */,
 				492279B31B90E2F00062C695 /* Main.storyboard */,
 				491500091C821B4200F2B74D /* AwardArcsViewController.swift */,
@@ -1000,6 +1003,7 @@
 				4993D5411C7471EB00E3AD06 /* PieRadarChartViewBase.swift in Sources */,
 				4993D58C1C7471EB00E3AD06 /* ChartXAxisRendererHorizontalBarChart.swift in Sources */,
 				4993D5891C7471EB00E3AD06 /* ChartRendererBase.swift in Sources */,
+				49D024951C8D10C200342F18 /* SettingsViewController.swift in Sources */,
 				4993D5941C7471EB00E3AD06 /* LineRadarChartRenderer.swift in Sources */,
 				4993D56B1C7471EB00E3AD06 /* ILineRadarChartDataSet.swift in Sources */,
 				4993D5471C7471EB00E3AD06 /* ChartLimitLine.swift in Sources */,

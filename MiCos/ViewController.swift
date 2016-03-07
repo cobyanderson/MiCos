@@ -257,6 +257,8 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func closeToViewController(segue:UIStoryboardSegue) {
+    }
     
     @IBAction func cancelToViewController(segue:UIStoryboardSegue) {
     }
