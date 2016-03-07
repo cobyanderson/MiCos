@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6228B9F3A76950363B7BAE35EB877624581DC5D9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6228B9F3A76950363B7BAE35EB877624581DC5D9" : 0,
+    "E99A72ACC196AB910C1713E9C277110A984A90C0" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "68489C1D-1AEB-4E0B-9389-E7EB97870C14",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6228B9F3A76950363B7BAE35EB877624581DC5D9" : "MiCos\/",
+    "E99A72ACC196AB910C1713E9C277110A984A90C0" : "Taggle\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MiCos",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MiCos.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cobyanderson\/MiCos.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6228B9F3A76950363B7BAE35EB877624581DC5D9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cobyanderson\/Taggles.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E99A72ACC196AB910C1713E9C277110A984A90C0"
+    }
+  ]
+}

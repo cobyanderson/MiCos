@@ -150,22 +150,11 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate {
         self.setSpring()
         
         //find the ranking
+        let rankList = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th"]
         let sortedScores = self.legacyScores.sort()
         let rankIndex = sortedScores.indexOf(score)
         
-        var place = ""
-        if (sortedScores.count - rankIndex!)  == 1 {
-            place = "1st Place"
-        }
-        else if (sortedScores.count - rankIndex!)  == 2 {
-            place = "2nd Place"
-        }
-        else if (sortedScores.count - rankIndex!)  == 3 {
-            place = "3rd Place"
-        }
-        else {
-            place = String(sortedScores.count - rankIndex!) + "th Place"
-        }
+        let place = rankList[sortedScores.count - rankIndex! - 1] + " Place"
         
         
         self.arcPlace.animateTo()
@@ -274,9 +263,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate {
     
     @IBAction func saveToViewController(segue:UIStoryboardSegue) {
         if let awardArcsViewController = segue.sourceViewController as? AwardArcsViewController {
-            if let award = awardArcsViewController.award {
+           // if let award = awardArcsViewController.award {
                 //save it here
-            }
+          //  }
             // some good stuff for animating table views
 //            let indexPath = NSIndexPath(forRow: players.count-1, inSection: 0)
 //            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)

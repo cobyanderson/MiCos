@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "MiCos": {
+      "applicationId": "ptL6M8uCH8bdfi3ahQJmtM9oMdhDTzA8khp8kzaR"
+    },
+    "_default": {
+      "link": "MiCos"
+    }
+  }
+}

@@ -31,8 +31,12 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
     func findAwardees(completionBlock:PFArrayResultBlock) -> PFQuery {
         let searchText = self.chooseAwardeeSearchBar?.text ?? ""
         let userQuery = PFUser.query()
+        if let awardersLegacy = PFUser.currentUser()?["Legacy"] as? String {
+            userQuery?.whereKey("Legacy", notEqualTo: awardersLegacy)
+        }
         userQuery?.whereKey("Name", matchesRegex: searchText, modifiers: "i")
         userQuery?.whereKey("username", notEqualTo: PFUser.currentUser()!.username!)
+        userQuery?.whereKey("Role", containedIn: ["F","E"])
         userQuery?.findObjectsInBackgroundWithBlock(completionBlock)
         
         return userQuery!

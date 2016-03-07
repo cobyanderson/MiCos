@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -30,6 +29,9 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Legacy Cup" id="jVo-8w-7f6">
+                                        <barButtonItem key="leftBarButtonItem" image="Settings" style="plain" id="D24-mD-CM6">
+                                            <inset key="imageInsets" minX="0.0" minY="12" maxX="20" maxY="10"/>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="u54-xf-JyA">
                                             <connections>
                                                 <segue destination="Ycg-ez-2Rf" kind="presentation" id="bFs-Tz-6FT"/>
@@ -92,8 +94,8 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="6Ck-XT-Ncs"/>
                                             <exclude reference="w16-E4-igW"/>
+                                            <exclude reference="6Ck-XT-Ncs"/>
                                             <exclude reference="KeJ-zj-RUX"/>
                                             <exclude reference="kzQ-y4-P5i"/>
                                         </mask>
@@ -246,6 +248,34 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Notify" id="0Ca-9p-DcE">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="bI2-V4-cTr">
+                                        <rect key="frame" x="0.0" y="481.5" width="400" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bI2-V4-cTr" id="TYi-Zi-UUJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EaY-Di-RFY">
+                                                    <rect key="frame" x="8" y="7" width="384" height="29"/>
+                                                    <segments>
+                                                        <segment title="Everyone"/>
+                                                        <segment title="All In Legacy"/>
+                                                        <segment title="Only Awardee"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EaY-Di-RFY" firstAttribute="leading" secondItem="TYi-Zi-UUJ" secondAttribute="leadingMargin" id="9q9-Kv-P6b"/>
+                                                <constraint firstItem="EaY-Di-RFY" firstAttribute="trailing" secondItem="TYi-Zi-UUJ" secondAttribute="trailingMargin" id="Wro-XH-cbs"/>
+                                                <constraint firstItem="EaY-Di-RFY" firstAttribute="centerY" secondItem="TYi-Zi-UUJ" secondAttribute="centerY" id="nSt-pz-nhU"/>
+                                                <constraint firstItem="EaY-Di-RFY" firstAttribute="centerX" secondItem="TYi-Zi-UUJ" secondAttribute="centerX" id="u5z-Sx-nNf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="771-yz-d7e" id="VM8-71-N8s"/>
@@ -270,13 +300,14 @@
                         <outlet property="arcLabel" destination="ISr-Rx-dnl" id="ElT-SQ-Muz"/>
                         <outlet property="arcSlider" destination="i4v-bV-jw0" id="7us-JE-OJm"/>
                         <outlet property="awardeeLabel" destination="sdr-Fs-atO" id="25G-T8-tUT"/>
+                        <outlet property="notifyControl" destination="EaY-Di-RFY" id="hwW-yo-N18"/>
                         <outlet property="reasonText" destination="TN8-jE-TNF" id="VBh-Az-2Xe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4rk-GH-uAa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ubB-aA-Prr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1668" y="351"/>
+            <point key="canvasLocation" x="1642" y="367"/>
         </scene>
         <!--Choose Awardee(s)-->
         <scene sceneID="8Xe-Lt-Z7J">
@@ -311,9 +342,9 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3V-3L-wMc" userLabel="name">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3V-3L-wMc" userLabel="name">
                                                     <rect key="frame" x="8" y="8" width="59.5" height="11.5"/>
-                                                    <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="19"/>
+                                                    <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -348,7 +379,7 @@
                                     <constraint firstAttribute="height" constant="44" id="eQ3-Td-Rt1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
-                                <state key="normal" title="Choose">
+                                <state key="normal" title="Done">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -389,7 +420,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="czE-WM-oEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5E6-1G-vT8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2360" y="351"/>
+            <point key="canvasLocation" x="2268" y="375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nYf-U9-BHA">
@@ -413,10 +444,62 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzf-mA-NLn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1002" y="357"/>
+            <point key="canvasLocation" x="942" y="357"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="4Px-cT-EUT">
+            <objects>
+                <tableViewController id="ENu-dB-V6t" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KGB-PW-FP7">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="6zL-gU-rhi">
+                                <rect key="frame" x="0.0" y="92" width="400" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6zL-gU-rhi" id="lJg-lg-9NP">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ENu-dB-V6t" id="0Na-kx-ZGm"/>
+                            <outlet property="delegate" destination="ENu-dB-V6t" id="onk-Jp-5x8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="ZG7-cz-q8S"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="400" height="600"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P2r-Cz-zVE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1413" y="1233"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LSF-MR-mqc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NI6-Zl-afC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="400" height="600"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lcx-pJ-y1L">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ENu-dB-V6t" kind="relationship" relationship="rootViewController" id="lyf-FJ-lUx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QfM-yQ-CdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="713" y="1233"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Settings" width="50" height="50"/>
         <image name="logo" width="390" height="390"/>
     </resources>
     <color key="tintColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
