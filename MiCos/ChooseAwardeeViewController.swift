@@ -11,6 +11,7 @@ import Parse
 
 class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var doneButton: UIButton!
     
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
 
@@ -18,12 +19,26 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
     
     @IBOutlet weak var chooseAwardeeSearchBar: UISearchBar!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var foundAwardees: [PFUser]?
     
-    var selectedAwardees: [String]? = []
+    var selectedAwardees: [String]? = [] {
+        didSet {
+            if (self.selectedAwardees)! == [] {
+                doneButton.enabled = false
+            }
+            else {
+                doneButton.enabled = true
+            }
+            
+        }
+    }
+    
     
     var query: PFQuery? {
         didSet {
+            activityIndicator.startAnimating()
             oldValue?.cancel()
         }
     }
@@ -37,6 +52,7 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         userQuery?.whereKey("Name", matchesRegex: searchText, modifiers: "i")
         userQuery?.whereKey("username", notEqualTo: PFUser.currentUser()!.username!)
         userQuery?.whereKey("Role", containedIn: ["F","E"])
+        userQuery?.orderByAscending("Legacy")
         userQuery?.findObjectsInBackgroundWithBlock(completionBlock)
         
         return userQuery!
@@ -48,6 +64,7 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
             return awardee as! PFUser
         })
        
+        self.activityIndicator.stopAnimating()
         self.awardeeTableView.reloadData()
         
     }
@@ -59,7 +76,9 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         
         query = findAwardees(searchUpdateList)
         
-        
+        //sets the doneButton to be disabled
+        self.doneButton.enabled = false
+        self.doneButton.setTitleColor(UIColor.lightTextColor(), forState: .Disabled)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

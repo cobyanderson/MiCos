@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 
-class AwardArcsViewController: UITableViewController {
+class AwardArcsViewController: UITableViewController, UITextViewDelegate{
 
     @IBOutlet weak var arcSlider: UISlider!
     
@@ -22,7 +22,11 @@ class AwardArcsViewController: UITableViewController {
     
     @IBOutlet weak var notifyControl: UISegmentedControl!
     
-   
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    @IBOutlet weak var textCountLabel: UILabel!
+    
+
     
     var awardees: [String] = [] {
         didSet {
@@ -31,8 +35,37 @@ class AwardArcsViewController: UITableViewController {
                 nameString = nameString + "\(awardee)  "
             }
             awardeeLabel.text? = nameString
+            if textLength > 20  {
+                self.doneButton.enabled = true
+            }
         }
     }
+    var textLength: Int = 0 {
+        didSet {
+            self.textCountLabel.text = "\(String(textLength))/20"
+            self.textCountLabel.textColor = UIColor.redColor()
+            if textLength > 20  {
+                self.textCountLabel.textColor = UIColor.greenColor()
+                if awardees.count > 0 {
+                    self.doneButton.enabled = true
+                }
+            } else {
+                self.doneButton.enabled = false
+                
+            }
+        }
+    }
+    func textViewDidChange(textView: UITextView) {
+        self.textLength = textView.text.length
+    }
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         reasonText.endEditing(true)
@@ -82,13 +115,38 @@ class AwardArcsViewController: UITableViewController {
 
     
     @IBAction func sliderValueChanged(sender: AnyObject) {
-        arcLabel.text = String(Int(arcSlider.value))
+        arcLabel.text = (String(format: "%.1f", arcSlider.value))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        arcSlider.maximumValue = 50
-        arcSlider.minimumValue = 1
+        self.reasonText.delegate = self
+        
+        //triggers the did set method of text length
+        self.textLength = 0
+        
+        // disables the done button
+        self.doneButton.enabled = false
+       
+        // sets arc max and min give values for different people
+        print (PFUser.currentUser()!)
+        if let arcMax = PFUser.currentUser()!["MaxArcs"] {
+            if let arcMin = PFUser.currentUser()!["MinArcs"] {
+                self.arcSlider.maximumValue = arcMax as! Float
+                self.arcSlider.minimumValue = arcMin as! Float
+                arcLabel.text = String(Int(arcMin as! Float))
+            }
+        }
+        
+        else {
+            self.arcSlider.minimumValue = 1
+            self.arcSlider.maximumValue = 3
+            arcLabel.text = String(Int(1))
+            self.notifyControl.removeSegmentAtIndex( 2 , animated: false)
+            
+        }
+        //sets the segment control's default
+        self.notifyControl.selectedSegmentIndex = 1
         
         //makes sure back button does not have previous title
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)

@@ -32,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let installation = PFInstallation.currentInstallation()
                 installation["user"] = user
+                if let legacy = PFUser.currentUser()?["Legacy"] {
+                    installation["legacy"] = legacy
+                }
+                
                 installation.saveInBackground()
                 
                 // if login was successful, display the TabBarController
@@ -120,6 +124,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        let currentInstallation = PFInstallation.currentInstallation()
+        if currentInstallation.badge != 0 {
+            currentInstallation.badge = 0
+            
+            currentInstallation.saveInBackground()
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {

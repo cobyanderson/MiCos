@@ -177,6 +177,7 @@
 		49C48AF61C77E602009BBE69 /* UnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48AD91C77E602009BBE69 /* UnwindSegue.swift */; };
 		49C870B11C7FD2BC00EAEF55 /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C870B01C7FD2BC00EAEF55 /* CircularLoaderView.swift */; };
 		49D024951C8D10C200342F18 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D024941C8D10C200342F18 /* SettingsViewController.swift */; };
+		49D0249D1C8E7ECA00342F18 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D0249C1C8E7ECA00342F18 /* FeedTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -407,6 +408,7 @@
 		49C48AD91C77E602009BBE69 /* UnwindSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegue.swift; sourceTree = "<group>"; };
 		49C870B01C7FD2BC00EAEF55 /* CircularLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularLoaderView.swift; sourceTree = "<group>"; };
 		49D024941C8D10C200342F18 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		49D0249C1C8E7ECA00342F18 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +480,7 @@
 				492279B11B90E2F00062C695 /* ViewController.swift */,
 				492279B31B90E2F00062C695 /* Main.storyboard */,
 				491500091C821B4200F2B74D /* AwardArcsViewController.swift */,
+				49D0249C1C8E7ECA00342F18 /* FeedTableViewCell.swift */,
 				491500171C82597200F2B74D /* AwardeeTableViewCell.swift */,
 				4915000F1C822CBB00F2B74D /* ChooseAwardeeViewController.swift */,
 				492279B81B90E2F00062C695 /* LaunchScreen.xib */,
@@ -1052,6 +1055,7 @@
 				49C48AE11C77E602009BBE69 /* DesignableTabBarController.swift in Sources */,
 				4993D5771C7471EB00E3AD06 /* ChartHighlight.swift in Sources */,
 				4915000A1C821B4200F2B74D /* AwardArcsViewController.swift in Sources */,
+				49D0249D1C8E7ECA00342F18 /* FeedTableViewCell.swift in Sources */,
 				49C48AE71C77E602009BBE69 /* KeyboardLayoutConstraint.swift in Sources */,
 				4993D5741C7471EB00E3AD06 /* ChartFillFormatter.swift in Sources */,
 				4993D5481C7471EB00E3AD06 /* ChartMarker.swift in Sources */,

@@ -1,7 +1,9 @@
 Parse.Cloud.job("check", function (request, status) {
+  var promises = [];
   var notificationClass = Parse.Object.extend("Notifications");
   var notificationQuery = new Parse.Query(notificationClass);
   notificationQuery.equalTo("Sent", false);
+  notificationQuery.limit = 1000;
   notificationQuery.find().then(function(qresults) {
     for (var i = 0; i < (qresults.length); i++) {
       var notification = qresults[i];
@@ -12,29 +14,39 @@ Parse.Cloud.job("check", function (request, status) {
       var toUser = notification.get('toUser');
       var awardee = notification.get('Awardee');
       var awarder = notification.get('Awarder');
-      var sendToAll = true
+      var notify = notification.get('Notify');
+      notification.set('Sent', true);
+      notification.save();
+
 
       var legacyClass = Parse.Object.extend("Legacies");
       var legacyQuery = new Parse.Query(legacyClass);
       legacyQuery.equalTo("Name", legacy);
       legacyQuery.find().then(function(results) {
         var theLegacy = results[0];
-        theLegacy.increment("TotalArcs", arcs)
+        var emoji = theLegacy.get("Emoji");
+        theLegacy.increment("TotalArcs", arcs);
         theLegacy.save();
       });
 
       var installationQuery = new Parse.Query(Parse.Installation);
-      if (sendToAll == false) {
+      if (notify == 0) {
         installationQuery.equalTo("user", toUser)
       };
+      if (notify == 1) {
+        installationQuery.equalTo("legacy", legacy)
+      }
       //installationQuery.equalTo("Legac")
-      Parse.Push.send({
+      promises.push(Parse.Push.send({
         where: installationQuery,
         data: {
-          alert: (String(arcs) + " Arcs to " + String(legacy) + " for " + String(awardee) + " " + String(message))
+          alert: (String(emoji) + " " + String(awarder) + ": " + String(arcs.toFixed(1)) + " Arcs to " + String(legacy) + "'s " + String(awardee) + " - " + String(message)),
+          badge: "Increment"
         }
-      });
+      }));
     }
   });
-  //status.success("meh")
+    Parse.Promise.when(promises).then(function() {
+      //  status.success("Promises yay!")
+    })
 });

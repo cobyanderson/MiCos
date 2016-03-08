@@ -89,7 +89,7 @@ public class ChartViewBase: UIView, ChartDataProvider, ChartAnimatorDelegate
     public weak var delegate: ChartViewDelegate?
     
     /// text that is displayed when the chart is empty
-    public var noDataText = "No chart data available."
+    public var noDataText = ""
     
     /// text that is displayed when the chart is empty that describes why the chart is empty
     public var noDataTextDescription: String?
