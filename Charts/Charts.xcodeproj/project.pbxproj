@@ -294,7 +294,7 @@
 		5B6A54941AA66AC0000F57C2 /* CandleStickChartRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandleStickChartRenderer.swift; sourceTree = "<group>"; };
 		5B6A54961AA66AD2000F57C2 /* BarChartRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BarChartRenderer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5B6A54981AA66B14000F57C2 /* BarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
-		5B6A549A1AA66B2C000F57C2 /* BarLineChartViewBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BarLineChartViewBase.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		5B6A549A1AA66B2C000F57C2 /* BarLineChartViewBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BarLineChartViewBase.swift; sourceTree = "<group>"; };
 		5B6A549C1AA66B3C000F57C2 /* CandleStickChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandleStickChartView.swift; sourceTree = "<group>"; };
 		5B6A549E1AA66B59000F57C2 /* CombinedChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinedChartView.swift; sourceTree = "<group>"; };
 		5B6A54A01AA66B6A000F57C2 /* HorizontalBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalBarChartView.swift; sourceTree = "<group>"; };
@@ -891,7 +891,6 @@
 				5B6A54971AA66AD2000F57C2 /* BarChartRenderer.swift in Sources */,
 				659400CA1BF463C2004F9C27 /* RadarChartData.swift in Sources */,
 				5B6A546B1AA5C23F000F57C2 /* ChartMarker.swift in Sources */,
-				5B88D8BB1C6352C400B54CBD /* ChartDefaultFillFormatter.swift in Sources */,
 				5BD4C5801BCDBF6C00462351 /* ChartDataProvider.swift in Sources */,
 				5BD4C57C1BCDBF6C00462351 /* BarChartDataProvider.swift in Sources */,
 				5B0032491B6525FC00B6A2FE /* ChartHighlighter.swift in Sources */,

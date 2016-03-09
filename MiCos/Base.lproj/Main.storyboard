@@ -72,6 +72,9 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Noq-Xk-Lbs">
+                                        <rect key="frame" x="190" y="190" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -83,10 +86,12 @@
                                     <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="5" id="HQ9-PG-Ey4"/>
                                     <constraint firstItem="jdD-dY-glf" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="KbQ-eQ-4ni"/>
                                     <constraint firstItem="gff-lp-viR" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="KeJ-zj-RUX"/>
+                                    <constraint firstItem="Noq-Xk-Lbs" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="TbA-Gn-7E6"/>
                                     <constraint firstItem="jdD-dY-glf" firstAttribute="top" secondItem="zbh-xw-fg9" secondAttribute="bottom" constant="5" id="X8N-zf-88j"/>
                                     <constraint firstItem="gff-lp-viR" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="avH-Rd-nPy"/>
                                     <constraint firstItem="2Na-s9-T9w" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="dLa-Vu-J75"/>
                                     <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="5" id="kzQ-y4-P5i"/>
+                                    <constraint firstItem="Noq-Xk-Lbs" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="oGN-nD-Xfc"/>
                                     <constraint firstItem="2Na-s9-T9w" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="tyF-II-O5y"/>
                                     <constraint firstItem="2Na-s9-T9w" firstAttribute="width" secondItem="esV-91-9KO" secondAttribute="height" multiplier="3:5" id="w16-E4-igW"/>
                                 </constraints>
@@ -220,6 +225,7 @@
                         <outlet property="feedTable" destination="7li-Sp-n4k" id="DEl-yb-mC6"/>
                         <outlet property="legacyName" destination="jdD-dY-glf" id="Phf-v3-ptH"/>
                         <outlet property="pieChartView" destination="esV-91-9KO" id="Pgt-RS-EhI"/>
+                        <outlet property="spinny" destination="Noq-Xk-Lbs" id="2KG-Mb-7tC"/>
                         <outlet property="topSpace" destination="892-ao-92i" id="zAv-G8-7AE"/>
                     </connections>
                 </viewController>
@@ -472,7 +478,7 @@
                                     <constraint firstAttribute="height" constant="44" id="eQ3-Td-Rt1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
-                                <state key="normal" title="Done">
+                                <state key="normal" title="Choose">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -512,7 +518,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="Y8v-uf-Hq7" id="CNy-gH-WGH"/>
                         <outlet property="awardeeTableView" destination="fPW-Ch-lUh" id="iET-wO-Ocd"/>
-                        <outlet property="bottomSpace" destination="3u0-cv-p1K" id="drj-Cv-aGm"/>
+                        <outlet property="bottomSpace" destination="0bQ-c7-evs" id="ERS-g5-GNK"/>
                         <outlet property="chooseAwardeeSearchBar" destination="6q3-x8-thY" id="kju-gd-fU9"/>
                         <outlet property="doneButton" destination="JZf-aZ-Y6Q" id="QFh-Ca-cyN"/>
                     </connections>

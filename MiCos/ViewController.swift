@@ -31,7 +31,11 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     
     @IBOutlet weak var topSpace: NSLayoutConstraint!
     
-    let progressIndicatorView = CircularLoaderView(frame: CGRectZero)
+    @IBOutlet weak var spinny: UIActivityIndicatorView!
+    
+    //let progressIndicatorView = CircularLoaderView(frame: CGRectZero)
+    
+    var refreshControl:UIRefreshControl?
     
     var legacyEmojis: [String] = []
     var legacyNames: [String] = []
@@ -39,9 +43,12 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     var legacyArcs: [Double] = [] {
         didSet {
             //gets total arc amount each time legacy arcs is updated
-            legacyArcsTotal = 0
-            for amount in legacyArcs {
-                legacyArcsTotal += amount
+            if legacyArcs.count > 0 {
+                self.spinny.stopAnimating()
+                legacyArcsTotal = 0
+                for amount in legacyArcs {
+                    legacyArcsTotal += amount
+                }
             }
         }
     }
@@ -51,9 +58,12 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     var notifications: [AnyObject] = [] {
         didSet {
             //self.feedTable.reloadData()
-            let range = NSMakeRange(0, self.feedTable.numberOfSections)
-            let sections = NSIndexSet(indexesInRange: range)
-            self.feedTable.reloadSections(sections, withRowAnimation: .Middle)
+            if notifications.count > 0 {
+                let range = NSMakeRange(0, self.feedTable.numberOfSections)
+                let sections = NSIndexSet(indexesInRange: range)
+                self.feedTable.reloadSections(sections, withRowAnimation: .Middle)
+                self.refreshControl?.endRefreshing()
+            }
         }
     }
     
@@ -89,6 +99,8 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         UIColor(red: 0.8275, green: 0.3294, blue: 0, alpha: 1.0),
         
     ]
+    
+    
  
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         let newName = self.legacyNames[entry.xIndex]
@@ -100,11 +112,10 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     func chartValueNothingSelected(chartView: ChartViewBase) {
         queryNotifications("none")
         self.updateMiddle("none", score: 0)
+    
         
     }
-    func chartTranslated(chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
-        print ("pease")
-    }
+    
 
     
     func setChart(dataPoints: [String], values: [Double]) {
@@ -204,12 +215,30 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             self.legacyName.animate()
             self.arcScore.animate()
             self.arcPlace.animate()
+            
         }
     
         
             
+
         
+    }
+    
+    func refresh() {
+        self.pieChartView.bringSubviewToFront(spinny)
+        self.spinny.hidden = false
+        self.spinny.startAnimating()
+       // self.feedTable.userInteractionEnabled = false
+        self.arcScore.hidden = true
+        self.legacyName.hidden = true
+        self.animatedLogo.image = UIImage(named: "logo")
+        self.setSpring()
+        self.animatedLogo.animate()
         
+        queryLegacies()
+        queryNotifications("none")
+    
+       
     }
     
     override func viewDidLoad() {
@@ -226,20 +255,18 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         else {
             self.awardArcsButton.enabled = false
         }
+        //setting up a refresh control
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.feedTable.addSubview(refreshControl!)
         
-        var screen = UIScreen.mainScreen().bounds
-        var screenWidth = screen.size.width
-        var screenHeight = screen.size.height
-        //self.topSpace.constant = (screenHeight / CGFloat(3))
-        // ugly animations
-        self.arcScore.hidden = true
-        self.legacyName.hidden = true
-            
-        self.animatedLogo.image = UIImage(named: "logo")
-        self.animatedLogo.animate()
+        self.refresh()
         
-        queryLegacies()
-        queryNotifications("none")
+//        var screen = UIScreen.mainScreen().bounds
+//        var screenWidth = screen.size.width
+//        var screenHeight = screen.size.height
+      
+       
         
 
         //pieChartView.addSubview(self.progressIndicatorView)
@@ -252,17 +279,28 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     
     }
     func queryLegacies() {
+        //clears legacy info first
+        var Names: [String] = []
+        var Emojis: [String] = []
+        var Arcs: [Double] = []
+        var Scores: [Float] = []
+        self.legacyArcsTotal = 0
         let legacyQuery = PFQuery(className: "Legacies")
         legacyQuery.orderByDescending("Name")
         legacyQuery.findObjectsInBackgroundWithBlock{ (objects: [AnyObject]?, error) -> Void in
             if error == nil {
                 if let legacies = objects {
                     for legacy in legacies {
-                        self.legacyEmojis.append(legacy["Emoji"] as! String)
-                        self.legacyArcs.append(legacy["TotalArcs"] as! Double)
-                        self.legacyNames.append(legacy["Name"] as! String)
-                        self.legacyScores.append(legacy["TotalArcs"] as! Float)
+                        Emojis.append(legacy["Emoji"] as! String)
+                        Arcs.append(legacy["TotalArcs"] as! Double)
+                        Names.append(legacy["Name"] as! String)
+                        Scores.append(legacy["TotalArcs"] as! Float)
                     }
+                    self.legacyArcs = Arcs
+                    self.legacyEmojis = Emojis
+                    self.legacyNames = Names
+                    self.legacyScores = Scores
+                    
                    
                     
                     
@@ -279,6 +317,10 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                        // self.pieChartView.b
                         self.animatedLogo.animateTo()
                         self.updateMiddle("none", score: 0)
+                    
+                        
+                    
+                    
                 }
             }
         }

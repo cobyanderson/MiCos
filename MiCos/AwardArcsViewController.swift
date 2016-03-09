@@ -137,14 +137,12 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
                 arcLabel.text = String(Int(arcMin as! Float))
             }
         }
-        
-        else {
-            self.arcSlider.minimumValue = 1
-            self.arcSlider.maximumValue = 3
-            arcLabel.text = String(Int(1))
-            self.notifyControl.removeSegmentAtIndex( 2 , animated: false)
-            
+        if let role = PFUser.currentUser()!["Role"] as? String {
+            if role == "E" {
+                self.notifyControl.removeSegmentAtIndex(2 , animated: false)
+            }
         }
+    
         //sets the segment control's default
         self.notifyControl.selectedSegmentIndex = 1
         

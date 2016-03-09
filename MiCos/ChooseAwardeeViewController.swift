@@ -74,6 +74,11 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         self.awardeeTableView.dataSource = self
         self.chooseAwardeeSearchBar.delegate = self
         
+        //register to check if the keyboard pops up
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "keyboardShown:", name: UIKeyboardDidShowNotification, object: nil)
+
+        
         query = findAwardees(searchUpdateList)
         
         //sets the doneButton to be disabled
@@ -146,7 +151,8 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        bottomSpace.constant = 216
+    
+        //bottomSpace.constant = 230
         chooseAwardeeSearchBar.setShowsCancelButton(true, animated: true)
     }
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
@@ -155,13 +161,29 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         searchBar.setShowsCancelButton(false, animated: true)
         query = findAwardees(searchUpdateList)
         bottomSpace.constant = 0
+        UIView.animateWithDuration(0.3) { () -> Void in
+            self.view.layoutIfNeeded()
+        }
         
         
     }
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         query = findAwardees(searchUpdateList)
     }
-  
+    //activates when keyboard is shown, measures dimensions of keyboard, and sets bottom of screen to raise up
+    func keyboardShown(notification: NSNotification) {
+        let info  = notification.userInfo!
+        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
+        
+        let rawFrame = value.CGRectValue
+        let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
+        
+        bottomSpace.constant = keyboardFrame.height
+        UIView.animateWithDuration(0.1) { () -> Void in
+            self.view.layoutIfNeeded()
+        }
+            
+    }
 
     /*
     // Override to support conditional editing of the table view.
