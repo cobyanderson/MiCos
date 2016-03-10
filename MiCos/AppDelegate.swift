@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // 1
                
             } else  if let user = user {
-                
                 let installation = PFInstallation.currentInstallation()
                 installation["user"] = user
                 if let legacy = PFUser.currentUser()?["Legacy"] {

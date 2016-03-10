@@ -15,18 +15,22 @@ class SettingsViewController: UITableViewController {
     
     @IBOutlet weak var submitBug: UITableViewCell!
     
+    @IBOutlet weak var username: UILabel!
+    
+    @IBOutlet weak var legacy: UILabel!
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print (indexPath.section)
-        if indexPath.section == 0 {
-            PFUser.logOutInBackgroundWithBlock { (NSError) -> Void in
-                let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                delegate.presentLogInView()
+        if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                PFUser.logOutInBackgroundWithBlock { (NSError) -> Void in
+                    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    delegate.presentLogInView()
 
+                }
+            } else {
+                 UIApplication.sharedApplication().openURL(NSURL(string: "https://docs.google.com/forms/d/18oztRy7QhVYUCmxCGQrsklhjS8X89r32vU_9lWbKP0A/viewform")!)
             }
-        }
-        else {
-            UIApplication.sharedApplication().openURL(NSURL(string: "https://docs.google.com/forms/d/18oztRy7QhVYUCmxCGQrsklhjS8X89r32vU_9lWbKP0A/viewform")!)
-            
         }
         
     }
@@ -34,6 +38,8 @@ class SettingsViewController: UITableViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.username.text = PFUser.currentUser()!["Name"] as? String ?? "Name"
+        self.legacy.text = PFUser.currentUser()!["Legacy"] as? String ?? "Admin"
         
         
 

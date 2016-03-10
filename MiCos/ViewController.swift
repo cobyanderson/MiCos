@@ -12,7 +12,7 @@ import Charts
 
 
 
-class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
     
 
     @IBOutlet weak var pieChartView: PieChartView!
@@ -32,10 +32,18 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     @IBOutlet weak var topSpace: NSLayoutConstraint!
     
     @IBOutlet weak var spinny: UIActivityIndicatorView!
-    
+
+    @IBOutlet weak var tabBar: UITabBar!
+ 
     //let progressIndicatorView = CircularLoaderView(frame: CGRectZero)
     
     var refreshControl:UIRefreshControl?
+    
+    var currentTable: String = "Awards" {
+        didSet {
+            refresh()
+        }
+    }
     
     var legacyEmojis: [String] = []
     var legacyNames: [String] = []
@@ -107,12 +115,13 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         let newScore = self.legacyScores[entry.xIndex]
         updateMiddle(newName, score: newScore)
         queryNotifications(newName)
+      
         
     }
     func chartValueNothingSelected(chartView: ChartViewBase) {
         queryNotifications("none")
         self.updateMiddle("none", score: 0)
-    
+       
         
     }
     
@@ -157,7 +166,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         //pieChartView.drawSliceTextEnabled = false
       
         
-        
+    
     }
   
     
@@ -225,27 +234,50 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     }
     
     func refresh() {
-        self.pieChartView.bringSubviewToFront(spinny)
-        self.spinny.hidden = false
-        self.spinny.startAnimating()
-       // self.feedTable.userInteractionEnabled = false
-        self.arcScore.hidden = true
-        self.legacyName.hidden = true
-        self.animatedLogo.image = UIImage(named: "logo")
-        self.setSpring()
-        self.animatedLogo.animate()
-        
-        queryLegacies()
-        queryNotifications("none")
+        //if currentTable == "Awards" {
+            self.pieChartView.bringSubviewToFront(spinny)
+            self.spinny.hidden = false
+            self.spinny.startAnimating()
+           // self.feedTable.userInteractionEnabled = false
+            self.arcScore.hidden = true
+            self.legacyName.hidden = true
+            self.animatedLogo.image = UIImage(named: "logo")
+            self.setSpring()
+            self.animatedLogo.animate()
+            
+            queryLegacies()
+            queryNotifications("none")
+//        }
+//        if currentTable == "Gratitudes" {
+//            self.pieChartView
+//            
+//        }
     
-       
+
+    }
+    func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
+        if item == self.tabBar.items![0] {
+            self.currentTable = "Awards"
+        }
+        if item == self.tabBar.items![1] {
+            self.currentTable = "Gratitudes"
+        }
+    }
+    override func viewDidAppear(animated: Bool) {
+        //insert code querying if gratitude is done or not yet here
+        self.performSegueWithIdentifier("gratitudeSegue", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         feedTable.delegate = self
         feedTable.dataSource = self
+        tabBar.delegate = self
+        self.feedTable.estimatedRowHeight = 150.0
+        self.feedTable.rowHeight = UITableViewAutomaticDimension
         
+        
+            
         //fading + button if student
         if let role = PFUser.currentUser()?["Role"] {
             if role as? String == "F" {
@@ -260,6 +292,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         refreshControl!.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         self.feedTable.addSubview(refreshControl!)
         
+        tabBar.selectedItem = tabBar.items![0]
         self.refresh()
         
 //        var screen = UIScreen.mainScreen().bounds
@@ -331,17 +364,21 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         notificationQuery.limit = 50
         if selectedLegacy != "none" {
             notificationQuery.whereKey("Legacy", equalTo: selectedLegacy)
+            notificationQuery.whereKey("Notify", notEqualTo: -1)
+           
         }
         else {
-            notificationQuery.whereKey("Notify", notEqualTo: 1)
-            notificationQuery.whereKey("Notify", notEqualTo: 0)
+            notificationQuery.whereKey("Notify", notContainedIn: [1, 0, -1])
+            //notificationQuery.whereKey("Notify", notEqualTo: 0)
+         
         }
         notificationQuery.whereKey("Sent", equalTo: true)
+        notificationQuery.orderByDescending("createdAt")
         notificationQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error) -> Void in
             if error == nil {
                 if let notifications = objects {
                     self.notifications = notifications
-                    print (objects)
+                    
                 }
             }
         }
@@ -412,6 +449,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     
     @IBAction func cancelToViewController(segue:UIStoryboardSegue) {
     }
+    @IBAction func doneToViewController(segue:UIStoryboardSegue) {
+    }
+    
     
     @IBAction func saveToViewController(segue:UIStoryboardSegue) {
         if let awardArcsViewController = segue.sourceViewController as? AwardArcsViewController {
