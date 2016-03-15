@@ -166,7 +166,8 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     @IBAction func unwindWithSelectedAwardees(segue: UIStoryboardSegue) {
-        if let ChooseAwardeeViewController = segue.sourceViewController as? ChooseAwardeeViewController,
+        if let ChooseAwardeeViewController = segue.sourceViewController as?
+            ChooseAwardeeViewController,
             passedUsers = ChooseAwardeeViewController.selectedAwardees{
             awardees = passedUsers
         }
@@ -175,6 +176,15 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        
+        //LightContent
+        return UIStatusBarStyle.LightContent
+        
+        //Default
+        //return UIStatusBarStyle.Default
+        
     }
 
 }

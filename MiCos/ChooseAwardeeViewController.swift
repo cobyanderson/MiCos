@@ -43,7 +43,7 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         }
     }
     
-    func findAwardees(completionBlock:PFArrayResultBlock) -> PFQuery {
+   func findAwardees(completionBlock:PFArrayResultBlock) -> PFQuery {
         let searchText = self.chooseAwardeeSearchBar?.text ?? ""
         let userQuery = PFUser.query()
         if let awardersLegacy = PFUser.currentUser()?["Legacy"] as? String {
@@ -54,7 +54,7 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         userQuery?.whereKey("Role", containedIn: ["F","E"])
         userQuery?.orderByAscending("Legacy")
         userQuery?.findObjectsInBackgroundWithBlock(completionBlock)
-        
+        userQuery?.limit = 200
         return userQuery!
         
     }
@@ -229,6 +229,15 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         // Pass the selected object to the new view controller.
     }
     */
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        
+        //LightContent
+        return UIStatusBarStyle.LightContent
+        
+        //Default
+        //return UIStatusBarStyle.Default
+        
+    }
 
 }
 extension PFUser{

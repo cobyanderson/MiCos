@@ -19,7 +19,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
    
     @IBOutlet weak var legacyName: SpringLabel!
    
-    @IBOutlet weak var animatedLogo: SpringImageView!
+    //@IBOutlet weak var animatedLogo: SpringImageView!
     
     @IBOutlet weak var arcScore: SpringLabel!
 
@@ -34,10 +34,17 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     @IBOutlet weak var spinny: UIActivityIndicatorView!
 
     @IBOutlet weak var tabBar: UITabBar!
+    
+    @IBOutlet weak var pieChartAspect: NSLayoutConstraint!
+    
+    @IBOutlet weak var tableguideLabel: UILabel!
  
     //let progressIndicatorView = CircularLoaderView(frame: CGRectZero)
     
     var refreshControl:UIRefreshControl?
+    
+    var oneTimePass = false
+    // allows the app time to save the fact that a user has just completed their daily gratitude
     
     var currentTable: String = "Awards" {
         didSet {
@@ -53,6 +60,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             //gets total arc amount each time legacy arcs is updated
             if legacyArcs.count > 0 {
                 self.spinny.stopAnimating()
+                self.tableguideLabel.hidden = false
                 legacyArcsTotal = 0
                 for amount in legacyArcs {
                     legacyArcsTotal += amount
@@ -66,12 +74,12 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     var notifications: [AnyObject] = [] {
         didSet {
             //self.feedTable.reloadData()
-            if notifications.count > 0 {
+            
                 let range = NSMakeRange(0, self.feedTable.numberOfSections)
                 let sections = NSIndexSet(indexesInRange: range)
                 self.feedTable.reloadSections(sections, withRowAnimation: .Middle)
                 self.refreshControl?.endRefreshing()
-            }
+            
         }
     }
     
@@ -84,14 +92,14 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         
         UIColor(red: 0.1608, green: 0.702, blue: 0.7255, alpha: 1.0),
         UIColor(red: 0.2039, green: 0.5961, blue: 0.8588, alpha: 1.0),
+        UIColor(red: 0.1, green: 0.2784, blue: 0.7784, alpha: 1.0),
+        UIColor(red: 0.2324, green: 0.1, blue: 0.798, alpha: 1.0),
+        UIColor(red: 0.5824, green: 0.1, blue: 0.898, alpha: 1.0),
+        
         UIColor(red: 0.6078, green: 0.349, blue: 0.7137, alpha: 1.0),
         UIColor(red: 0.5569, green: 0.2667, blue: 0.6784, alpha: 1.0),
         UIColor(red: 0.2039, green: 0.2863, blue: 0.3686, alpha: 1.0),
-        
         UIColor(red: 0.1725, green: 0.2431, blue: 0.3137, alpha: 1.0),
-        UIColor.darkGrayColor(),
-        UIColor(red: 0.498, green: 0.549, blue: 0.5529, alpha: 1.0),
-        UIColor(red: 0.5843, green: 0.6471, blue: 0.651, alpha: 1.0),
         UIColor(red: 0.7412, green: 0.7647, blue: 0.7804, alpha: 1.0),
         
         UIColor(red: 0.9255, green: 0.9412, blue: 0.9451, alpha: 1.0),
@@ -115,6 +123,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         let newScore = self.legacyScores[entry.xIndex]
         updateMiddle(newName, score: newScore)
         queryNotifications(newName)
+        
       
         
     }
@@ -149,7 +158,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         pieChartView.noDataTextDescription = " "
         pieChartView.noDataText = " "
         pieChartView.data = chartData
-        pieChartView.backgroundColor = UIColor.clearColor()
+       // pieChartView.backgroundColor = UIColor.clearColor()
         pieChartView.descriptionText = ""
        // pieChartView.animate(xAxisDuration: 5.0, yAxisDuration: 4.0)
         
@@ -159,7 +168,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
        // pieChartView.legend.textColor = UIColor.blackColor()
         pieChartView.legend.enabled = false
       //  pieChartView.holeColor = UIColor.whiteColor()
-        pieChartView.holeColor = UIColor.whiteColor()
+      //  pieChartView.holeColor = UIColor.clearColor()
         pieChartView.transparentCircleRadiusPercent = 0.75
         pieChartView.dragDecelerationFrictionCoef = 0
         
@@ -171,11 +180,11 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
   
     
     func setSpring() {
-        self.animatedLogo.animation = "zoomIn"
-        self.animatedLogo.curve = "easeIn"
-        self.animatedLogo.force = 2.5
-        self.animatedLogo.duration = 4
-        self.animatedLogo.rotate = 180
+//        self.animatedLogo.animation = "zoomIn"
+//        self.animatedLogo.curve = "easeIn"
+//        self.animatedLogo.force = 2.5
+//        self.animatedLogo.duration = 4
+//        self.animatedLogo.rotate = 180
         
         self.legacyName.animation = "fadeIn"
         self.legacyName.curve = "linear"
@@ -234,44 +243,85 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     }
     
     func refresh() {
-        //if currentTable == "Awards" {
+        if currentTable == "Awards" {
+            //hides the label so it doesnt pop up til the rest does
+            self.tableguideLabel.hidden = true
             self.pieChartView.bringSubviewToFront(spinny)
             self.spinny.hidden = false
             self.spinny.startAnimating()
            // self.feedTable.userInteractionEnabled = false
             self.arcScore.hidden = true
             self.legacyName.hidden = true
-            self.animatedLogo.image = UIImage(named: "logo")
+          //  self.animatedLogo.image = UIImage(named: "logo")
             self.setSpring()
-            self.animatedLogo.animate()
+           // self.animatedLogo.animate()
             
             queryLegacies()
             queryNotifications("none")
-//        }
-//        if currentTable == "Gratitudes" {
-//            self.pieChartView
-//            
-//        }
+        }
+        if currentTable == "Gratitudes" {
+            queryNotifications("gratitudes")
+        }
     
 
     }
     func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         if item == self.tabBar.items![0] {
+            self.feedTable.tableHeaderView = self.pieChartView
             self.currentTable = "Awards"
+            self.pieChartView.userInteractionEnabled = true
+    
+            
+           
         }
         if item == self.tabBar.items![1] {
+            self.feedTable.tableHeaderView = nil
             self.currentTable = "Gratitudes"
+            self.pieChartView.userInteractionEnabled = false
+          
+            
+            
+            
+        
         }
     }
     override func viewDidAppear(animated: Bool) {
-        //insert code querying if gratitude is done or not yet here
-        self.performSegueWithIdentifier("gratitudeSegue", sender: self)
+        PFUser.currentUser()!.fetchInBackgroundWithBlock { (user: PFObject?, error) -> Void in
+            if error == nil {
+                
+                if self.oneTimePass == false {
+                    if let currentUser = user {
+                        
+                        if let sent = currentUser["DailyGratitude"] as? Bool { // if daily grat var exists
+                            if let role = currentUser["Role"] as? String {
+                                if role != "A" && role != "B" && role != "C" && role != "D" {
+                                    if sent == false {
+                                        self.performSegueWithIdentifier("gratitudeSegue", sender: self)
+                                    }
+                                }
+                            }
+                            
+                        } else { // if the daily gratititude variable does not exist, check the role
+                            if let role = currentUser["Role"] as? String {
+                                if role != "A" && role != "B" && role != "C" && role != "D" {
+                                    self.performSegueWithIdentifier("gratitudeSegue", sender: self)
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+                self.oneTimePass = false
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         feedTable.delegate = self
         feedTable.dataSource = self
+        //sets table header view to nothing to make sure it reloads
+        self.feedTable.tableHeaderView = nil
         tabBar.delegate = self
         self.feedTable.estimatedRowHeight = 150.0
         self.feedTable.rowHeight = UITableViewAutomaticDimension
@@ -291,6 +341,8 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         self.feedTable.addSubview(refreshControl!)
+        
+        self.feedTable.tableHeaderView = self.pieChartView
         
         tabBar.selectedItem = tabBar.items![0]
         self.refresh()
@@ -348,7 +400,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                         //self.pieChartView.layer.mask = nil
                    // return true
                        // self.pieChartView.b
-                        self.animatedLogo.animateTo()
+                  //      self.animatedLogo.animateTo()
                         self.updateMiddle("none", score: 0)
                     
                         
@@ -362,27 +414,40 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         let notificationQuery = PFQuery(className: "Notifications")
         notificationQuery.orderByDescending("createdAt")
         notificationQuery.limit = 50
-        if selectedLegacy != "none" {
-            notificationQuery.whereKey("Legacy", equalTo: selectedLegacy)
-            notificationQuery.whereKey("Notify", notEqualTo: -1)
-           
+        if selectedLegacy == "gratitudes" {
+            notificationQuery.whereKey("Awardee", equalTo: PFUser.currentUser()!["Name"]!)
+            notificationQuery.whereKey("Notify", equalTo: -1)
+        }
+        else if selectedLegacy == "none" {
+            notificationQuery.whereKey("Notify", notContainedIn: [1, 0, -1])
+            self.tableguideLabel.text = "Major Awards for All"
         }
         else {
-            notificationQuery.whereKey("Notify", notContainedIn: [1, 0, -1])
-            //notificationQuery.whereKey("Notify", notEqualTo: 0)
-         
+            notificationQuery.whereKey("Legacy", equalTo: selectedLegacy)
+            notificationQuery.whereKey("Notify", notEqualTo: -1)
+            self.tableguideLabel.text = "All Awards for \(selectedLegacy)"
         }
+        
         notificationQuery.whereKey("Sent", equalTo: true)
         notificationQuery.orderByDescending("createdAt")
         notificationQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error) -> Void in
             if error == nil {
                 if let notifications = objects {
                     self.notifications = notifications
+                    print (notifications)
                     
                 }
             }
         }
     }
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//         if (indexPath.section == -1 && indexPath.row == 0) {
+//            if self.currentTable == "Gratitudes" {
+//                return 0
+//            }
+//        }
+//        return 50
+//    }
 
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -392,21 +457,40 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
 //        else {
 //            
 //        }
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEE, MMM d"
+        
         let cell = self.feedTable.dequeueReusableCellWithIdentifier("feedCell") as! FeedTableViewCell
-        let notification = self.notifications[indexPath.row]
-        let awardee = notification["Awardee"] as! String
-        let awarder = notification["Awarder"] as! String
-        let legacy = notification["Legacy"] as! String
-        let message = notification["Message"] as! String
-        let arcs = notification["Arcs"] as! Float
-        let legacyIndex = self.legacyNames.indexOf(legacy)
-        let emoji = self.legacyEmojis[legacyIndex!]
+            let notification = self.notifications[indexPath.row]
+            let awardee = notification["Awardee"] as! String
+            let awarder = notification["Awarder"] as! String
+            let legacy = notification["Legacy"] as! String
+            let message = notification["Message"] as! String
+            let arcs = notification["Arcs"] as! Float
+            let parseDate = notification.createdAt!! as NSDate
+            let date = dateFormatter.stringFromDate(parseDate)
+        
+            let legacyIndex = self.legacyNames.indexOf(legacy)
+            let emoji = self.legacyEmojis[legacyIndex!]
+        
         let color = self.colorSet[legacyIndex!]
-        cell.colorView.backgroundColor = color
-        cell.titleLabel.text = "\(emoji) \(legacy): \(awardee)"
-        cell.bodyLabel.text = message
-        cell.arcLabel.text = (String(format: "%.1f", arcs))
-        cell.awarderLabel.text = "-\(awarder)"
+        if currentTable == "Awards" {
+            cell.colorView.backgroundColor = color
+            cell.titleLabel.text = "\(emoji) \(legacy): \(awardee)"
+            cell.bodyLabel.text = message
+            cell.arcLabel.text = (String(format: "%.1f", arcs))
+            cell.awarderLabel.text = "-\(awarder) on \(date)"
+            cell.arcTitleLabel.text = "Arcs"
+        }
+        if currentTable == "Gratitudes" {
+            cell.bodyLabel.text = message
+            cell.arcLabel.text = (String(format: "%.1f", arcs))
+            cell.awarderLabel.text = "-\(date)"
+            cell.titleLabel.text = "From \(awarder):"
+            cell.colorView.backgroundColor = UIColor.clearColor()
+            cell.arcTitleLabel.text = "Arc"
+            
+        }
         return cell
         
         
@@ -449,7 +533,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     
     @IBAction func cancelToViewController(segue:UIStoryboardSegue) {
     }
+    
     @IBAction func doneToViewController(segue:UIStoryboardSegue) {
+        self.oneTimePass = true
     }
     
     
@@ -464,6 +550,16 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             
             
         }
+        
+    }
+    //Changing Status Bar
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        
+        //LightContent
+        return UIStatusBarStyle.LightContent
+        
+        //Default
+        //return UIStatusBarStyle.Default
         
     }
 

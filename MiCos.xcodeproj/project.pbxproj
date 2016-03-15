@@ -180,6 +180,7 @@
 		49D0249D1C8E7ECA00342F18 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D0249C1C8E7ECA00342F18 /* FeedTableViewCell.swift */; };
 		49D0249F1C90FD5700342F18 /* GratitudeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D0249E1C90FD5700342F18 /* GratitudeTableViewController.swift */; };
 		49D024A31C91091700342F18 /* ChoosePersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D024A21C91091700342F18 /* ChoosePersonViewController.swift */; };
+		49D024A51C91207E00342F18 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D024A41C91207E00342F18 /* PersonTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -413,6 +414,7 @@
 		49D0249C1C8E7ECA00342F18 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		49D0249E1C90FD5700342F18 /* GratitudeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratitudeTableViewController.swift; sourceTree = "<group>"; };
 		49D024A21C91091700342F18 /* ChoosePersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoosePersonViewController.swift; sourceTree = "<group>"; };
+		49D024A41C91207E00342F18 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -484,6 +486,7 @@
 				492279B11B90E2F00062C695 /* ViewController.swift */,
 				492279B31B90E2F00062C695 /* Main.storyboard */,
 				491500091C821B4200F2B74D /* AwardArcsViewController.swift */,
+				49D024A41C91207E00342F18 /* PersonTableViewCell.swift */,
 				49D0249E1C90FD5700342F18 /* GratitudeTableViewController.swift */,
 				49D0249C1C8E7ECA00342F18 /* FeedTableViewCell.swift */,
 				491500171C82597200F2B74D /* AwardeeTableViewCell.swift */,
@@ -1009,6 +1012,7 @@
 				49D024A31C91091700342F18 /* ChoosePersonViewController.swift in Sources */,
 				4993D5391C7471EB00E3AD06 /* BarLineChartViewBase.swift in Sources */,
 				4993D5631C7471EB00E3AD06 /* ScatterChartData.swift in Sources */,
+				49D024A51C91207E00342F18 /* PersonTableViewCell.swift in Sources */,
 				4993D5501C7471EB00E3AD06 /* BarLineScatterCandleBubbleChartDataSet.swift in Sources */,
 				4993D5411C7471EB00E3AD06 /* PieRadarChartViewBase.swift in Sources */,
 				4993D58C1C7471EB00E3AD06 /* ChartXAxisRendererHorizontalBarChart.swift in Sources */,

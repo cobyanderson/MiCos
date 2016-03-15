@@ -1,27 +1,21 @@
 //
-//  FeedTableViewCell.swift
+//  PersonTableViewCell.swift
 //  MiCos
 //
-//  Created by Samuel Coby Anderson on 3/7/16.
+//  Created by Samuel Coby Anderson on 3/9/16.
 //  Copyright © 2016 Samuel Coby Anderson. All rights reserved.
 //
 
 import UIKit
 
-class FeedTableViewCell: UITableViewCell {
+class PersonTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var bodyLabel: UILabel!
-    
-    @IBOutlet weak var awarderLabel: UILabel!
-    
-    @IBOutlet weak var arcLabel: UILabel!
 
-    @IBOutlet weak var colorView: UIView!
     
-    @IBOutlet weak var arcTitleLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     
+    @IBOutlet weak var nameLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
