@@ -115,7 +115,7 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
 
     
     @IBAction func sliderValueChanged(sender: AnyObject) {
-        arcLabel.text = (String(format: "%.1f", arcSlider.value))
+        arcLabel.text = (String(format: "%.0f", arcSlider.value))
     }
     
     override func viewDidLoad() {

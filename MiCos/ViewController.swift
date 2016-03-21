@@ -20,6 +20,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     @IBOutlet weak var legacyName: SpringLabel!
    
     //@IBOutlet weak var animatedLogo: SpringImageView!
+    @IBOutlet weak var bigArcs: SpringLabel!
     
     @IBOutlet weak var arcScore: SpringLabel!
 
@@ -52,6 +53,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         }
     }
     
+    var legacyDivisors: [Int] = []
     var legacyEmojis: [String] = []
     var legacyNames: [String] = []
     var legacyArcsTotal: Double = 0
@@ -172,6 +174,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         pieChartView.transparentCircleRadiusPercent = 0.75
         pieChartView.dragDecelerationFrictionCoef = 0
         
+        //self.pieChartView.layoutIfNeeded()
+ 
+        
         //pieChartView.drawSliceTextEnabled = false
       
         
@@ -198,6 +203,11 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         self.arcPlace.curve = "linear"
         self.arcPlace.duration = 0.3
         
+        self.bigArcs.animation = "fadeIn"
+        self.bigArcs.curve = "linear"
+        self.bigArcs.duration = 0.3
+       
+        
         
     }
     func updateMiddle(name: String, score: Float) {
@@ -209,10 +219,16 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         
         self.setSpring()
         
+        let legacyIndex = self.legacyNames.indexOf(name) ?? 0
+        let legacyScore = self.legacyScores[legacyIndex]
+        let legacyArc = self.legacyArcs[legacyIndex]
+        let legacyDivisor = self.legacyDivisors[legacyIndex]
+        
         //list of the rankings to 25
         let rankList = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th"]
         let sortedScores = self.legacyScores.sort()
-
+        
+        self.bigArcs.animateTo()
         self.arcPlace.animateTo()
         self.legacyName.animateTo()
         self.arcScore.animateToNext { () -> () in
@@ -221,18 +237,24 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                 let currentHighScore = self.legacyScores.maxElement()
                 let nameIndex = self.legacyScores.indexOf(currentHighScore!)
                 let currentHighName = self.legacyNames[nameIndex!]
+                self.bigArcs.text = ""
                 self.legacyName.text = currentHighName
                 self.arcPlace.text = "Current Leader:"
             } else {
                 let rankIndex = sortedScores.indexOf(score)
                 let place = rankList[sortedScores.count - rankIndex! - 1] + " Place"
-                self.arcScore.text = (String(format: "%.1f", score)) + " Arcs"
+                let first = String(format: "%.1f", legacyArc)
+                let second = String(legacyDivisor)
+                let third = String(format: "%.1f", legacyScore)
+                self.arcPlace.text = place
+                self.arcScore.text = first + " Arcs / " + second + " Members"
                 self.legacyName.text = name
-                self.arcPlace.text = String(place)
+                self.bigArcs.text = third
             }
             self.legacyName.animate()
             self.arcScore.animate()
             self.arcPlace.animate()
+            self.bigArcs.animate()
             
         }
     
@@ -267,7 +289,15 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     }
     func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         if item == self.tabBar.items![0] {
-            self.feedTable.tableHeaderView = self.pieChartView
+           self.feedTable.tableHeaderView!.frame.size.height = view.frame.size.width
+//            header.setNeedsLayout()
+//            header.layoutIfNeeded()
+//            let height = header.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+//            header.frame.size.height = height
+//            feedTable.tableHeaderView = header
+//            self.arcPlace.layoutIfNeeded()
+//            self.arcScore.layoutIfNeeded()
+//            self.legacyName.layoutIfNeeded()
             self.currentTable = "Awards"
             self.pieChartView.userInteractionEnabled = true
     
@@ -275,7 +305,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
            
         }
         if item == self.tabBar.items![1] {
-            self.feedTable.tableHeaderView = nil
+           self.feedTable.tableHeaderView!.frame.size.height = 0
             self.currentTable = "Gratitudes"
             self.pieChartView.userInteractionEnabled = false
           
@@ -320,8 +350,6 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         super.viewDidLoad()
         feedTable.delegate = self
         feedTable.dataSource = self
-        //sets table header view to nothing to make sure it reloads
-        self.feedTable.tableHeaderView = nil
         tabBar.delegate = self
         self.feedTable.estimatedRowHeight = 150.0
         self.feedTable.rowHeight = UITableViewAutomaticDimension
@@ -342,10 +370,14 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         refreshControl!.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         self.feedTable.addSubview(refreshControl!)
         
+        // set's up the table header view making sure it is as wide as the screen 
         self.feedTable.tableHeaderView = self.pieChartView
+        self.feedTable.tableHeaderView!.frame.size.height = view.frame.size.width
+      
         
         tabBar.selectedItem = tabBar.items![0]
         self.refresh()
+      
         
 //        var screen = UIScreen.mainScreen().bounds
 //        var screenWidth = screen.size.width
@@ -369,6 +401,8 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         var Emojis: [String] = []
         var Arcs: [Double] = []
         var Scores: [Float] = []
+        var Divisors: [Int] = []
+        
         self.legacyArcsTotal = 0
         let legacyQuery = PFQuery(className: "Legacies")
         legacyQuery.orderByDescending("Name")
@@ -379,18 +413,25 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                         Emojis.append(legacy["Emoji"] as! String)
                         Arcs.append(legacy["TotalArcs"] as! Double)
                         Names.append(legacy["Name"] as! String)
-                        Scores.append(legacy["TotalArcs"] as! Float)
+                        Scores.append((legacy["TotalArcs"] as! Float) / Float(legacy["Divisor"] as? Int ?? 1))
+                        Divisors.append(legacy["Divisor"] as? Int ?? 1)
+                      
                     }
                     self.legacyArcs = Arcs
                     self.legacyEmojis = Emojis
                     self.legacyNames = Names
                     self.legacyScores = Scores
+                    self.legacyDivisors = Divisors
+                    
                     
                    
                     
                     
                    // self.progressIndicatorView.progress = CGFloat(1.0)/CGFloat(1.0)
-                    self.setChart(self.legacyEmojis, values: self.legacyArcs)
+                    
+                    //converts the legacy scores (which are floats) to doubles
+                    let legacyScoresAsDoubles = self.legacyScores.map {Double($0)}
+                    self.setChart(self.legacyEmojis, values: legacyScoresAsDoubles)
                     self.setSpring()
                     //self.progressIndicatorView.reveal()
                     //self.legacyName.text = ""
@@ -434,7 +475,8 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             if error == nil {
                 if let notifications = objects {
                     self.notifications = notifications
-                    print (notifications)
+                    self.feedTable.layoutIfNeeded()
+                    self.pieChartView.layoutIfNeeded()
                     
                 }
             }
@@ -478,17 +520,18 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             cell.colorView.backgroundColor = color
             cell.titleLabel.text = "\(emoji) \(legacy): \(awardee)"
             cell.bodyLabel.text = message
-            cell.arcLabel.text = (String(format: "%.1f", arcs))
+            cell.arcLabel.text = (String(format: "%.0f", arcs))
             cell.awarderLabel.text = "-\(awarder) on \(date)"
             cell.arcTitleLabel.text = "Arcs"
         }
         if currentTable == "Gratitudes" {
             cell.bodyLabel.text = message
-            cell.arcLabel.text = (String(format: "%.1f", arcs))
+            cell.arcLabel.text = (String(format: "%.0f", arcs))
             cell.awarderLabel.text = "-\(date)"
             cell.titleLabel.text = "From \(awarder):"
             cell.colorView.backgroundColor = UIColor.clearColor()
             cell.arcTitleLabel.text = "Arc"
+            
             
         }
         return cell
@@ -496,6 +539,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         
         
     }
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.notifications.count
     }

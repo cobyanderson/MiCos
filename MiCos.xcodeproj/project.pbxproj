@@ -903,6 +903,11 @@
 					492279A91B90E2F00062C695 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = D6C7YNZ89Q;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					492279BE1B90E2F00062C695 = {
 						CreatedOnToolsVersion = 6.4;
