@@ -70,46 +70,47 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         reasonText.endEditing(true)
         if segue.identifier ==  "SaveAward" {
-         
             
-            let userQuery = PFUser.query()
-            userQuery?.whereKey("Name", containedIn: awardees)
-            
-            userQuery?.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error) -> Void in
-                if error == nil {
-                    if let users = objects {
-                        for user in users {
-                            let notification = PFObject(className: "Notifications")
-                            notification["Legacy"] = user["Legacy"]
-                            notification["Message"] = self.reasonText.text
-                            notification["Arcs"] = self.arcSlider.value
-                            notification["toUser"] = user
-                            notification["Awardee"] = user["Name"]
-                            let currentUser = PFUser.currentUser()
-                            notification["Awarder"] = currentUser?["Name"] as! String
-                            notification["fromUser"] = currentUser
-                            notification["Sent"] = false
-                            notification["Notify"] = self.notifyControl.selectedSegmentIndex
-                            notification.saveInBackground()
-//                            let pointsQuery = PFQuery(className: "Legacies")
-//                            pointsQuery.whereKey("Name", equalTo: user["Legacy"] as! String)
-//                            pointsQuery.limit = 1
-//                            pointsQuery.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error) -> Void in
-//                                if error == nil{
-//                                    if let points = objects {
-//                                        for point in points {
-//                                            point.incrementKey("TotalArcs", byAmount: self.arcSlider.value)
-//                                            point.saveInBackground()
-//                                        }
-//                                    }
-//                                }
-//                            })
-                            
+            //makes sure doen button is enabled before saving
+            if doneButton.enabled == true {
+                let userQuery = PFUser.query()
+                userQuery?.whereKey("Name", containedIn: awardees)
+                
+                userQuery?.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error) -> Void in
+                    if error == nil {
+                        if let users = objects {
+                            for user in users {
+                                let notification = PFObject(className: "Notifications")
+                                notification["Legacy"] = user["Legacy"]
+                                notification["Message"] = self.reasonText.text
+                                notification["Arcs"] = self.arcSlider.value
+                                notification["toUser"] = user
+                                notification["Awardee"] = user["Name"]
+                                let currentUser = PFUser.currentUser()
+                                notification["Awarder"] = currentUser?["Name"] as! String
+                                notification["fromUser"] = currentUser
+                                notification["Sent"] = false
+                                notification["Notify"] = self.notifyControl.selectedSegmentIndex
+                                notification.saveInBackground()
+                                //                            let pointsQuery = PFQuery(className: "Legacies")
+                                //                            pointsQuery.whereKey("Name", equalTo: user["Legacy"] as! String)
+                                //                            pointsQuery.limit = 1
+                                //                            pointsQuery.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error) -> Void in
+                                //                                if error == nil{
+                                //                                    if let points = objects {
+                                //                                        for point in points {
+                                //                                            point.incrementKey("TotalArcs", byAmount: self.arcSlider.value)
+                                //                                            point.saveInBackground()
+                                //                                        }
+                                //                                    }
+                                //                                }
+                                //                            })
+                                
+                            }
                         }
                     }
-                }
-            })
-        
+                })
+            }
         }
     }
 

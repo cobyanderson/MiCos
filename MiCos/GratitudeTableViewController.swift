@@ -75,31 +75,34 @@ class GratitudeTableViewController: UITableViewController, UITextViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         messageText.endEditing(true)
         
-        let userQuery = PFUser.query()
-        userQuery?.whereKey("Name", equalTo: person!)
-        
-        userQuery?.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error) -> Void in
-            if error == nil {
-                if let user = objects?[0] {
-                    let notification = PFObject(className: "Notifications")
-                    notification["Legacy"] = user["Legacy"]
-                    notification["Message"] = self.messageText.text
-                    notification["Arcs"] = 1.0
-                    notification["toUser"] = user
-                    notification["Awardee"] = user["Name"]
-                    let currentUser = PFUser.currentUser()
-                    notification["Awarder"] = currentUser?["Name"] as! String
-                    notification["fromUser"] = currentUser
-                    notification["Sent"] = false
-                    notification["Notify"] = -1
-                    PFUser.currentUser()!["DailyGratitude"] = true
-                    notification.saveInBackground()
-                    PFUser.currentUser()?.saveInBackground()
-                    //fix this to not be like this
+        // makes sure the done button is enabled, meaning the 
+        if doneButton.enabled == true {
+            let userQuery = PFUser.query()
+            userQuery?.whereKey("Name", equalTo: person!)
+            
+            userQuery?.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error) -> Void in
+                if error == nil {
+                    if let user = objects?[0] {
+                        let notification = PFObject(className: "Notifications")
+                        notification["Legacy"] = user["Legacy"]
+                        notification["Message"] = self.messageText.text
+                        notification["Arcs"] = 1.0
+                        notification["toUser"] = user
+                        notification["Awardee"] = user["Name"]
+                        let currentUser = PFUser.currentUser()
+                        notification["Awarder"] = currentUser?["Name"] as! String
+                        notification["fromUser"] = currentUser
+                        notification["Sent"] = false
+                        notification["Notify"] = -1
+                        PFUser.currentUser()!["DailyGratitude"] = true
+                        notification.saveInBackground()
+                        PFUser.currentUser()?.saveInBackground()
+                        //fix this to not be like this
+                    }
                 }
-            }
-        })
-        
+            })
+            
+        }
     }
     
 

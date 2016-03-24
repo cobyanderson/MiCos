@@ -5,7 +5,13 @@ Parse.Cloud.job("check", function (request, status) {
   notificationQuery.equalTo("Sent", false);
   notificationQuery.limit = 1000;
   notificationQuery.find().then(function(qresults) {
-    for (var i = 0; i < (qresults.length); i++) {
+    if ((qresults.length) > 0) {
+      limiting(qresults, 0)
+      console.log("first")
+      console.log(qresults.length)
+      console.log("second")
+    }
+  function limiting(qresults, i) {
       var notification = qresults[i];
       var legacy = notification.get('Legacy');
       var arcs = notification.get('Arcs');
@@ -16,37 +22,89 @@ Parse.Cloud.job("check", function (request, status) {
       var awarder = notification.get('Awarder');
       var notify = notification.get('Notify');
       notification.set('Sent', true);
-      notification.save();
+      notification.save().then(function() {
 
 
+
+      var emoji = "⭐️"
       var legacyClass = Parse.Object.extend("Legacies");
       var legacyQuery = new Parse.Query(legacyClass);
       legacyQuery.equalTo("Name", legacy);
       legacyQuery.find().then(function(results) {
         var theLegacy = results[0];
-        var emoji = theLegacy.get("Emoji");
+        emoji = theLegacy.get("Emoji")
         theLegacy.increment("TotalArcs", arcs);
-        theLegacy.save();
-      });
+        theLegacy.save().then(function() {
 
-      var installationQuery = new Parse.Query(Parse.Installation);
-      if (notify == 0) {
-        installationQuery.equalTo("user", toUser)
-      };
-      if (notify == 1) {
-        installationQuery.equalTo("legacy", legacy)
-      }
-      //installationQuery.equalTo("Legac")
-      promises.push(Parse.Push.send({
-        where: installationQuery,
-        data: {
-          alert: (String(emoji) + " " + String(awarder) + ": " + String(arcs.toFixed(1)) + " Arcs to " + String(legacy) + "'s " + String(awardee) + " - " + String(message)),
-          badge: "Increment"
-        }
-      }));
-    }
+          var installationQuery = new Parse.Query(Parse.Installation);
+          var note = (String(emoji) + " " + String(arcs.toFixed(0)) + " Arcs to " + String(legacy) + "'s " + String(awardee) + ": " + String(message) + " -" + String(awarder))
+          if (notify == 0) {
+            installationQuery.equalTo("user", toUser)
+
+          };
+          if (notify == -1) {
+            installationQuery.equalTo("user", toUser)
+            note = ("Gratitude from " + String(awarder) + ": " + String(message))
+          };
+          if (notify == 1) {
+            installationQuery.equalTo("legacy", legacy)
+          };
+          //installationQuery.equalTo("Legac")
+          promises.push(Parse.Push.send({
+            where: installationQuery,
+            data: {
+              alert: note,
+              badge: "Increment"
+            }
+          }));
+          //my own loop to force synchonus
+          i = i + 1
+          console.log(i)
+          console.log(qresults.length)
+          if (i < (qresults.length)) {
+            limiting(qresults, i)
+            console.log("again")
+          }
+      });
+    });
+
   });
+}
+});
     Parse.Promise.when(promises).then(function() {
       //  status.success("Promises yay!")
     })
+});
+Parse.Cloud.job("gratitudes", function (request, status) {
+  // Parse.User.allowCustomUserClass(true);
+//  var userClass = Parse.Object.extend("User");
+Parse.Cloud.useMasterKey();
+  var userQuery = new Parse.Query(Parse.User);
+  userQuery.notEqualTo("DailyGratitude", false);
+//  userQuery.include('DailyGratitude');
+
+  userQuery.find().then(function(users) {
+  //  newUsers = [];
+    for (var m = 0; m < (users.length); m++) {
+      if ((users.length) > 0) {
+        wait(users, 0);
+      };
+    };
+  });
+    //  newUsers.push(user);
+    function wait (users, n) {
+      user = users[n]
+      console.log(user);
+      user.set('DailyGratitude', false);
+      user.save().then(function() {
+        wait(users, (n + 1));
+      });
+    };
+
+  //  return newUsers;
+
+  // }).then(function(newUsers) {
+  //   console.log(newUsers);
+  //   Parse.Object.saveAll(newUsers);
+  // });
 });
