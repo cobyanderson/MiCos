@@ -33,7 +33,6 @@
 		492279FA1B90E9100062C695 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492279F91B90E9100062C695 /* SystemConfiguration.framework */; };
 		492279FC1B90E91D0062C695 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 492279FB1B90E91D0062C695 /* libz.dylib */; };
 		492279FE1B90E9270062C695 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 492279FD1B90E9270062C695 /* libsqlite3.dylib */; };
-		49227A011B90EEA80062C695 /* ParseLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49227A001B90EEA80062C695 /* ParseLoginHelper.swift */; };
 		49227A031B90F09C0062C695 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49227A021B90F09C0062C695 /* FBSDKCoreKit.framework */; };
 		4993D51B1C7471EB00E3AD06 /* Cartfile.private in Resources */ = {isa = PBXBuildFile; fileRef = 4993D47E1C7471EB00E3AD06 /* Cartfile.private */; };
 		4993D51C1C7471EB00E3AD06 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 4993D47F1C7471EB00E3AD06 /* Cartfile.resolved */; };
@@ -266,7 +265,6 @@
 		492279F91B90E9100062C695 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		492279FB1B90E91D0062C695 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		492279FD1B90E9270062C695 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		49227A001B90EEA80062C695 /* ParseLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseLoginHelper.swift; sourceTree = "<group>"; };
 		49227A021B90F09C0062C695 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Taggle/Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		4993D47E1C7471EB00E3AD06 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		4993D47F1C7471EB00E3AD06 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
@@ -463,7 +461,6 @@
 				492279C21B90E2F00062C695 /* MiCosTests */,
 				492279AB1B90E2F00062C695 /* Products */,
 				49227A461B90F9570062C695 /* MiCos Images */,
-				492279FF1B90EE230062C695 /* Parse Helpers */,
 				492279D11B90E5E60062C695 /* parse-library-1.8.2 */,
 			);
 			sourceTree = "<group>";
@@ -547,14 +544,6 @@
 				492279FD1B90E9270062C695 /* libsqlite3.dylib */,
 			);
 			path = "parse-library-1.8.2";
-			sourceTree = "<group>";
-		};
-		492279FF1B90EE230062C695 /* Parse Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				49227A001B90EEA80062C695 /* ParseLoginHelper.swift */,
-			);
-			path = "Parse Helpers";
 			sourceTree = "<group>";
 		};
 		49227A461B90F9570062C695 /* MiCos Images */ = {
@@ -1048,7 +1037,6 @@
 				49C48ADC1C77E602009BBE69 /* AutoTextView.swift in Sources */,
 				4993D54D1C7471EB00E3AD06 /* BarChartDataEntry.swift in Sources */,
 				4993D5541C7471EB00E3AD06 /* CandleChartData.swift in Sources */,
-				49227A011B90EEA80062C695 /* ParseLoginHelper.swift in Sources */,
 				4993D5811C7471EB00E3AD06 /* LineChartDataProvider.swift in Sources */,
 				4993D55C1C7471EB00E3AD06 /* LineChartDataSet.swift in Sources */,
 				4993D53C1C7471EB00E3AD06 /* ChartViewBase.swift in Sources */,
