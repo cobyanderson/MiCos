@@ -108,3 +108,34 @@ Parse.Cloud.useMasterKey();
   //   Parse.Object.saveAll(newUsers);
   // });
 });
+
+Parse.Cloud.job("reminder", function (request,status) {
+  var promises = [];
+
+  Parse.Cloud.useMasterKey();
+  var userQuery = new Parse.Query(Parse.User);
+  userQuery.equalTo("DailyGratitude", false);
+  userQuery.containedIn("Role", ["E", "F"])
+  var text = "Feeling Thankful? Don't forget to send your daily gratitude!"
+
+  userQuery.find().then(function(falseUsers) {
+    var installations = new Parse.Query(Parse.Installation);
+    installations.containedIn("user", falseUsers)
+    // for (var r = 0; r < (falseUsers.length); r++) {
+    //   var user = falseUsers[r]
+    //   console.log(user);
+    // }
+    return installations
+  }).then(function(installations){
+    promises.push(Parse.Push.send({
+      where: installations,
+      data: {
+        alert: text,
+        badge: "Increment"
+      }
+    }));
+  });
+  Parse.Promise.when(promises).then(function() {
+    //  status.success("Promises yay!")
+  })
+});
