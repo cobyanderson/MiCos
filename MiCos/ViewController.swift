@@ -360,7 +360,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         if let role = PFUser.currentUser()?["Role"] {
             if role as? String == "F" {
                 self.awardArcsButton.enabled = false
-                self.awardArcsButton.
+              
             }
         }
         else {
