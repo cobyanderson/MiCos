@@ -361,6 +361,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             if role as? String == "F" {
                 self.awardArcsButton.enabled = false
               
+                
             }
         }
         else {
