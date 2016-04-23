@@ -29,10 +29,11 @@ class GratitudeTableViewController: UITableViewController, UITextViewDelegate {
     }
     var textLength: Int = 0 {
         didSet {
-            self.textCountLabel.text = "\(String(textLength))/50"
+            self.textCountLabel.text = "Need \(String(50 - textLength))"
             self.textCountLabel.textColor = UIColor.redColor()
-            if textLength > 50  {
+            if textLength >= 50  {
                 self.textCountLabel.textColor = UIColor.greenColor()
+                self.textCountLabel.text = ""
                 if person != "" {
                     self.doneButton.enabled = true
                 }

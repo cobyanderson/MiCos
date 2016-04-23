@@ -42,10 +42,11 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
     }
     var textLength: Int = 0 {
         didSet {
-            self.textCountLabel.text = "\(String(textLength))/20"
+            self.textCountLabel.text = "Need \(String(20 - textLength))"
             self.textCountLabel.textColor = UIColor.redColor()
-            if textLength > 20  {
+            if textLength >= 20  {
                 self.textCountLabel.textColor = UIColor.greenColor()
+                self.textCountLabel.text = ""
                 if awardees.count > 0 {
                     self.doneButton.enabled = true
                 }

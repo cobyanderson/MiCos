@@ -18,6 +18,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0le-8x-ttg">
+                                <rect key="frame" x="0.0" y="551" width="400" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="Awards" image="star" id="7Tl-Di-R9l"/>
+                                    <tabBarItem title="Gratitudes" image="heart" id="iwh-s5-qgZ"/>
+                                </items>
+                                <color key="barTintColor" red="0.1001130329" green="0.1001130329" blue="0.1001130329" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="selectedImageTintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </tabBar>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eze-6V-umT">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="eDR-Nu-vP8"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.1001130329" green="0.1001130329" blue="0.1001130329" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="18"/>
+                                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Legacy Cup" id="jVo-8w-7f6">
+                                        <barButtonItem key="leftBarButtonItem" image="Settings" style="plain" id="D24-mD-CM6">
+                                            <connections>
+                                                <segue destination="NI6-Zl-afC" kind="presentation" id="9zj-RH-SpU"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="u54-xf-JyA">
+                                            <connections>
+                                                <segue destination="Ycg-ez-2Rf" kind="presentation" id="bFs-Tz-6FT"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7li-Sp-n4k">
                                 <rect key="frame" x="0.0" y="60" width="400" height="491"/>
                                 <color key="backgroundColor" red="0.89139441289999999" green="0.89139441289999999" blue="0.89139441289999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,7 +74,7 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gff-lp-viR" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
                                             <rect key="frame" x="200" y="205" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -59,9 +95,23 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXh-pi-bwi" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
                                             <rect key="frame" x="157.5" y="164.5" width="86" height="71.5"/>
-                                            <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="90"/>
+                                            <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="100"/>
                                             <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="0.59599345439189189" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="animation" value="flash"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="force">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="repeatCount">
+                                                    <real key="value" value="1000"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.89139441289999999" green="0.89139441289999999" blue="0.89139441289999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,6 +125,7 @@
                                         <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="5" id="HQ9-PG-Ey4"/>
                                         <constraint firstItem="jdD-dY-glf" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="KbQ-eQ-4ni"/>
                                         <constraint firstItem="gff-lp-viR" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="KeJ-zj-RUX"/>
+                                        <constraint firstItem="kXh-pi-bwi" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="NtG-i2-sa4"/>
                                         <constraint firstItem="Noq-Xk-Lbs" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="TbA-Gn-7E6"/>
                                         <constraint firstItem="jdD-dY-glf" firstAttribute="top" secondItem="zbh-xw-fg9" secondAttribute="bottom" constant="5" id="X8N-zf-88j"/>
                                         <constraint firstItem="kXh-pi-bwi" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="ZvF-hx-Tki"/>
@@ -82,13 +133,16 @@
                                         <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="5" id="kzQ-y4-P5i"/>
                                         <constraint firstItem="6f5-EK-eEn" firstAttribute="leading" secondItem="esV-91-9KO" secondAttribute="leading" constant="8" id="mLU-Eb-C8X"/>
                                         <constraint firstItem="Noq-Xk-Lbs" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="oGN-nD-Xfc"/>
+                                        <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="kXh-pi-bwi" secondAttribute="bottom" constant="-31" id="u5E-xD-15A"/>
                                         <constraint firstAttribute="bottom" secondItem="6f5-EK-eEn" secondAttribute="bottom" id="x6r-tn-8J2"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="ZvF-hx-Tki"/>
                                             <exclude reference="6Ck-XT-Ncs"/>
                                             <exclude reference="KeJ-zj-RUX"/>
                                             <exclude reference="kzQ-y4-P5i"/>
+                                            <exclude reference="u5E-xD-15A"/>
                                         </mask>
                                     </variation>
                                 </view>
@@ -183,42 +237,6 @@
                                     </mask>
                                 </variation>
                             </tableView>
-                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0le-8x-ttg">
-                                <rect key="frame" x="0.0" y="551" width="400" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <tabBarItem title="Awards" image="star" id="7Tl-Di-R9l"/>
-                                    <tabBarItem title="Gratitudes" image="heart" id="iwh-s5-qgZ"/>
-                                </items>
-                                <color key="barTintColor" red="0.1001130329" green="0.1001130329" blue="0.1001130329" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="selectedImageTintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </tabBar>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eze-6V-umT">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="eDR-Nu-vP8"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.1001130329" green="0.1001130329" blue="0.1001130329" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="18"/>
-                                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Legacy Cup" id="jVo-8w-7f6">
-                                        <barButtonItem key="leftBarButtonItem" image="Settings" style="plain" id="D24-mD-CM6">
-                                            <connections>
-                                                <segue destination="NI6-Zl-afC" kind="presentation" id="9zj-RH-SpU"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="u54-xf-JyA">
-                                            <connections>
-                                                <segue destination="Ycg-ez-2Rf" kind="presentation" id="bFs-Tz-6FT"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.74806660349999998" green="0.74806660349999998" blue="0.74806660349999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>

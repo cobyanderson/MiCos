@@ -39,6 +39,7 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
         userQuery?.whereKey("username", notEqualTo: PFUser.currentUser()!.username!)
         userQuery?.whereKey("Role", containedIn: ["F","E"])
         userQuery?.orderByAscending("Legacy")
+        userQuery?.limit = 200
         userQuery?.findObjectsInBackgroundWithBlock(completionBlock)
         
         return userQuery!

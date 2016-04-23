@@ -233,7 +233,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         self.legacyName.animateTo()
         self.arcScore.animateToNext { () -> () in
             if name == "none" && score == 0 {
-                self.arcScore.text = (String(format: "%.1f", self.legacyArcsTotal)) + " Total Arcs"
+                self.arcScore.text = (String(format: "%.1f", self.legacyArcsTotal)) + " Shared Arcs"
                 let currentHighScore = self.legacyScores.maxElement()
                 let nameIndex = self.legacyScores.indexOf(currentHighScore!)
                 let currentHighName = self.legacyNames[nameIndex!]
@@ -360,6 +360,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         if let role = PFUser.currentUser()?["Role"] {
             if role as? String == "F" {
                 self.awardArcsButton.enabled = false
+                self.awardArcsButton.
             }
         }
         else {
@@ -460,13 +461,13 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             notificationQuery.whereKey("Notify", equalTo: -1)
         }
         else if selectedLegacy == "none" {
-            notificationQuery.whereKey("Notify", notContainedIn: [1, 0, -1])
-            self.tableguideLabel.text = "Major Awards for All"
+            notificationQuery.whereKey("Notify", notEqualTo: -1)
+            self.tableguideLabel.text = "All Awards"
         }
         else {
             notificationQuery.whereKey("Legacy", equalTo: selectedLegacy)
             notificationQuery.whereKey("Notify", notEqualTo: -1)
-            self.tableguideLabel.text = "All Awards for \(selectedLegacy)"
+            self.tableguideLabel.text = "Awards for \(selectedLegacy)"
         }
         
         notificationQuery.whereKey("Sent", equalTo: true)
