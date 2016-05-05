@@ -33,6 +33,9 @@ Parse.Cloud.job("check", function (request, status) {
       legacyQuery.find().then(function(results) {
         var theLegacy = results[0];
         emoji = theLegacy.get("Emoji")
+        if (notify == -1) {
+          theLegacy.increment("Gratitudes", 1);
+        }
         theLegacy.increment("TotalArcs", arcs);
         theLegacy.save().then(function() {
 

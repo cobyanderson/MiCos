@@ -77,7 +77,7 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
                 let userQuery = PFUser.query()
                 userQuery?.whereKey("Name", containedIn: awardees)
                 
-                userQuery?.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error) -> Void in
+                userQuery?.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error) -> Void in
                     if error == nil {
                         if let users = objects {
                             for user in users {

@@ -29,7 +29,7 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    func findPeople(completionBlock:PFArrayResultBlock) -> PFQuery {
+    func findPeople(completionBlock:PFQueryArrayResultBlock) -> PFQuery {
         let searchText = self.personSearchBar?.text ?? ""
         let userQuery = PFUser.query()
         if let awardersLegacy = PFUser.currentUser()?["Legacy"] as? String {
@@ -45,8 +45,8 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
         return userQuery!
         
     }
-    func searchUpdateList(results: [AnyObject]?, error: NSError?) {
-        let awardees = results as? [PFObject] ?? []
+    func searchUpdateList(results: [PFObject]?, error: NSError?) {
+        let awardees = results ?? []
         self.foundPeople = awardees.map({ (awardee) -> PFUser in
             return awardee as! PFUser
         })

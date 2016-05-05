@@ -26,6 +26,8 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
 
     @IBOutlet weak var arcPlace: SpringLabel!
     
+    @IBOutlet weak var gratitudesLabel: SpringLabel!
+    
     @IBOutlet weak var feedTable: UITableView!
     
     @IBOutlet weak var awardArcsButton: UIBarButtonItem!
@@ -56,6 +58,8 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     var legacyDivisors: [Int] = []
     var legacyEmojis: [String] = []
     var legacyNames: [String] = []
+    var legacyGratitudes: [Int] = []
+    var legacyGratitudesTotal: Int = 0
     var legacyArcsTotal: Double = 0
     var legacyArcs: [Double] = [] {
         didSet {
@@ -67,6 +71,11 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                 for amount in legacyArcs {
                     legacyArcsTotal += amount
                 }
+                legacyGratitudesTotal = 0
+                for grat in legacyGratitudes {
+                    legacyGratitudesTotal += grat
+                }
+                
             }
         }
     }
@@ -206,6 +215,10 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         self.bigArcs.animation = "fadeIn"
         self.bigArcs.curve = "linear"
         self.bigArcs.duration = 0.3
+        
+        self.gratitudesLabel.animation = "fadeIn"
+        self.gratitudesLabel.curve = "linear"
+        self.gratitudesLabel.duration = 0.3
        
         
         
@@ -223,6 +236,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         let legacyScore = self.legacyScores[legacyIndex]
         let legacyArc = self.legacyArcs[legacyIndex]
         let legacyDivisor = self.legacyDivisors[legacyIndex]
+        let legacyGratitude = self.legacyGratitudes[legacyIndex]
         
         //list of the rankings to 25
         let rankList = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th"]
@@ -231,15 +245,17 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         self.bigArcs.animateTo()
         self.arcPlace.animateTo()
         self.legacyName.animateTo()
+        self.gratitudesLabel.animateTo()
         self.arcScore.animateToNext { () -> () in
             if name == "none" && score == 0 {
                 self.arcScore.text = (String(format: "%.1f", self.legacyArcsTotal)) + " Shared Arcs"
                 let currentHighScore = self.legacyScores.maxElement()
                 let nameIndex = self.legacyScores.indexOf(currentHighScore!)
                 let currentHighName = self.legacyNames[nameIndex!]
-                self.bigArcs.text = ""
+                self.bigArcs.text = self.legacyEmojis[nameIndex!]
                 self.legacyName.text = currentHighName
                 self.arcPlace.text = "Current Leader:"
+                self.gratitudesLabel.text = "\(String(self.legacyGratitudesTotal)) Shared Gratitudes"
             } else {
                 let rankIndex = sortedScores.indexOf(score)
                 let place = rankList[sortedScores.count - rankIndex! - 1] + " Place"
@@ -250,11 +266,13 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                 self.arcScore.text = first + " Arcs / " + second + " Members"
                 self.legacyName.text = name
                 self.bigArcs.text = third
+                self.gratitudesLabel.text = "\(String(legacyGratitude)) Gratitudes"
             }
             self.legacyName.animate()
             self.arcScore.animate()
             self.arcPlace.animate()
             self.bigArcs.animate()
+            self.gratitudesLabel.animate()
             
         }
     
@@ -404,11 +422,13 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         var Arcs: [Double] = []
         var Scores: [Float] = []
         var Divisors: [Int] = []
+        var Gratitudes: [Int] = []
         
         self.legacyArcsTotal = 0
         let legacyQuery = PFQuery(className: "Legacies")
         legacyQuery.orderByDescending("Name")
-        legacyQuery.findObjectsInBackgroundWithBlock{ (objects: [AnyObject]?, error) -> Void in
+    
+        legacyQuery.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error) -> Void in
             if error == nil {
                 if let legacies = objects {
                     for legacy in legacies {
@@ -417,13 +437,15 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                         Names.append(legacy["Name"] as! String)
                         Scores.append((legacy["TotalArcs"] as! Float) / Float(legacy["Divisor"] as? Int ?? 1))
                         Divisors.append(legacy["Divisor"] as? Int ?? 1)
-                      
+                        Gratitudes.append(legacy["Gratitudes"] as? Int ?? 0)
+                        
                     }
                     self.legacyArcs = Arcs
                     self.legacyEmojis = Emojis
                     self.legacyNames = Names
                     self.legacyScores = Scores
                     self.legacyDivisors = Divisors
+                    self.legacyGratitudes = Gratitudes
                     
                     
                    
@@ -473,7 +495,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         
         notificationQuery.whereKey("Sent", equalTo: true)
         notificationQuery.orderByDescending("createdAt")
-        notificationQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error) -> Void in
+        notificationQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error) -> Void in
             if error == nil {
                 if let notifications = objects {
                     self.notifications = notifications
@@ -506,11 +528,11 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         
         let cell = self.feedTable.dequeueReusableCellWithIdentifier("feedCell") as! FeedTableViewCell
             let notification = self.notifications[indexPath.row]
-            let awardee = notification["Awardee"] as! String
-            let awarder = notification["Awarder"] as! String
-            let legacy = notification["Legacy"] as! String
-            let message = notification["Message"] as! String
-            let arcs = notification["Arcs"] as! Float
+            let awardee = notification.objectForKey("Awardee") as! String
+            let awarder = notification.objectForKey("Awarder") as! String
+            let legacy = notification.objectForKey("Legacy") as! String
+            let message = notification.objectForKey("Message") as! String
+            let arcs = notification.objectForKey("Arcs") as! Float
             let parseDate = notification.createdAt!! as NSDate
             let date = dateFormatter.stringFromDate(parseDate)
         

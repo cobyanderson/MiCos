@@ -6,104 +6,13 @@
 //  Copyright (c) 2015 Samuel Coby Anderson. All rights reserved.
 //
 
-//SHITTY CODE THAT MAKES THIS STUPID LOGIN HELPER WORK
 
-
-//  ParseLoginHelper.swift
-//  Template Project
-//
-//  Created by Benjamin Encz on 4/15/15.
-//  Copyright (c) 2015 Make School. All rights reserved.
-//
-
-import Foundation
-import FBSDKCoreKit
-import Parse
-import ParseUI
-
-typealias ParseLoginHelperCallback = (PFUser?, NSError?) -> Void
-
-/**
- This class implements the 'PFLogInViewControllerDelegate' protocol. After a successfull login
- it will call the callback function and provide a 'PFUser' object.
- */
-class ParseLoginHelper : NSObject {
-    static let errorDomain = "com.makeschool.parseloginhelpererrordomain"
-    static let usernameNotFoundErrorCode = 1
-    static let usernameNotFoundLocalizedDescription = "Could not retrieve Facebook username"
-    let callback: ParseLoginHelperCallback
-    
-    init(callback: ParseLoginHelperCallback) {
-        self.callback = callback
-    }
-}
-
-extension ParseLoginHelper : PFLogInViewControllerDelegate{
-    
-    func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
-        //        self.callback(nil, error)
-    }
-    
-    func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-        // Determine if this is a Facebook login
-        
-        let isFacebookLogin = FBSDKAccessToken.currentAccessToken() != nil
-        
-        if !isFacebookLogin {
-            // Plain parse login, we can return user immediately
-            self.callback(user, nil)
-        } else {
-            // if this is a Facebook login, fetch the username from Facebook
-            FBSDKGraphRequest(graphPath: "me", parameters: nil).startWithCompletionHandler {
-                (connection: FBSDKGraphRequestConnection!, result: AnyObject?, error: NSError?) -> Void in
-                if let error = error {
-                    // Facebook Error? -> hand error to callback
-                    self.callback(nil, error)
-                }
-                
-                if let fbUsername = result?["name"] as? String {
-                    // assign Facebook name to PFUser
-                    user.username = fbUsername
-                    // store PFUser
-                    user.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
-                        if (success) {
-                            // updated username could be stored -> call success
-                            self.callback(user, error)
-                        } else {
-                            // updating username failed -> hand error to callback
-                            self.callback(nil, error)
-                        }
-                    })
-                } else {
-                    // cannot retrieve username? -> create error and hand it to callback
-                    let userInfo = [NSLocalizedDescriptionKey : ParseLoginHelper.usernameNotFoundLocalizedDescription]
-                    let noUsernameError = NSError(
-                        domain: ParseLoginHelper.errorDomain,
-                        code: ParseLoginHelper.usernameNotFoundErrorCode,
-                        userInfo: userInfo
-                    )
-                    self.callback(nil, error)
-                }
-            }
-        }
-    }
-    
-}
-
-extension ParseLoginHelper : PFSignUpViewControllerDelegate {
-    
-    func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
-        signUpController.dismissViewControllerAnimated(false, completion: nil)
-        self.callback(user, nil)
-    }
-    
-}
 
 import UIKit
 import Parse
 import Bolts
 import ParseUI
-import FBSDKCoreKit
+
 
 @UIApplicationMain
 
@@ -143,11 +52,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
 
-     
-      
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "myAppId"
+            $0.clientKey = "clientkey"
+            $0.server = "https://minerva-legacy-cup.herokuapp.com/parse"
+            
+        }
+        Parse.initializeWithConfiguration(configuration)
+    
+    
         
-        Parse.setApplicationId("ptL6M8uCH8bdfi3ahQJmtM9oMdhDTzA8khp8kzaR",
-            clientKey: "L8SbAeOmjjR6DdD4nu9Ffc08feWy3uF036taEbYI")
+//        Parse.setApplicationId("ptL6M8uCH8bdfi3ahQJmtM9oMdhDTzA8khp8kzaR",
+//            clientKey: "L8SbAeOmjjR6DdD4nu9Ffc08feWy3uF036taEbYI")
         
         let userNotificationTypes: UIUserNotificationType = ([UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]);
         
@@ -169,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = startViewController;
             self.window?.makeKeyAndVisible()
             
-            return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+           // return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
             
         } else {
             // 4
@@ -194,6 +110,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         installation.setDeviceTokenFromData(deviceToken)
         installation.saveInBackground()
+    }
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        if error.code == 3010 {
+            print("Push notifications are not supported in the iOS Simulator.")
+        } else {
+            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+        }
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {

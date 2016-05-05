@@ -68,18 +68,18 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdD-dY-glf" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
-                                            <rect key="frame" x="200" y="200" width="0.0" height="0.0"/>
+                                            <rect key="frame" x="200" y="160" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="36"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gff-lp-viR" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
-                                            <rect key="frame" x="200" y="205" width="0.0" height="0.0"/>
+                                            <rect key="frame" x="200" y="210" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbh-xw-fg9" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
-                                            <rect key="frame" x="200" y="195" width="0.0" height="0.0"/>
+                                            <rect key="frame" x="200" y="160" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="23"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -93,10 +93,13 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXh-pi-bwi" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kXh-pi-bwi" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
                                             <rect key="frame" x="157.5" y="164.5" width="86" height="71.5"/>
-                                            <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="100"/>
-                                            <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="0.59599345439189189" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="80" id="C62-m5-nPx"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="70"/>
+                                            <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="duration">
@@ -113,26 +116,35 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVg-eh-39e" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
+                                            <rect key="frame" x="128" y="237" width="145" height="21"/>
+                                            <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="18"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.89139441289999999" green="0.89139441289999999" blue="0.89139441289999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="jdD-dY-glf" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="2Wm-0W-1v0"/>
+                                        <constraint firstItem="jdD-dY-glf" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" constant="-40" id="2Wm-0W-1v0"/>
                                         <constraint firstAttribute="width" secondItem="esV-91-9KO" secondAttribute="height" multiplier="1:1" id="5XP-ey-NT3"/>
                                         <constraint firstItem="jdD-dY-glf" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="6Ck-XT-Ncs"/>
                                         <constraint firstItem="kXh-pi-bwi" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="Fhu-TE-Bfj"/>
                                         <constraint firstItem="zbh-xw-fg9" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="HCw-UY-HFc"/>
-                                        <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="5" id="HQ9-PG-Ey4"/>
+                                        <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="50" id="HQ9-PG-Ey4"/>
                                         <constraint firstItem="jdD-dY-glf" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="KbQ-eQ-4ni"/>
                                         <constraint firstItem="gff-lp-viR" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="KeJ-zj-RUX"/>
                                         <constraint firstItem="kXh-pi-bwi" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="NtG-i2-sa4"/>
+                                        <constraint firstItem="aVg-eh-39e" firstAttribute="top" secondItem="kXh-pi-bwi" secondAttribute="bottom" constant="5" id="Pa2-6J-nUZ"/>
                                         <constraint firstItem="Noq-Xk-Lbs" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="TbA-Gn-7E6"/>
-                                        <constraint firstItem="jdD-dY-glf" firstAttribute="top" secondItem="zbh-xw-fg9" secondAttribute="bottom" constant="5" id="X8N-zf-88j"/>
+                                        <constraint firstItem="jdD-dY-glf" firstAttribute="top" secondItem="zbh-xw-fg9" secondAttribute="bottom" id="X8N-zf-88j"/>
                                         <constraint firstItem="kXh-pi-bwi" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="ZvF-hx-Tki"/>
                                         <constraint firstItem="gff-lp-viR" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="avH-Rd-nPy"/>
+                                        <constraint firstItem="aVg-eh-39e" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="exq-YB-uSX"/>
                                         <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="5" id="kzQ-y4-P5i"/>
                                         <constraint firstItem="6f5-EK-eEn" firstAttribute="leading" secondItem="esV-91-9KO" secondAttribute="leading" constant="8" id="mLU-Eb-C8X"/>
                                         <constraint firstItem="Noq-Xk-Lbs" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="oGN-nD-Xfc"/>
+                                        <constraint firstItem="aVg-eh-39e" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="67" id="tvU-4E-8p4"/>
                                         <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="kXh-pi-bwi" secondAttribute="bottom" constant="-31" id="u5E-xD-15A"/>
                                         <constraint firstAttribute="bottom" secondItem="6f5-EK-eEn" secondAttribute="bottom" id="x6r-tn-8J2"/>
                                     </constraints>
@@ -140,6 +152,7 @@
                                         <mask key="constraints">
                                             <exclude reference="ZvF-hx-Tki"/>
                                             <exclude reference="6Ck-XT-Ncs"/>
+                                            <exclude reference="Pa2-6J-nUZ"/>
                                             <exclude reference="KeJ-zj-RUX"/>
                                             <exclude reference="kzQ-y4-P5i"/>
                                             <exclude reference="u5E-xD-15A"/>
@@ -273,6 +286,7 @@
                         <outlet property="awardArcsButton" destination="u54-xf-JyA" id="xQM-NE-3Vd"/>
                         <outlet property="bigArcs" destination="kXh-pi-bwi" id="Nf2-jC-0eB"/>
                         <outlet property="feedTable" destination="7li-Sp-n4k" id="DEl-yb-mC6"/>
+                        <outlet property="gratitudesLabel" destination="aVg-eh-39e" id="lLs-65-cwW"/>
                         <outlet property="legacyName" destination="jdD-dY-glf" id="Phf-v3-ptH"/>
                         <outlet property="pieChartAspect" destination="5XP-ey-NT3" id="EWz-Q5-tqW"/>
                         <outlet property="pieChartView" destination="esV-91-9KO" id="Pgt-RS-EhI"/>

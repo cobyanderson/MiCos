@@ -43,7 +43,7 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         }
     }
     
-   func findAwardees(completionBlock:PFArrayResultBlock) -> PFQuery {
+   func findAwardees(completionBlock:PFQueryArrayResultBlock) -> PFQuery {
         let searchText = self.chooseAwardeeSearchBar?.text ?? ""
         let userQuery = PFUser.query()
         if let awardersLegacy = PFUser.currentUser()?["Legacy"] as? String {
@@ -58,8 +58,8 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         return userQuery!
         
     }
-    func searchUpdateList(results: [AnyObject]?, error: NSError?) {
-        let awardees = results as? [PFObject] ?? []
+    func searchUpdateList(results: [PFObject]?, error: NSError?) {
+        let awardees = results ?? []
         self.foundAwardees = awardees.map({ (awardee) -> PFUser in
             return awardee as! PFUser
         })

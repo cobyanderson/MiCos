@@ -81,7 +81,7 @@ class GratitudeTableViewController: UITableViewController, UITextViewDelegate {
             let userQuery = PFUser.query()
             userQuery?.whereKey("Name", equalTo: person!)
             
-            userQuery?.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error) -> Void in
+            userQuery?.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error) -> Void in
                 if error == nil {
                     if let user = objects?[0] {
                         let notification = PFObject(className: "Notifications")
@@ -95,10 +95,10 @@ class GratitudeTableViewController: UITableViewController, UITextViewDelegate {
                         notification["fromUser"] = currentUser
                         notification["Sent"] = false
                         notification["Notify"] = -1
-                        PFUser.currentUser()!["DailyGratitude"] = true
-                        notification.saveInBackground()
-                        PFUser.currentUser()?.saveInBackground()
-                        //fix this to not be like this
+//                        PFUser.currentUser()!["DailyGratitude"] = true
+//                        notification.saveInBackground()
+//                        PFUser.currentUser()?.saveInBackground()
+//                        //fix this to not be like this
                     }
                 }
             })
