@@ -24,17 +24,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         super.init()
+    
         
         parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
             // Initialize the ParseLoginHelper with a callback
             if let error = error {
-                // 1
+                print (error)
                
             } else  if let user = user {
                 let installation = PFInstallation.currentInstallation()
                 installation["user"] = user
+                installation["userId"] = user.objectId!
                 if let legacy = PFUser.currentUser()?["Legacy"] {
                     installation["legacy"] = legacy
+                }
+                if let classOf = PFUser.currentUser()?["Class"] {
+                    installation["class"] = classOf
                 }
                 
                 installation.saveInBackground()
@@ -51,25 +56,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        
+        
 
         let configuration = ParseClientConfiguration {
             $0.applicationId = "myAppId"
             $0.clientKey = "clientkey"
             $0.server = "https://minerva-legacy-cup.herokuapp.com/parse"
+            $0.localDatastoreEnabled = true
             
         }
         Parse.initializeWithConfiguration(configuration)
+        
+        
     
     
         
 //        Parse.setApplicationId("ptL6M8uCH8bdfi3ahQJmtM9oMdhDTzA8khp8kzaR",
 //            clientKey: "L8SbAeOmjjR6DdD4nu9Ffc08feWy3uF036taEbYI")
         
-        let userNotificationTypes: UIUserNotificationType = ([UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]);
-        
+        let userNotificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
         let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
+      
         
         let user = PFUser.currentUser()
         
@@ -106,9 +116,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let user = PFUser.currentUser() {
             installation["user"] = user
+            installation["userId"] = user.objectId!
+            
         }
         
         installation.setDeviceTokenFromData(deviceToken)
+        installation.channels = ["global"]
         installation.saveInBackground()
     }
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {

@@ -22,11 +22,12 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
     
     @IBOutlet weak var notifyControl: UISegmentedControl!
     
-    @IBOutlet weak var doneButton: UIBarButtonItem!
+    @IBOutlet weak var doneButton: UIButton!
     
     @IBOutlet weak var textCountLabel: UILabel!
     
-
+    var notifications: [PFObject]? = []
+    var points: [PFObject]? = []
     
     var awardees: [String] = [] {
         didSet {
@@ -37,6 +38,7 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
             awardeeLabel.text? = nameString
             if textLength > 20  {
                 self.doneButton.enabled = true
+                self.doneButton.alpha = 1.0
             }
         }
     }
@@ -49,9 +51,11 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
                 self.textCountLabel.text = ""
                 if awardees.count > 0 {
                     self.doneButton.enabled = true
+                    self.doneButton.alpha = 1.0
                 }
             } else {
                 self.doneButton.enabled = false
+                self.doneButton.alpha = 0.3
                 
             }
         }
@@ -70,49 +74,11 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         reasonText.endEditing(true)
-        if segue.identifier ==  "SaveAward" {
+        
             
             //makes sure doen button is enabled before saving
-            if doneButton.enabled == true {
-                let userQuery = PFUser.query()
-                userQuery?.whereKey("Name", containedIn: awardees)
-                
-                userQuery?.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error) -> Void in
-                    if error == nil {
-                        if let users = objects {
-                            for user in users {
-                                let notification = PFObject(className: "Notifications")
-                                notification["Legacy"] = user["Legacy"]
-                                notification["Message"] = self.reasonText.text
-                                notification["Arcs"] = self.arcSlider.value
-                                notification["toUser"] = user
-                                notification["Awardee"] = user["Name"]
-                                let currentUser = PFUser.currentUser()
-                                notification["Awarder"] = currentUser?["Name"] as! String
-                                notification["fromUser"] = currentUser
-                                notification["Sent"] = false
-                                notification["Notify"] = self.notifyControl.selectedSegmentIndex
-                                notification.saveInBackground()
-                                //                            let pointsQuery = PFQuery(className: "Legacies")
-                                //                            pointsQuery.whereKey("Name", equalTo: user["Legacy"] as! String)
-                                //                            pointsQuery.limit = 1
-                                //                            pointsQuery.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error) -> Void in
-                                //                                if error == nil{
-                                //                                    if let points = objects {
-                                //                                        for point in points {
-                                //                                            point.incrementKey("TotalArcs", byAmount: self.arcSlider.value)
-                                //                                            point.saveInBackground()
-                                //                                        }
-                                //                                    }
-                                //                                }
-                                //                            })
-                                
-                            }
-                        }
-                    }
-                })
-            }
-        }
+               
+        
     }
 
     
@@ -127,8 +93,12 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
         //triggers the did set method of text length
         self.textLength = 0
         
+        //gets rid of separators
+        self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
+        
         // disables the done button
         self.doneButton.enabled = false
+        self.doneButton.alpha = 0.3
        
         // sets arc max and min give values for different people
         print (PFUser.currentUser()!)
@@ -137,40 +107,27 @@ class AwardArcsViewController: UITableViewController, UITextViewDelegate{
                 self.arcSlider.maximumValue = arcMax as! Float
                 self.arcSlider.minimumValue = arcMin as! Float
                 arcLabel.text = String(Int(arcMin as! Float))
+                
             }
         }
-        if let role = PFUser.currentUser()!["Role"] as? String {
-            if role == "E" {
-                self.notifyControl.removeSegmentAtIndex(2 , animated: false)
-            }
-        }
+//        if let role = PFUser.currentUser()!["Role"] as? String {
+//            if role == "E" {
+//                self.notifyControl.removeSegmentAtIndex(2 , animated: false)
+//            }
+//        }
     
         //sets the segment control's default
-        self.notifyControl.selectedSegmentIndex = 1
+        self.notifyControl.selectedSegmentIndex = 2
         
         //makes sure back button does not have previous title
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         
         
-        //sets up a tap gesture to dismiss keyboard
-        
-        
-        
-        
-        
-        
-
-    
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     @IBAction func unwindWithSelectedAwardees(segue: UIStoryboardSegue) {
-        if let ChooseAwardeeViewController = segue.sourceViewController as?
+        if let chooseAwardeeViewController = segue.sourceViewController as?
             ChooseAwardeeViewController,
-            passedUsers = ChooseAwardeeViewController.selectedAwardees{
+            passedUsers = chooseAwardeeViewController.selectedAwardees{
             awardees = passedUsers
         }
     }

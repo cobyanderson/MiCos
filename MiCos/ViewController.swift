@@ -58,8 +58,15 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     var legacyDivisors: [Int] = []
     var legacyEmojis: [String] = []
     var legacyNames: [String] = []
-    var legacyGratitudes: [Int] = []
     var legacyGratitudesTotal: Int = 0
+    var legacyGratitudes: [Int] = [] {
+        didSet {
+            legacyGratitudesTotal = 0
+            for grat in legacyGratitudes {
+                legacyGratitudesTotal += grat
+            }
+        }
+    }
     var legacyArcsTotal: Double = 0
     var legacyArcs: [Double] = [] {
         didSet {
@@ -70,10 +77,6 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                 legacyArcsTotal = 0
                 for amount in legacyArcs {
                     legacyArcsTotal += amount
-                }
-                legacyGratitudesTotal = 0
-                for grat in legacyGratitudes {
-                    legacyGratitudesTotal += grat
                 }
                 
             }
@@ -93,6 +96,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             
         }
     }
+    var lastGratitudeDate: PFObject?
+    
+
     
     let colorSet =
     [   UIColor.brownColor(),
@@ -227,8 +233,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         // puting in a name of "none" and a score of 0 will make this default
         self.pieChartView.bringSubviewToFront(arcScore)
         self.pieChartView.bringSubviewToFront(legacyName)
-        self.arcScore.hidden = false
-        self.legacyName.hidden = false
+        
         
         self.setSpring()
         
@@ -237,6 +242,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         let legacyArc = self.legacyArcs[legacyIndex]
         let legacyDivisor = self.legacyDivisors[legacyIndex]
         let legacyGratitude = self.legacyGratitudes[legacyIndex]
+       
         
         //list of the rankings to 25
         let rankList = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th"]
@@ -248,18 +254,18 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         self.gratitudesLabel.animateTo()
         self.arcScore.animateToNext { () -> () in
             if name == "none" && score == 0 {
-                self.arcScore.text = (String(format: "%.1f", self.legacyArcsTotal)) + " Shared Arcs"
+                self.arcScore.text = (String(format: "%.0f", self.legacyArcsTotal)) + " Global Arcs"
                 let currentHighScore = self.legacyScores.maxElement()
                 let nameIndex = self.legacyScores.indexOf(currentHighScore!)
                 let currentHighName = self.legacyNames[nameIndex!]
                 self.bigArcs.text = self.legacyEmojis[nameIndex!]
                 self.legacyName.text = currentHighName
                 self.arcPlace.text = "Current Leader:"
-                self.gratitudesLabel.text = "\(String(self.legacyGratitudesTotal)) Shared Gratitudes"
+                self.gratitudesLabel.text = "\(String(self.legacyGratitudesTotal)) Global Gratitudes"
             } else {
                 let rankIndex = sortedScores.indexOf(score)
                 let place = rankList[sortedScores.count - rankIndex! - 1] + " Place"
-                let first = String(format: "%.1f", legacyArc)
+                let first = String(format: "%.0f", legacyArc)
                 let second = String(legacyDivisor)
                 let third = String(format: "%.1f", legacyScore)
                 self.arcPlace.text = place
@@ -268,6 +274,12 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                 self.bigArcs.text = third
                 self.gratitudesLabel.text = "\(String(legacyGratitude)) Gratitudes"
             }
+            self.arcScore.hidden = false
+            self.legacyName.hidden = false
+            self.gratitudesLabel.hidden = false
+            self.bigArcs.hidden = false
+            self.arcPlace.hidden = false
+            
             self.legacyName.animate()
             self.arcScore.animate()
             self.arcPlace.animate()
@@ -292,6 +304,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
            // self.feedTable.userInteractionEnabled = false
             self.arcScore.hidden = true
             self.legacyName.hidden = true
+            self.gratitudesLabel.hidden = true
+            self.bigArcs.hidden = true
+            self.arcPlace.hidden = true
           //  self.animatedLogo.image = UIImage(named: "logo")
             self.setSpring()
            // self.animatedLogo.animate()
@@ -334,34 +349,36 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         }
     }
     override func viewDidAppear(animated: Bool) {
-        PFUser.currentUser()!.fetchInBackgroundWithBlock { (user: PFObject?, error) -> Void in
-            if error == nil {
-                
-                if self.oneTimePass == false {
-                    if let currentUser = user {
-                        
-                        if let sent = currentUser["DailyGratitude"] as? Bool { // if daily grat var exists
-                            if let role = currentUser["Role"] as? String {
-                                if role != "A" && role != "B" && role != "C" && role != "D" {
-                                    if sent == false {
-                                        self.performSegueWithIdentifier("gratitudeSegue", sender: self)
-                                    }
-                                }
-                            }
-                            
-                        } else { // if the daily gratititude variable does not exist, check the role
-                            if let role = currentUser["Role"] as? String {
-                                if role != "A" && role != "B" && role != "C" && role != "D" {
-                                    self.performSegueWithIdentifier("gratitudeSegue", sender: self)
-                                    
-                                }
-                            }
-                        }
-                    }
+        
+        //gets today's date
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day], fromDate: date)
+        let today = components.day
+     
+        
+        //grabs the last date stored the last time a gratitude was sent and pops up the sendgratitude view controller if it does not match today
+        let query = PFQuery(className:"lastGratitude")
+        query.fromLocalDatastore()
+        query.getFirstObjectInBackgroundWithBlock { (object, error) in
+            if error == nil && object != nil {
+                    if today != (object!["sent"] as! Int) {
+                         self.performSegueWithIdentifier("gratitudeSegue", sender: self)
                 }
-                self.oneTimePass = false
+            } else {
+                //if it does not exist, this creates a new record of the last gratitude date (0 is never a date)
+                let newObject = PFObject(className: "lastGratitude")
+                newObject["sent"] = 0
+                newObject.pinInBackground()
+                self.performSegueWithIdentifier("gratitudeSegue", sender: self)
+                
+                
             }
+            
         }
+   
+
+
     }
     
     override func viewDidLoad() {
@@ -397,23 +414,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         
         tabBar.selectedItem = tabBar.items![0]
         self.refresh()
-      
-        
-//        var screen = UIScreen.mainScreen().bounds
-//        var screenWidth = screen.size.width
-//        var screenHeight = screen.size.height
-      
        
         
-
-        //pieChartView.addSubview(self.progressIndicatorView)
-       
-       // progressIndicatorView.frame = pieChartView.bounds
-        //progressIndicatorView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
-        //self.progressIndicatorView.progress = CGFloat(0.5)/CGFloat(1.0)
-        
-        
-    
+      
     }
     func queryLegacies() {
         //clears legacy info first
@@ -448,6 +451,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                     self.legacyGratitudes = Gratitudes
                     
                     
+                    
                    
                     
                     
@@ -478,7 +482,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     func queryNotifications(selectedLegacy: String) {
         let notificationQuery = PFQuery(className: "Notifications")
         notificationQuery.orderByDescending("createdAt")
-        notificationQuery.limit = 50
+        notificationQuery.limit = 100
         if selectedLegacy == "gratitudes" {
             notificationQuery.whereKey("Awardee", equalTo: PFUser.currentUser()!["Name"]!)
             notificationQuery.whereKey("Notify", equalTo: -1)
@@ -493,7 +497,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             self.tableguideLabel.text = "Awards for \(selectedLegacy)"
         }
         
-        notificationQuery.whereKey("Sent", equalTo: true)
+        //notificationQuery.whereKey("Sent", equalTo: true)
         notificationQuery.orderByDescending("createdAt")
         notificationQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error) -> Void in
             if error == nil {
@@ -602,21 +606,200 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     @IBAction func cancelToViewController(segue:UIStoryboardSegue) {
     }
     
+    
+    //This one is coming from the gratitude screen
     @IBAction func doneToViewController(segue:UIStoryboardSegue) {
-        self.oneTimePass = true
+        
+        //gets the current day from the phone calendar
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day], fromDate: date)
+        let today = components.day
+        
+        //saves if the gratitude has been sent or not
+        let query = PFQuery(className:"lastGratitude")
+        query.fromLocalDatastore()
+        query.getFirstObjectInBackgroundWithBlock { (object, error) in
+            if error == nil && object != nil {
+                object!["sent"] = today
+                object!.pinInBackground()
+            } else {
+                print (error)
+            }
+        }
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+            
+        
+        if let gratitudeTableViewController = segue.sourceViewController as? GratitudeTableViewController {
+            let passedDone = gratitudeTableViewController.doneButton.enabled
+            if passedDone == true {
+                let passedText = gratitudeTableViewController.messageText.text
+                let passedAwardee = gratitudeTableViewController.person
+                
+                let userQuery = PFUser.query()
+                userQuery?.whereKey("Name", equalTo: passedAwardee!)
+                
+                userQuery?.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error) -> Void in
+                    if error == nil {
+                        if let users = objects {
+                            for user in users {
+                                let notification = PFObject(className: "Notifications")
+                                notification["Legacy"] = user["Legacy"] ?? "Admin"
+                                notification["Class"] = user["Class"] ?? 9999
+                                notification["Message"] = passedText
+                                notification["Arcs"] = 1
+                                notification["toUser"] = user
+                                notification["Awardee"] = user["Name"]
+                                let currentUser = PFUser.currentUser()
+                                notification["Awarder"] = currentUser?["Name"] as! String
+                                notification["fromUser"] = currentUser
+                                notification["Notify"] = -1
+                                notification.saveInBackgroundWithBlock({ (Bool, error) in
+                                    
+                                    
+                                    
+                                    //also increments points
+                                    let pointsQuery = PFQuery(className: "Legacies")
+                                    pointsQuery.whereKey("Name", equalTo: user["Legacy"] as! String)
+                                    pointsQuery.limit = 1
+                                    pointsQuery.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error) -> Void in
+                                        if error == nil{
+                                            if let legacies = objects {
+                                                for legacy in legacies {
+                                                    
+                                                    legacy.incrementKey("TotalArcs", byAmount: 1)
+                                                    legacy.incrementKey("Gratitudes", byAmount: 1)
+                                                    
+                                                    legacy.saveInBackgroundWithBlock({ (Bool, error) in
+                                                        
+                                                       
+  
+                                                        // creates the text of the notification
+                                                        let note = "\(currentUser?["Name"] as! String) sent you a Gratitude 💌"
+                                                        
+                                                        //sets up variables to be used in sorting notifiations for class or legacy
+                                                        let Class = user["Class"] ?? 9999
+                                                        let legacy = user["Legacy"] ?? "Admin"
+                                                        
+                                                        //notify -1 = gratitude, notify 0 = all in class, notify 1 = all in legacy, notify 2 = everyone
+                                                        
+                                                        PFCloud.callFunctionInBackground("sendNotification", withParameters: ["note" : note, "notify": -1 , "Class": Class!, "legacy": legacy!, "toUser": user.objectId!])   {
+                                                            
+                                                            (response: AnyObject?, error: NSError?) -> Void in
+                                                            if let error = error {
+                                                                print (error)
+                                                            }
+                                                            if let response = response {
+                                                                print (response)
+                                                            }
+                                                        }
+                                                        
+                                                    })
+                                                    
+                                                }
+                                            }
+                                        }
+                                    })
+                                })
+                                
+                            }
+                        }
+                    }
+                })
+                
+            }
+            
+        }
+        
     }
     
-    
+    // this one is coming from the award arcs screen
     @IBAction func saveToViewController(segue:UIStoryboardSegue) {
-        if let awardArcsViewController = segue.sourceViewController as? AwardArcsViewController {
-           // if let award = awardArcsViewController.award {
-                //save it here
-          //  }
-            // some good stuff for animating table views
-//            let indexPath = NSIndexPath(forRow: players.count-1, inSection: 0)
-//            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            
-            
+        if let awardArcsViewController = segue.sourceViewController as? AwardArcsViewController{
+            //only activates if done button is enabled
+            let passedDone = awardArcsViewController.doneButton.enabled
+            if passedDone == true {
+                
+                //getting passed valuse from ArcAwardsViewController
+                let passedText = awardArcsViewController.reasonText.text
+                let passedArcs = Int(awardArcsViewController.arcLabel.text!)
+                let passedNotify = awardArcsViewController.notifyControl.selectedSegmentIndex
+                let passedAwardees = awardArcsViewController.awardees
+                
+                let userQuery = PFUser.query()
+                userQuery?.whereKey("Name", containedIn: passedAwardees)
+                
+                userQuery?.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error) -> Void in
+                    if error == nil {
+                        if let users = objects {
+                            for user in users {
+                                let notification = PFObject(className: "Notifications")
+                                notification["Legacy"] = user["Legacy"] ?? "Admin"
+                                notification["Class"] = user["Class"] ?? 9999
+                                notification["Message"] = passedText
+                                notification["Arcs"] = passedArcs
+                                notification["toUser"] = user
+                                notification["Awardee"] = user["Name"]
+                                let currentUser = PFUser.currentUser()
+                                notification["Awarder"] = currentUser?["Name"] as! String
+                                notification["fromUser"] = currentUser
+                                notification["Notify"] = passedNotify
+                                notification.saveInBackgroundWithBlock({ (Bool, error) in
+                                    
+                                    
+                                    
+                                    //also increments points
+                                    let pointsQuery = PFQuery(className: "Legacies")
+                                    pointsQuery.whereKey("Name", equalTo: user["Legacy"] as! String)
+                                    pointsQuery.limit = 1
+                                    pointsQuery.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error) -> Void in
+                                        if error == nil{
+                                            if let legacies = objects {
+                                                for legacy in legacies {
+                                                    
+                                                    legacy.incrementKey("TotalArcs", byAmount: passedArcs!)
+                                                    
+                                                    legacy.saveInBackgroundWithBlock({ (Bool, error) in
+                                                        
+                                                        //refreshes the view
+                                                        self.refresh()
+                                                        
+                                                        //gets emoji from the looked up legacy
+                                                        let emoji = String(legacy["Emoji"]!)
+                                                        
+                                                        // creates the text of the notification
+                                                        let note = "\(emoji) \(passedArcs!) Arcs to \(user["Legacy"])'s \(user["Name"]): \(passedText) -\(currentUser!["Name"])"
+                                                        
+                                                        //sets up variables to be used in sorting notifiations for class or legacy
+                                                        let Class = user["Class"] ?? 9999
+                                                        let legacy = user["Legacy"] ?? "Admin"
+                                                        
+                                                        //notify -1 = gratitude, notify 0 = all in class, notify 1 = all in legacy, notify 2 = everyone
+                              
+                                                        PFCloud.callFunctionInBackground("sendNotification", withParameters: ["note" : note, "notify": passedNotify, "Class": Class!, "legacy": legacy!, "toUser": user.objectId!])   {
+                                                            
+                                                                (response: AnyObject?, error: NSError?) -> Void in
+                                                            if let error = error {
+                                                                print (error)
+                                                            }
+                                                            if let response = response {
+                                                                print (response)
+                                                            }
+                                                    }
+                                                    
+                                                    })
+                                                    
+                                                }
+                                            }
+                                        }
+                                    })
+                                })
+                                
+                            }
+                        }
+                    }
+                })
+            }
         }
         
     }
