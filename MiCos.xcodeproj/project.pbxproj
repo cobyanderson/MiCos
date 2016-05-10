@@ -31,6 +31,17 @@
 		492279B71B90E2F00062C695 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 492279B61B90E2F00062C695 /* Images.xcassets */; };
 		492279BA1B90E2F00062C695 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 492279B81B90E2F00062C695 /* LaunchScreen.xib */; };
 		492279C61B90E2F00062C695 /* MiCosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492279C51B90E2F00062C695 /* MiCosTests.swift */; };
+		494567561CE15AFD00EDBD6D /* ChronicleDisp-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4945674B1CE15AFD00EDBD6D /* ChronicleDisp-Black.ttf */; };
+		494567571CE15AFD00EDBD6D /* ChronicleDisp-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4945674C1CE15AFD00EDBD6D /* ChronicleDisp-BlackItalic.ttf */; };
+		494567581CE15AFD00EDBD6D /* ChronicleDisp-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4945674D1CE15AFD00EDBD6D /* ChronicleDisp-Bold.ttf */; };
+		494567591CE15AFD00EDBD6D /* ChronicleDisp-BoldItal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4945674E1CE15AFD00EDBD6D /* ChronicleDisp-BoldItal.ttf */; };
+		4945675A1CE15AFD00EDBD6D /* ChronicleDisp-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4945674F1CE15AFD00EDBD6D /* ChronicleDisp-Italic.ttf */; };
+		4945675B1CE15AFD00EDBD6D /* ChronicleDisp-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 494567501CE15AFD00EDBD6D /* ChronicleDisp-Light.ttf */; };
+		4945675C1CE15AFD00EDBD6D /* ChronicleDisp-Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 494567511CE15AFD00EDBD6D /* ChronicleDisp-Roman.ttf */; };
+		4945675D1CE15AFD00EDBD6D /* ChronicleDisp-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 494567521CE15AFD00EDBD6D /* ChronicleDisp-Semibold.ttf */; };
+		4945675E1CE15AFD00EDBD6D /* ChronicleDisp-SemiboldItal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 494567531CE15AFD00EDBD6D /* ChronicleDisp-SemiboldItal.ttf */; };
+		4945675F1CE15AFD00EDBD6D /* ChronicleDisp-XLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 494567541CE15AFD00EDBD6D /* ChronicleDisp-XLight.ttf */; };
+		494567601CE15AFD00EDBD6D /* ChronicleDisp-XLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 494567551CE15AFD00EDBD6D /* ChronicleDisp-XLightItalic.ttf */; };
 		4993D51B1C7471EB00E3AD06 /* Cartfile.private in Resources */ = {isa = PBXBuildFile; fileRef = 4993D47E1C7471EB00E3AD06 /* Cartfile.private */; };
 		4993D51C1C7471EB00E3AD06 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 4993D47F1C7471EB00E3AD06 /* Cartfile.resolved */; };
 		4993D5361C7471EB00E3AD06 /* ChartAnimationEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D4A21C7471EB00E3AD06 /* ChartAnimationEasing.swift */; };
@@ -261,6 +272,17 @@
 		492279BF1B90E2F00062C695 /* MiCosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiCosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		492279C41B90E2F00062C695 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		492279C51B90E2F00062C695 /* MiCosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiCosTests.swift; sourceTree = "<group>"; };
+		4945674B1CE15AFD00EDBD6D /* ChronicleDisp-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-Black.ttf"; sourceTree = "<group>"; };
+		4945674C1CE15AFD00EDBD6D /* ChronicleDisp-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-BlackItalic.ttf"; sourceTree = "<group>"; };
+		4945674D1CE15AFD00EDBD6D /* ChronicleDisp-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-Bold.ttf"; sourceTree = "<group>"; };
+		4945674E1CE15AFD00EDBD6D /* ChronicleDisp-BoldItal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-BoldItal.ttf"; sourceTree = "<group>"; };
+		4945674F1CE15AFD00EDBD6D /* ChronicleDisp-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-Italic.ttf"; sourceTree = "<group>"; };
+		494567501CE15AFD00EDBD6D /* ChronicleDisp-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-Light.ttf"; sourceTree = "<group>"; };
+		494567511CE15AFD00EDBD6D /* ChronicleDisp-Roman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-Roman.ttf"; sourceTree = "<group>"; };
+		494567521CE15AFD00EDBD6D /* ChronicleDisp-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-Semibold.ttf"; sourceTree = "<group>"; };
+		494567531CE15AFD00EDBD6D /* ChronicleDisp-SemiboldItal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-SemiboldItal.ttf"; sourceTree = "<group>"; };
+		494567541CE15AFD00EDBD6D /* ChronicleDisp-XLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-XLight.ttf"; sourceTree = "<group>"; };
+		494567551CE15AFD00EDBD6D /* ChronicleDisp-XLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChronicleDisp-XLightItalic.ttf"; sourceTree = "<group>"; };
 		4993D47E1C7471EB00E3AD06 /* Cartfile.private */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		4993D47F1C7471EB00E3AD06 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		4993D4801C7471EB00E3AD06 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Charts.xcodeproj; sourceTree = "<group>"; };
@@ -472,6 +494,7 @@
 				4920E66E1CDAAE670099D320 /* AudioToolbox.framework */,
 				49C48ABB1C77E602009BBE69 /* Spring */,
 				4993D47D1C7471EB00E3AD06 /* Charts */,
+				4945674A1CE15AFD00EDBD6D /* Fonts */,
 				492279AC1B90E2F00062C695 /* MiCos */,
 				492279C21B90E2F00062C695 /* MiCosTests */,
 				492279AB1B90E2F00062C695 /* Products */,
@@ -542,6 +565,24 @@
 			children = (
 			);
 			path = "MiCos Images";
+			sourceTree = "<group>";
+		};
+		4945674A1CE15AFD00EDBD6D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4945674B1CE15AFD00EDBD6D /* ChronicleDisp-Black.ttf */,
+				4945674C1CE15AFD00EDBD6D /* ChronicleDisp-BlackItalic.ttf */,
+				4945674D1CE15AFD00EDBD6D /* ChronicleDisp-Bold.ttf */,
+				4945674E1CE15AFD00EDBD6D /* ChronicleDisp-BoldItal.ttf */,
+				4945674F1CE15AFD00EDBD6D /* ChronicleDisp-Italic.ttf */,
+				494567501CE15AFD00EDBD6D /* ChronicleDisp-Light.ttf */,
+				494567511CE15AFD00EDBD6D /* ChronicleDisp-Roman.ttf */,
+				494567521CE15AFD00EDBD6D /* ChronicleDisp-Semibold.ttf */,
+				494567531CE15AFD00EDBD6D /* ChronicleDisp-SemiboldItal.ttf */,
+				494567541CE15AFD00EDBD6D /* ChronicleDisp-XLight.ttf */,
+				494567551CE15AFD00EDBD6D /* ChronicleDisp-XLightItalic.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		4993D47D1C7471EB00E3AD06 /* Charts */ = {
@@ -949,14 +990,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494567591CE15AFD00EDBD6D /* ChronicleDisp-BoldItal.ttf in Resources */,
 				492279B51B90E2F00062C695 /* Main.storyboard in Resources */,
+				4945675A1CE15AFD00EDBD6D /* ChronicleDisp-Italic.ttf in Resources */,
 				49C48AE91C77E602009BBE69 /* LoadingView.xib in Resources */,
+				4945675C1CE15AFD00EDBD6D /* ChronicleDisp-Roman.ttf in Resources */,
 				492279BA1B90E2F00062C695 /* LaunchScreen.xib in Resources */,
 				492279B71B90E2F00062C695 /* Images.xcassets in Resources */,
+				4945675E1CE15AFD00EDBD6D /* ChronicleDisp-SemiboldItal.ttf in Resources */,
 				4993D5A01C7471EB00E3AD06 /* Info.plist in Resources */,
+				494567571CE15AFD00EDBD6D /* ChronicleDisp-BlackItalic.ttf in Resources */,
+				494567581CE15AFD00EDBD6D /* ChronicleDisp-Bold.ttf in Resources */,
+				494567601CE15AFD00EDBD6D /* ChronicleDisp-XLightItalic.ttf in Resources */,
 				4993D51C1C7471EB00E3AD06 /* Cartfile.resolved in Resources */,
 				4993D51B1C7471EB00E3AD06 /* Cartfile.private in Resources */,
+				4945675F1CE15AFD00EDBD6D /* ChronicleDisp-XLight.ttf in Resources */,
+				494567561CE15AFD00EDBD6D /* ChronicleDisp-Black.ttf in Resources */,
+				4945675B1CE15AFD00EDBD6D /* ChronicleDisp-Light.ttf in Resources */,
 				49C48AE61C77E602009BBE69 /* Info.plist in Resources */,
+				4945675D1CE15AFD00EDBD6D /* ChronicleDisp-Semibold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

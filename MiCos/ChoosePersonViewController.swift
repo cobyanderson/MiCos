@@ -85,7 +85,7 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
         
         let foundPerson = foundPeople![indexPath.row]
         cell.nameLabel.text = foundPerson["Name"] as? String ?? "error"
-        cell.emailLabel.text = foundPerson["Legacy"] as? String ?? "error"
+        cell.emailLabel.text = (foundPerson["Legacy"] as? String ?? "error").uppercaseString
         
         return cell
         

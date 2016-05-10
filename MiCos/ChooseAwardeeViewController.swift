@@ -115,7 +115,7 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         let foundAwardee = foundAwardees![indexPath.row]
         //cell.legacyLabel.text = foundAwardee["Emoji"] as? String ?? "error"
         cell.nameLabel.text = foundAwardee["Name"] as? String ?? "error"
-        cell.emailLabel.text = foundAwardee["Legacy"] as? String ?? "error"
+        cell.emailLabel.text = (foundAwardee["Legacy"] as? String ?? "error").uppercaseString
 
         if selectedAwardees!.contains(foundAwardees![indexPath.row].objectId!) {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark

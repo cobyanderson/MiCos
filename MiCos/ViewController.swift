@@ -260,7 +260,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                 let currentHighName = self.legacyNames[nameIndex!]
                 self.bigArcs.text = self.legacyEmojis[nameIndex!]
                 self.legacyName.text = currentHighName
-                self.arcPlace.text = "Current Leader:"
+                self.arcPlace.text = "CURRENT LEADER:"
                 self.gratitudesLabel.text = "\(String(self.legacyGratitudesTotal)) Global Gratitudes"
             } else {
                 let rankIndex = sortedScores.indexOf(score)
@@ -268,7 +268,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                 let first = String(format: "%.0f", legacyArc)
                 let second = String(legacyDivisor)
                 let third = String(format: "%.1f", legacyScore)
-                self.arcPlace.text = place
+                self.arcPlace.text = place.uppercaseString
                 self.arcScore.text = first + " Arcs / " + second + " Members"
                 self.legacyName.text = name
                 self.bigArcs.text = third
@@ -546,19 +546,19 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         let color = self.colorSet[legacyIndex!]
         if currentTable == "Awards" {
             cell.colorView.backgroundColor = color
-            cell.titleLabel.text = "\(emoji) \(legacy): \(awardee)"
+            cell.titleLabel.text = ("\(emoji) \(legacy.uppercaseString): \(awardee)")
             cell.bodyLabel.text = message
             cell.arcLabel.text = (String(format: "%.0f", arcs))
             cell.awarderLabel.text = "-\(awarder) on \(date)"
-            cell.arcTitleLabel.text = "Arcs"
+            cell.arcTitleLabel.text = "ARCS"
         }
         if currentTable == "Gratitudes" {
             cell.bodyLabel.text = message
             cell.arcLabel.text = (String(format: "%.0f", arcs))
             cell.awarderLabel.text = "-\(date)"
-            cell.titleLabel.text = "From \(awarder):"
+            cell.titleLabel.text = "\(awarder):"
             cell.colorView.backgroundColor = UIColor.clearColor()
-            cell.arcTitleLabel.text = "Arc"
+            cell.arcTitleLabel.text = "ARC"
             
             
         }

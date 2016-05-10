@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ChronicleDisp-XLightItalic.ttf</string>
+		<string>ChronicleDisp-Black.ttf</string>
+		<string>ChronicleDisp-BlackItalic.ttf</string>
+		<string>ChronicleDisp-Bold.ttf</string>
+		<string>ChronicleDisp-BoldItal.ttf</string>
+		<string>ChronicleDisp-Italic.ttf</string>
+		<string>ChronicleDisp-Roman.ttf</string>
+		<string>ChronicleDisp-Semibold.ttf</string>
+		<string>ChronicleDisp-SemiboldItal.ttf</string>
+		<string>ChronicleDisp-XLight.ttf</string>
+		<string>ChronicleDisp-Light.ttf</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

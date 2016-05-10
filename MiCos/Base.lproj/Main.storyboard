@@ -5,6 +5,29 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="ChronicleDisp-Black.ttf">
+            <string>ChronicleDisplay-Black</string>
+            <string>ChronicleDisplay-Black</string>
+            <string>ChronicleDisplay-Black</string>
+        </mutableArray>
+        <mutableArray key="ChronicleDisp-Bold.ttf">
+            <string>ChronicleDisplay-Bold</string>
+            <string>ChronicleDisplay-Bold</string>
+            <string>ChronicleDisplay-Bold</string>
+        </mutableArray>
+        <mutableArray key="ChronicleDisp-Italic.ttf">
+            <string>ChronicleDisplay-Italic</string>
+        </mutableArray>
+        <mutableArray key="ChronicleDisp-Semibold.ttf">
+            <string>ChronicleDisplay-Semi</string>
+            <string>ChronicleDisplay-Semi</string>
+            <string>ChronicleDisplay-Semi</string>
+            <string>ChronicleDisplay-Semi</string>
+            <string>ChronicleDisplay-Semi</string>
+            <string>ChronicleDisplay-Semi</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -15,11 +38,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0le-8x-ttg">
-                                <rect key="frame" x="0.0" y="551" width="400" height="49"/>
+                                <rect key="frame" x="0.0" y="751" width="400" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
                                     <tabBarItem title="Awards" image="star" id="7Tl-Di-R9l"/>
@@ -36,11 +59,11 @@
                                 </constraints>
                                 <color key="barTintColor" red="0.1001130329" green="0.1001130329" blue="0.1001130329" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="18"/>
+                                    <fontDescription key="fontDescription" name="ChronicleDisplay-Roman" family="Chronicle Display" pointSize="17"/>
                                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Legacy Cup" id="jVo-8w-7f6">
+                                    <navigationItem title="LEGACY CUP" id="jVo-8w-7f6">
                                         <barButtonItem key="leftBarButtonItem" image="Settings" style="plain" id="D24-mD-CM6">
                                             <connections>
                                                 <segue destination="NI6-Zl-afC" kind="presentation" id="9zj-RH-SpU"/>
@@ -54,8 +77,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7li-Sp-n4k">
-                                <rect key="frame" x="0.0" y="60" width="400" height="491"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="91" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7li-Sp-n4k">
+                                <rect key="frame" x="0.0" y="60" width="400" height="691"/>
                                 <color key="backgroundColor" red="0.89139441289999999" green="0.89139441289999999" blue="0.89139441289999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="O86-lH-VsZ"/>
@@ -68,20 +91,20 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdD-dY-glf" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
-                                            <rect key="frame" x="200" y="160" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="36"/>
+                                            <rect key="frame" x="200" y="150" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" name="ChronicleDisplay-Bold" family="Chronicle Display" pointSize="36"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gff-lp-viR" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
-                                            <rect key="frame" x="200" y="210" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="16"/>
+                                            <rect key="frame" x="200" y="220" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" name="ChronicleDisplay-Bold" family="Chronicle Display" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbh-xw-fg9" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
-                                            <rect key="frame" x="200" y="160" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="23"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbh-xw-fg9" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
+                                            <rect key="frame" x="200" y="145" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Noq-Xk-Lbs">
@@ -89,7 +112,7 @@
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6f5-EK-eEn" userLabel="tableguide">
                                             <rect key="frame" x="8" y="400" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="16"/>
+                                            <fontDescription key="fontDescription" name="ChronicleDisplay-Italic" family="Chronicle Display" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -98,7 +121,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="80" id="C62-m5-nPx"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="70"/>
+                                            <fontDescription key="fontDescription" name="ChronicleDisplay-Black" family="Chronicle Display" pointSize="70"/>
                                             <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -116,35 +139,35 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVg-eh-39e" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVg-eh-39e" customClass="SpringLabel" customModule="MiCos" customModuleProvider="target">
                                             <rect key="frame" x="128" y="237" width="145" height="21"/>
-                                            <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="18"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" name="ChronicleDisplay-Bold" family="Chronicle Display" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.89139441289999999" green="0.89139441289999999" blue="0.89139441289999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="jdD-dY-glf" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" constant="-40" id="2Wm-0W-1v0"/>
+                                        <constraint firstItem="jdD-dY-glf" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" constant="-50" id="2Wm-0W-1v0"/>
                                         <constraint firstAttribute="width" secondItem="esV-91-9KO" secondAttribute="height" multiplier="1:1" id="5XP-ey-NT3"/>
                                         <constraint firstItem="jdD-dY-glf" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="6Ck-XT-Ncs"/>
                                         <constraint firstItem="kXh-pi-bwi" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="Fhu-TE-Bfj"/>
                                         <constraint firstItem="zbh-xw-fg9" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="HCw-UY-HFc"/>
-                                        <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="50" id="HQ9-PG-Ey4"/>
+                                        <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="70" id="HQ9-PG-Ey4"/>
                                         <constraint firstItem="jdD-dY-glf" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="KbQ-eQ-4ni"/>
                                         <constraint firstItem="gff-lp-viR" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="KeJ-zj-RUX"/>
                                         <constraint firstItem="kXh-pi-bwi" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="NtG-i2-sa4"/>
                                         <constraint firstItem="aVg-eh-39e" firstAttribute="top" secondItem="kXh-pi-bwi" secondAttribute="bottom" constant="5" id="Pa2-6J-nUZ"/>
                                         <constraint firstItem="Noq-Xk-Lbs" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="TbA-Gn-7E6"/>
-                                        <constraint firstItem="jdD-dY-glf" firstAttribute="top" secondItem="zbh-xw-fg9" secondAttribute="bottom" id="X8N-zf-88j"/>
+                                        <constraint firstItem="jdD-dY-glf" firstAttribute="top" secondItem="zbh-xw-fg9" secondAttribute="bottom" constant="5" id="X8N-zf-88j"/>
                                         <constraint firstItem="kXh-pi-bwi" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="ZvF-hx-Tki"/>
                                         <constraint firstItem="gff-lp-viR" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="avH-Rd-nPy"/>
                                         <constraint firstItem="aVg-eh-39e" firstAttribute="centerX" secondItem="esV-91-9KO" secondAttribute="centerX" id="exq-YB-uSX"/>
                                         <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="5" id="kzQ-y4-P5i"/>
                                         <constraint firstItem="6f5-EK-eEn" firstAttribute="leading" secondItem="esV-91-9KO" secondAttribute="leading" constant="8" id="mLU-Eb-C8X"/>
                                         <constraint firstItem="Noq-Xk-Lbs" firstAttribute="centerY" secondItem="esV-91-9KO" secondAttribute="centerY" id="oGN-nD-Xfc"/>
-                                        <constraint firstItem="aVg-eh-39e" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="67" id="tvU-4E-8p4"/>
+                                        <constraint firstItem="aVg-eh-39e" firstAttribute="top" secondItem="jdD-dY-glf" secondAttribute="bottom" constant="90" id="tvU-4E-8p4"/>
                                         <constraint firstItem="gff-lp-viR" firstAttribute="top" secondItem="kXh-pi-bwi" secondAttribute="bottom" constant="-31" id="u5E-xD-15A"/>
                                         <constraint firstAttribute="bottom" secondItem="6f5-EK-eEn" secondAttribute="bottom" id="x6r-tn-8J2"/>
                                     </constraints>
@@ -160,11 +183,11 @@
                                     </variation>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="feedCell" rowHeight="83" id="vdJ-jx-XC2" customClass="FeedTableViewCell" customModule="MiCos" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="428" width="400" height="83"/>
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="feedCell" rowHeight="91" id="vdJ-jx-XC2" customClass="FeedTableViewCell" customModule="MiCos" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="428" width="400" height="91"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vdJ-jx-XC2" id="9AX-XG-MkE">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="82.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="90.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="759" verticalCompressionResistancePriority="758" text="Message Reasoning text text text text text text text text text text" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Wx-WW-wKT">
@@ -174,40 +197,40 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Gid-Xd-TSI">
-                                                    <rect key="frame" x="342" y="16" width="50" height="50"/>
+                                                    <rect key="frame" x="342" y="-2" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="RFM-XY-VWk"/>
                                                         <constraint firstAttribute="height" constant="50" id="em0-aC-P4B"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="25"/>
+                                                    <fontDescription key="fontDescription" name="ChronicleDisplay-Black" family="Chronicle Display" pointSize="30"/>
                                                     <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Awarder" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ir-G7-jXs">
-                                                    <rect key="frame" x="272" y="69" width="66.5" height="5"/>
-                                                    <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="13"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="- Awarder" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ir-G7-jXs">
+                                                    <rect key="frame" x="18" y="69" width="66.5" height="13.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofx-ss-T6o">
-                                                    <rect key="frame" x="-12" y="8" width="18" height="74"/>
+                                                    <rect key="frame" x="-12" y="8" width="18" height="82"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="18" id="8as-Uz-hiR"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😜 Legacy: Awardee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfp-q9-W1c">
-                                                    <rect key="frame" x="8" y="8" width="384" height="23"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="23" id="ec9-mY-KBV"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ARCS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xe-0X-mwI">
+                                                    <rect key="frame" x="353" y="35" width="27.5" height="11.5"/>
+                                                    <fontDescription key="fontDescription" name="ChronicleDisplay-Semi" family="Chronicle Display" pointSize="10"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arcs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xe-0X-mwI">
-                                                    <rect key="frame" x="353.5" y="53" width="27.5" height="11.5"/>
-                                                    <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="11"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😜 Legacy: Awardee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfp-q9-W1c">
+                                                    <rect key="frame" x="18" y="8" width="374" height="23"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="23" id="ec9-mY-KBV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="ChronicleDisplay-Semi" family="Chronicle Display" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -217,20 +240,28 @@
                                                 <constraint firstItem="ofx-ss-T6o" firstAttribute="leading" secondItem="9AX-XG-MkE" secondAttribute="leadingMargin" constant="-20" id="8tt-qo-Bbz"/>
                                                 <constraint firstItem="qfp-q9-W1c" firstAttribute="trailing" secondItem="9AX-XG-MkE" secondAttribute="trailingMargin" id="BMB-uB-QoL"/>
                                                 <constraint firstItem="ofx-ss-T6o" firstAttribute="top" secondItem="9AX-XG-MkE" secondAttribute="topMargin" id="EMS-t7-qn6"/>
+                                                <constraint firstItem="Gid-Xd-TSI" firstAttribute="top" secondItem="9AX-XG-MkE" secondAttribute="topMargin" constant="-10" id="Gor-Lq-q1p"/>
                                                 <constraint firstItem="0Wx-WW-wKT" firstAttribute="top" secondItem="qfp-q9-W1c" secondAttribute="bottom" id="IvP-ib-ZyC"/>
                                                 <constraint firstItem="Gid-Xd-TSI" firstAttribute="centerY" secondItem="9AX-XG-MkE" secondAttribute="centerY" id="Jt3-Hu-zjT"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ofx-ss-T6o" secondAttribute="bottom" constant="-7.5" id="LQD-7Z-udi"/>
-                                                <constraint firstItem="qfp-q9-W1c" firstAttribute="leading" secondItem="9AX-XG-MkE" secondAttribute="leadingMargin" id="Oaz-TI-C6u"/>
+                                                <constraint firstItem="qfp-q9-W1c" firstAttribute="leading" secondItem="9AX-XG-MkE" secondAttribute="leadingMargin" constant="10" id="Oaz-TI-C6u"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Gid-Xd-TSI" secondAttribute="trailing" id="Qex-RH-wW7"/>
                                                 <constraint firstItem="7xe-0X-mwI" firstAttribute="centerX" secondItem="Gid-Xd-TSI" secondAttribute="centerX" id="Vsn-Ur-kZ1"/>
                                                 <constraint firstItem="7xe-0X-mwI" firstAttribute="top" secondItem="Gid-Xd-TSI" secondAttribute="bottom" constant="-13" id="Vxr-Qx-cKY"/>
                                                 <constraint firstItem="Gid-Xd-TSI" firstAttribute="leading" secondItem="0Wx-WW-wKT" secondAttribute="trailing" constant="3" id="ZMt-QO-Z8Z"/>
+                                                <constraint firstItem="0ir-G7-jXs" firstAttribute="leading" secondItem="9AX-XG-MkE" secondAttribute="leadingMargin" constant="10" id="gKj-WS-wkW"/>
                                                 <constraint firstItem="qfp-q9-W1c" firstAttribute="top" secondItem="9AX-XG-MkE" secondAttribute="topMargin" id="hLk-eo-16E"/>
                                                 <constraint firstItem="0Wx-WW-wKT" firstAttribute="leading" secondItem="9AX-XG-MkE" secondAttribute="leadingMargin" constant="10" id="rd2-je-xBS"/>
                                                 <constraint firstItem="Gid-Xd-TSI" firstAttribute="leading" secondItem="0ir-G7-jXs" secondAttribute="trailing" constant="3" id="s74-CY-exg"/>
                                                 <constraint firstItem="0ir-G7-jXs" firstAttribute="top" secondItem="0Wx-WW-wKT" secondAttribute="bottom" constant="5" id="wHA-pv-tFc"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="0ir-G7-jXs" secondAttribute="bottom" id="xLy-It-FrW"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Jt3-Hu-zjT"/>
+                                                    <exclude reference="s74-CY-exg"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.89139441289999999" green="0.89139441289999999" blue="0.89139441289999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -279,7 +310,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="400" height="600"/>
+                    <size key="freeformSize" width="400" height="800"/>
                     <connections>
                         <outlet property="arcPlace" destination="zbh-xw-fg9" id="1YP-ui-Ctp"/>
                         <outlet property="arcScore" destination="gff-lp-viR" id="k7f-YR-8an"/>
@@ -371,7 +402,13 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="TN8-jE-TNF" secondAttribute="trailing" id="W71-aR-Efk"/>
                                                 <constraint firstItem="TN8-jE-TNF" firstAttribute="leading" secondItem="Cn3-oe-vSy" secondAttribute="leadingMargin" id="YV6-b8-TkD"/>
                                                 <constraint firstItem="TN8-jE-TNF" firstAttribute="centerX" secondItem="Cn3-oe-vSy" secondAttribute="centerX" id="mZ1-ny-z6X"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Acl-lJ-zBK" secondAttribute="bottom" id="vKB-l1-QDu"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="IVP-XZ-F4b"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -397,7 +434,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="cAb-XM-4XC"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="30"/>
+                                                    <fontDescription key="fontDescription" name="ChronicleDisplay-Black" family="Chronicle Display" pointSize="30"/>
                                                     <color key="textColor" red="1" green="0.46193262839999999" blue="0.1088563228" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -542,29 +579,33 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPd-d4-crH" userLabel="email">
                                                     <rect key="frame" x="8" y="25" width="41.5" height="10.5"/>
-                                                    <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="ChronicleDisplay-Semi" family="Chronicle Display" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3V-3L-wMc" userLabel="name">
                                                     <rect key="frame" x="8" y="8" width="59.5" height="11.5"/>
-                                                    <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="ChronicleDisplay-Semi" family="Chronicle Display" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Q3V-3L-wMc" firstAttribute="centerY" secondItem="YhT-kW-oeC" secondAttribute="centerY" constant="-8" id="1OC-Qb-Of4"/>
+                                                <constraint firstItem="Q3V-3L-wMc" firstAttribute="centerY" secondItem="YhT-kW-oeC" secondAttribute="centerY" constant="-10" id="1OC-Qb-Of4"/>
                                                 <constraint firstItem="Q3V-3L-wMc" firstAttribute="leading" secondItem="YhT-kW-oeC" secondAttribute="leadingMargin" id="7Q1-lX-RIc"/>
                                                 <constraint firstItem="BPd-d4-crH" firstAttribute="leading" secondItem="YhT-kW-oeC" secondAttribute="leadingMargin" id="KZc-du-00g"/>
                                                 <constraint firstItem="Q3V-3L-wMc" firstAttribute="top" secondItem="YhT-kW-oeC" secondAttribute="topMargin" id="VOh-6K-00c"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="BPd-d4-crH" secondAttribute="bottom" constant="-7.5" id="amk-OV-kqo"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="BPd-d4-crH" secondAttribute="bottom" constant="2.5" id="fr9-wu-jBV"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="BPd-d4-crH" secondAttribute="bottom" id="fr9-wu-jBV"/>
+                                                <constraint firstAttribute="topMargin" secondItem="Q3V-3L-wMc" secondAttribute="top" id="hXu-Cx-sz2"/>
                                                 <constraint firstItem="BPd-d4-crH" firstAttribute="top" secondItem="Q3V-3L-wMc" secondAttribute="bottom" constant="3" id="lZN-23-aNI"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="1OC-Qb-Of4"/>
+                                                    <exclude reference="VOh-6K-00c"/>
                                                     <exclude reference="amk-OV-kqo"/>
+                                                    <exclude reference="lZN-23-aNI"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -576,23 +617,23 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Y8v-uf-Hq7">
+                                <rect key="frame" x="190" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZf-aZ-Y6Q">
                                 <rect key="frame" x="0.0" y="556" width="400" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="eQ3-Td-Rt1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
-                                <state key="normal" title="Choose">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Select">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="5E6-1G-vT8" kind="unwind" unwindAction="unwindWithSelectedAwardees:" id="R9p-ep-nAO"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Y8v-uf-Hq7">
-                                <rect key="frame" x="190" y="290" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -646,7 +687,7 @@
                         <color key="backgroundColor" red="0.1001130329" green="0.1001130329" blue="0.1001130329" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.1001130329" green="0.1001130329" blue="0.1001130329" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="18"/>
+                            <fontDescription key="fontDescription" name="ChronicleDisplay-Bold" family="Chronicle Display" pointSize="18"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                         </textAttributes>
@@ -820,11 +861,17 @@
                                             <constraints>
                                                 <constraint firstItem="42V-xl-N6v" firstAttribute="leading" secondItem="Hz9-yV-O8O" secondAttribute="leadingMargin" id="3se-bc-RLH"/>
                                                 <constraint firstItem="Ebg-UI-5zx" firstAttribute="top" secondItem="Hz9-yV-O8O" secondAttribute="topMargin" constant="-8" id="L2d-LL-mbv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Ebg-UI-5zx" secondAttribute="bottom" id="PYw-h0-L8E"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="42V-xl-N6v" secondAttribute="trailing" id="Vf9-Hd-dg6"/>
                                                 <constraint firstItem="42V-xl-N6v" firstAttribute="top" secondItem="Hz9-yV-O8O" secondAttribute="topMargin" id="d5F-cu-ggV"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="42V-xl-N6v" secondAttribute="bottom" id="djO-Uy-wNo"/>
                                                 <constraint firstItem="Ebg-UI-5zx" firstAttribute="trailing" secondItem="Hz9-yV-O8O" secondAttribute="trailingMargin" id="j4N-8E-0tE"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="L2d-LL-mbv"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -916,13 +963,13 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyo-Cp-uAK" userLabel="email">
                                                     <rect key="frame" x="16" y="25" width="41.5" height="10.5"/>
-                                                    <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="ChronicleDisplay-Semi" family="Chronicle Display" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25I-uW-p1x" userLabel="name">
                                                     <rect key="frame" x="16" y="8" width="59.5" height="11.5"/>
-                                                    <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="ChronicleDisplay-Semi" family="Chronicle Display" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
