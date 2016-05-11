@@ -81,6 +81,7 @@ class GratitudeTableViewController: UITableViewController, UITextViewDelegate {
         
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         
+        
         let today = NSDate()
         print (today)
         let calendar = NSCalendar.currentCalendar()
@@ -93,20 +94,24 @@ class GratitudeTableViewController: UITableViewController, UITextViewDelegate {
         
         //sets up five local notifications to remind people to send their daily gratitudes
         for i in 1...5 {
+            
+            //add a day to the time
+            pushTime = pushTime.dateByAddingTimeInterval(86400)
         
             let notification = UILocalNotification()
             notification.alertBody = message
             notification.fireDate = pushTime
+            notification.soundName = "velvet alert 07 descending.mp3"
+            notification.applicationIconBadgeNumber = 1
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
             
-            pushTime = pushTime.dateByAddingTimeInterval(86400)
             switch i {
             case 1:
                 message = "Someone do something nice or unexpected for you today? Show them your thanks with a Gratitude!"
             case 2:
                 message = "Taking just a few moments to reflect on what we are thankful for each day builds whole individuals and strong communities, want to send a Gratitude? "
             case 3:
-                message = "You haven't sent a Gratitude in four days, it only takes a few seconds of your time to make someone else's day."
+                message = "You haven't sent a Gratitude in a few days, it only takes a few seconds of your time to make someone else's day."
             case 4:
                 message = "It seems these notifications aren't working, I'll stop reminding you to send your daily Gratitude."
             default:

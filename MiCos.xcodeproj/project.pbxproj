@@ -25,7 +25,6 @@
 		4920E6841CDAC12B0099D320 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4920E6651CDAAAEA0099D320 /* ParseFacebookUtilsV4.framework */; };
 		4920E6851CDAC12E0099D320 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4920E6661CDAAAEA0099D320 /* ParseTwitterUtils.framework */; };
 		4920E6861CDAC1310099D320 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4920E6671CDAAAEA0099D320 /* ParseUI.framework */; };
-		492279B01B90E2F00062C695 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492279AF1B90E2F00062C695 /* AppDelegate.swift */; };
 		492279B21B90E2F00062C695 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492279B11B90E2F00062C695 /* ViewController.swift */; };
 		492279B51B90E2F00062C695 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492279B31B90E2F00062C695 /* Main.storyboard */; };
 		492279B71B90E2F00062C695 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 492279B61B90E2F00062C695 /* Images.xcassets */; };
@@ -151,6 +150,10 @@
 		4993D59E1C7471EB00E3AD06 /* ChartUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D5161C7471EB00E3AD06 /* ChartUtils.swift */; };
 		4993D59F1C7471EB00E3AD06 /* ChartViewPortHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D5171C7471EB00E3AD06 /* ChartViewPortHandler.swift */; };
 		4993D5A01C7471EB00E3AD06 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4993D51A1C7471EB00E3AD06 /* Info.plist */; };
+		49A5642A1CE3A81E00D9CA37 /* FlurryEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A564261CE3A81E00D9CA37 /* FlurryEmpty.m */; };
+		49A5642B1CE3A81E00D9CA37 /* libFlurry_7.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A564281CE3A81E00D9CA37 /* libFlurry_7.6.0.a */; };
+		49A5642F1CE3ABA200D9CA37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492279AF1B90E2F00062C695 /* AppDelegate.swift */; };
+		49A564321CE3B33B00D9CA37 /* velvet alert 07 descending.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 49A564311CE3B33B00D9CA37 /* velvet alert 07 descending.mp3 */; };
 		49B0C2701C7482690000CE80 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4993D5A51C7471EB00E3AD06 /* Charts.framework */; };
 		49B0C2711C7482690000CE80 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4993D5A51C7471EB00E3AD06 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		49C48ADA1C77E602009BBE69 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48ABC1C77E602009BBE69 /* AsyncButton.swift */; };
@@ -170,7 +173,6 @@
 		49C48AE81C77E602009BBE69 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48ACA1C77E602009BBE69 /* LoadingView.swift */; };
 		49C48AE91C77E602009BBE69 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C48ACB1C77E602009BBE69 /* LoadingView.xib */; };
 		49C48AEA1C77E602009BBE69 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48ACC1C77E602009BBE69 /* Misc.swift */; };
-		49C48AEB1C77E602009BBE69 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48ACD1C77E602009BBE69 /* SoundPlayer.swift */; };
 		49C48AEC1C77E602009BBE69 /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48ACF1C77E602009BBE69 /* Spring.swift */; };
 		49C48AED1C77E602009BBE69 /* SpringAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48AD01C77E602009BBE69 /* SpringAnimation.swift */; };
 		49C48AEE1C77E602009BBE69 /* SpringButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C48AD11C77E602009BBE69 /* SpringButton.swift */; };
@@ -394,6 +396,13 @@
 		4993D5171C7471EB00E3AD06 /* ChartViewPortHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewPortHandler.swift; sourceTree = "<group>"; };
 		4993D5191C7471EB00E3AD06 /* Charts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Charts.h; sourceTree = "<group>"; };
 		4993D51A1C7471EB00E3AD06 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49A564251CE3A81E00D9CA37 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		49A564261CE3A81E00D9CA37 /* FlurryEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryEmpty.m; sourceTree = "<group>"; };
+		49A564271CE3A81E00D9CA37 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
+		49A564281CE3A81E00D9CA37 /* libFlurry_7.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.6.0.a; sourceTree = "<group>"; };
+		49A564291CE3A81E00D9CA37 /* libFlurryWatch_7.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryWatch_7.6.0.a; sourceTree = "<group>"; };
+		49A564301CE3ACDB00D9CA37 /* MiCos-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MiCos-Bridging-Header.h"; sourceTree = "<group>"; };
+		49A564311CE3B33B00D9CA37 /* velvet alert 07 descending.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "velvet alert 07 descending.mp3"; sourceTree = "<group>"; };
 		49C48ABC1C77E602009BBE69 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		49C48ABD1C77E602009BBE69 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		49C48ABE1C77E602009BBE69 /* AutoTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTextView.swift; sourceTree = "<group>"; };
@@ -441,6 +450,7 @@
 				4920E67F1CDAAEA90099D320 /* libsqlite3.tbd in Frameworks */,
 				4920E67D1CDAAEA00099D320 /* libz.tbd in Frameworks */,
 				4920E6841CDAC12B0099D320 /* ParseFacebookUtilsV4.framework in Frameworks */,
+				49A5642B1CE3A81E00D9CA37 /* libFlurry_7.6.0.a in Frameworks */,
 				4920E67B1CDAAE940099D320 /* SystemConfiguration.framework in Frameworks */,
 				4920E6851CDAC12E0099D320 /* ParseTwitterUtils.framework in Frameworks */,
 				4920E6821CDAC11E0099D320 /* Bolts.framework in Frameworks */,
@@ -483,15 +493,9 @@
 		492279A11B90E2F00062C695 = {
 			isa = PBXGroup;
 			children = (
-				4920E67E1CDAAEA90099D320 /* libsqlite3.tbd */,
-				4920E67C1CDAAEA00099D320 /* libz.tbd */,
-				4920E67A1CDAAE940099D320 /* SystemConfiguration.framework */,
-				4920E6781CDAAE8D0099D320 /* StoreKit.framework */,
-				4920E6761CDAAE870099D320 /* Security.framework */,
-				4920E6741CDAAE810099D320 /* CoreLocation.framework */,
-				4920E6721CDAAE7B0099D320 /* CoreGraphics.framework */,
-				4920E6701CDAAE6F0099D320 /* CFNetwork.framework */,
-				4920E66E1CDAAE670099D320 /* AudioToolbox.framework */,
+				49A564301CE3ACDB00D9CA37 /* MiCos-Bridging-Header.h */,
+				49A564161CE2485200D9CA37 /* Frameworks */,
+				49A564241CE3A81E00D9CA37 /* Flurry */,
 				49C48ABB1C77E602009BBE69 /* Spring */,
 				4993D47D1C7471EB00E3AD06 /* Charts */,
 				4945674A1CE15AFD00EDBD6D /* Fonts */,
@@ -530,6 +534,7 @@
 				492279B81B90E2F00062C695 /* LaunchScreen.xib */,
 				49D024A21C91091700342F18 /* ChoosePersonViewController.swift */,
 				49C870B01C7FD2BC00EAEF55 /* CircularLoaderView.swift */,
+				49A564311CE3B33B00D9CA37 /* velvet alert 07 descending.mp3 */,
 				492279AD1B90E2F00062C695 /* Supporting Files */,
 			);
 			path = MiCos;
@@ -833,6 +838,34 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		49A564161CE2485200D9CA37 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4920E67E1CDAAEA90099D320 /* libsqlite3.tbd */,
+				4920E67C1CDAAEA00099D320 /* libz.tbd */,
+				4920E6761CDAAE870099D320 /* Security.framework */,
+				4920E67A1CDAAE940099D320 /* SystemConfiguration.framework */,
+				4920E6741CDAAE810099D320 /* CoreLocation.framework */,
+				4920E6781CDAAE8D0099D320 /* StoreKit.framework */,
+				4920E6721CDAAE7B0099D320 /* CoreGraphics.framework */,
+				4920E6701CDAAE6F0099D320 /* CFNetwork.framework */,
+				4920E66E1CDAAE670099D320 /* AudioToolbox.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		49A564241CE3A81E00D9CA37 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				49A564251CE3A81E00D9CA37 /* Flurry.h */,
+				49A564261CE3A81E00D9CA37 /* FlurryEmpty.m */,
+				49A564271CE3A81E00D9CA37 /* FlurryWatch.h */,
+				49A564281CE3A81E00D9CA37 /* libFlurry_7.6.0.a */,
+				49A564291CE3A81E00D9CA37 /* libFlurryWatch_7.6.0.a */,
+			);
+			path = Flurry;
+			sourceTree = "<group>";
+		};
 		49C48ABB1C77E602009BBE69 /* Spring */ = {
 			isa = PBXGroup;
 			children = (
@@ -1003,6 +1036,7 @@
 				494567581CE15AFD00EDBD6D /* ChronicleDisp-Bold.ttf in Resources */,
 				494567601CE15AFD00EDBD6D /* ChronicleDisp-XLightItalic.ttf in Resources */,
 				4993D51C1C7471EB00E3AD06 /* Cartfile.resolved in Resources */,
+				49A564321CE3B33B00D9CA37 /* velvet alert 07 descending.mp3 in Resources */,
 				4993D51B1C7471EB00E3AD06 /* Cartfile.private in Resources */,
 				4945675F1CE15AFD00EDBD6D /* ChronicleDisp-XLight.ttf in Resources */,
 				494567561CE15AFD00EDBD6D /* ChronicleDisp-Black.ttf in Resources */,
@@ -1026,7 +1060,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49C48AEB1C77E602009BBE69 /* SoundPlayer.swift in Sources */,
 				4993D5551C7471EB00E3AD06 /* CandleChartDataEntry.swift in Sources */,
 				4993D5441C7471EB00E3AD06 /* ChartAxisBase.swift in Sources */,
 				4993D59C1C7471EB00E3AD06 /* ChartTransformer.swift in Sources */,
@@ -1060,6 +1093,7 @@
 				4993D5471C7471EB00E3AD06 /* ChartLimitLine.swift in Sources */,
 				49C48AE81C77E602009BBE69 /* LoadingView.swift in Sources */,
 				4993D5531C7471EB00E3AD06 /* BubbleChartDataSet.swift in Sources */,
+				49A5642F1CE3ABA200D9CA37 /* AppDelegate.swift in Sources */,
 				4993D5561C7471EB00E3AD06 /* CandleChartDataSet.swift in Sources */,
 				4993D55F1C7471EB00E3AD06 /* PieChartData.swift in Sources */,
 				4993D5581C7471EB00E3AD06 /* ChartDataEntry.swift in Sources */,
@@ -1100,6 +1134,7 @@
 				4993D5511C7471EB00E3AD06 /* BubbleChartData.swift in Sources */,
 				4993D5931C7471EB00E3AD06 /* LineChartRenderer.swift in Sources */,
 				4993D5571C7471EB00E3AD06 /* ChartData.swift in Sources */,
+				49A5642A1CE3A81E00D9CA37 /* FlurryEmpty.m in Sources */,
 				49C48AE11C77E602009BBE69 /* DesignableTabBarController.swift in Sources */,
 				4993D5771C7471EB00E3AD06 /* ChartHighlight.swift in Sources */,
 				4915000A1C821B4200F2B74D /* AwardArcsViewController.swift in Sources */,
@@ -1109,7 +1144,6 @@
 				4993D5481C7471EB00E3AD06 /* ChartMarker.swift in Sources */,
 				4993D54C1C7471EB00E3AD06 /* BarChartData.swift in Sources */,
 				4993D5611C7471EB00E3AD06 /* RadarChartData.swift in Sources */,
-				492279B01B90E2F00062C695 /* AppDelegate.swift in Sources */,
 				49C48ADF1C77E602009BBE69 /* DesignableImageView.swift in Sources */,
 				4993D55B1C7471EB00E3AD06 /* LineChartData.swift in Sources */,
 				49C48AF51C77E602009BBE69 /* TransitionZoom.swift in Sources */,
@@ -1314,8 +1348,15 @@
 				INFOPLIST_FILE = MiCos/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flurry",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "MiCos-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1331,8 +1372,15 @@
 				INFOPLIST_FILE = MiCos/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flurry",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "MiCos-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

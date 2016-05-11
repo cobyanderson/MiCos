@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-
+        //configures parse server
         let configuration = ParseClientConfiguration {
             $0.applicationId = "myAppId"
             $0.clientKey = "clientkey"
@@ -69,9 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.initializeWithConfiguration(configuration)
         
         
-    
-    
+        //configures Flurry
+        Flurry.startSession("XNQHT96N5NNC5S22PRMN");
         
+ 
 //        Parse.setApplicationId("ptL6M8uCH8bdfi3ahQJmtM9oMdhDTzA8khp8kzaR",
 //            clientKey: "L8SbAeOmjjR6DdD4nu9Ffc08feWy3uF036taEbYI")
         
@@ -158,6 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             currentInstallation.saveInBackground()
         }
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {

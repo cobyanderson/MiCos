@@ -30,8 +30,6 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     
     @IBOutlet weak var feedTable: UITableView!
     
-    @IBOutlet weak var awardArcsButton: UIBarButtonItem!
-    
     @IBOutlet weak var topSpace: NSLayoutConstraint!
     
     @IBOutlet weak var spinny: UIActivityIndicatorView!
@@ -46,8 +44,11 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     
     var refreshControl:UIRefreshControl?
     
-    var oneTimePass = false
-    // allows the app time to save the fact that a user has just completed their daily gratitude
+    //keeps track of the last tab the user was on (gratitudes or leaderboard)
+    var lastTab: Int = 0
+    
+    //holds the role of the user (admin or student)
+    var userRole: String = "student"
     
     var currentTable: String = "Awards" {
         didSet {
@@ -91,15 +92,14 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             
                 let range = NSMakeRange(0, self.feedTable.numberOfSections)
                 let sections = NSIndexSet(indexesInRange: range)
-                self.feedTable.reloadSections(sections, withRowAnimation: .Middle)
+                //animates the feedtable cells
+                self.feedTable.reloadSections(sections, withRowAnimation: .Bottom)
                 self.refreshControl?.endRefreshing()
             
         }
     }
-    var lastGratitudeDate: PFObject?
-    
 
-    
+ 
     let colorSet =
     [   UIColor.brownColor(),
         UIColor(red: 0.102, green: 0.7373, blue: 0.6118, alpha: 1.0), //1
@@ -177,7 +177,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         pieChartView.data = chartData
        // pieChartView.backgroundColor = UIColor.clearColor()
         pieChartView.descriptionText = ""
-       // pieChartView.animate(xAxisDuration: 5.0, yAxisDuration: 4.0)
+        //pieChartView.animate(xAxisDuration: 0.3, yAxisDuration: 0.3)
         
         pieChartView.holeRadiusPercent = 0.70
 
@@ -206,23 +206,23 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
 //        self.animatedLogo.duration = 4
 //        self.animatedLogo.rotate = 180
         
-        self.legacyName.animation = "fadeIn"
+        self.legacyName.animation = "zoomIn"
         self.legacyName.curve = "linear"
         self.legacyName.duration = 0.3
         
-        self.arcScore.animation = "fadeIn"
+        self.arcScore.animation = "zoomIn"
         self.arcScore.curve = "linear"
         self.arcScore.duration = 0.3
         
-        self.arcPlace.animation = "fadeIn"
+        self.arcPlace.animation = "zoomIn"
         self.arcPlace.curve = "linear"
         self.arcPlace.duration = 0.3
         
-        self.bigArcs.animation = "fadeIn"
+        self.bigArcs.animation = "zoomIn"
         self.bigArcs.curve = "linear"
         self.bigArcs.duration = 0.3
         
-        self.gratitudesLabel.animation = "fadeIn"
+        self.gratitudesLabel.animation = "zoomIn"
         self.gratitudesLabel.curve = "linear"
         self.gratitudesLabel.duration = 0.3
        
@@ -322,63 +322,37 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     }
     func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         if item == self.tabBar.items![0] {
-           self.feedTable.tableHeaderView!.frame.size.height = view.frame.size.width
-//            header.setNeedsLayout()
-//            header.layoutIfNeeded()
-//            let height = header.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
-//            header.frame.size.height = height
-//            feedTable.tableHeaderView = header
-//            self.arcPlace.layoutIfNeeded()
-//            self.arcScore.layoutIfNeeded()
-//            self.legacyName.layoutIfNeeded()
+            self.feedTable.tableHeaderView!.frame.size.height = view.frame.size.width
             self.currentTable = "Awards"
             self.pieChartView.userInteractionEnabled = true
-    
-            
-           
+            self.lastTab = 0
+
         }
-        if item == self.tabBar.items![1] {
-           self.feedTable.tableHeaderView!.frame.size.height = 0
+        if item == self.tabBar.items![2] {
+            self.feedTable.tableHeaderView!.frame.size.height = 0
             self.currentTable = "Gratitudes"
             self.pieChartView.userInteractionEnabled = false
-          
-            
-            
-            
+            self.lastTab = 2
         
+        }
+        if item == self.tabBar.items![1]{
+            if let role = PFUser.currentUser()?["Role"] {
+                if role as? String == "F" || role as? String == "E" {
+                    self.performSegueWithIdentifier("gratitudeSegue", sender: self)
+                } else {
+                    self.performSegueWithIdentifier("awardSegue", sender: self)
+                }
+            }
         }
     }
+    // Callback when application enters the foreground
+    func applicationDidBecomeActiveNotification() {
+        self.checkGratitudeNote()
+        self.checkGratitudePop()
+        self.refresh()
+    }
     override func viewDidAppear(animated: Bool) {
-        
-        //gets today's date
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Day], fromDate: date)
-        let today = components.day
-     
-        
-        //grabs the last date stored the last time a gratitude was sent and pops up the sendgratitude view controller if it does not match today
-        let query = PFQuery(className:"lastGratitude")
-        query.fromLocalDatastore()
-        query.getFirstObjectInBackgroundWithBlock { (object, error) in
-            if error == nil && object != nil {
-                    if today != (object!["sent"] as! Int) {
-                         self.performSegueWithIdentifier("gratitudeSegue", sender: self)
-                }
-            } else {
-                //if it does not exist, this creates a new record of the last gratitude date (0 is never a date)
-                let newObject = PFObject(className: "lastGratitude")
-                newObject["sent"] = 0
-                newObject.pinInBackground()
-                self.performSegueWithIdentifier("gratitudeSegue", sender: self)
-                
-                
-            }
-            
-        }
-   
-
-
+        self.checkGratitudeNote()
     }
     
     override func viewDidLoad() {
@@ -386,22 +360,37 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         feedTable.delegate = self
         feedTable.dataSource = self
         tabBar.delegate = self
+        //navigationController?.delegate = self
         self.feedTable.estimatedRowHeight = 150.0
         self.feedTable.rowHeight = UITableViewAutomaticDimension
         
+      //  self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "ChronicleDisp-Bold", size: 20)!]
         
-            
-        //fading + button if student
+        //does something to the separators
+        self.feedTable.separatorColor = UIColor.clearColor()
+        
+        
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        // Add observer:
+        notificationCenter.addObserver(self, selector:#selector(ViewController.applicationDidBecomeActiveNotification), name:UIApplicationDidBecomeActiveNotification, object:nil)
+        
+        
+     
+        //changing award arcs button to award gratitudes if a student is the user
+        //also sets the role variable to either admin or student
         if let role = PFUser.currentUser()?["Role"] {
-            if role as? String == "F" {
-                self.awardArcsButton.enabled = false
-              
-                
-            }
+            if role as? String == "F" || role as? String == "E" {
+                self.tabBar.items![1].title = "Give Gratitude"
+                //self.tabBar.items![2].enabled = true
+                self.userRole = "student"
+            } else {
+                self.userRole = "admin"
+                //self.tabBar.items![2].enabled = false
+          }
         }
-        else {
-            self.awardArcsButton.enabled = false
-        }
+
+        self.checkGratitudePop()
+
         //setting up a refresh control
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
@@ -415,9 +404,80 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         tabBar.selectedItem = tabBar.items![0]
         self.refresh()
        
-        
-      
     }
+    func checkGratitudeNote() {
+        
+        //only runs to check this if the user is a student
+        if userRole == "student" {
+            //gets today's date
+            let date = NSDate()
+            let calendar = NSCalendar.currentCalendar()
+            let components = calendar.components([.Day], fromDate: date)
+            let today = components.day
+            
+            
+            //grabs the last date stored the last time a gratitude was sent and modifies the
+            let query = PFQuery(className:"lastGratitude")
+            query.whereKey("user", equalTo: PFUser.currentUser()!)
+            query.getFirstObjectInBackgroundWithBlock { (object, error) in
+                if error == nil && object != nil {
+                    if today != (object!["sent"] as! Int) {
+                        self.tabBar.items![1].badgeValue = "!"
+                        self.tabBar.items![1].enabled = true
+                        
+                    } else {
+                        self.tabBar.items![1].enabled = false
+                        self.tabBar.items![1].badgeValue = "✓"
+                    }
+                } else {
+                    //if it does not exist, this creates a new record of the last gratitude date (0 is never a date)
+                    let newObject = PFObject(className: "lastGratitude")
+                    newObject["sent"] = 0
+                    newObject["user"] = PFUser.currentUser()!
+                    newObject.saveInBackground()
+                    self.tabBar.items![1].badgeValue = "!"
+                    self.tabBar.items![1].enabled = true
+                    
+                    
+                }
+                
+            }
+        }
+    }
+    
+    func checkGratitudePop() {
+        
+        //only checks for gratitudes if user is a student
+        if userRole == "student" {
+            //gets today's date
+            let date = NSDate()
+            let calendar = NSCalendar.currentCalendar()
+            let components = calendar.components([.Day], fromDate: date)
+            let today = components.day
+            
+            //grabs the last date stored the last time a gratitude was sent and pops up the sendgratitude view controller if it does not match today
+            let query = PFQuery(className:"lastGratitude")
+            query.whereKey("user", equalTo: PFUser.currentUser()!)
+            query.getFirstObjectInBackgroundWithBlock { (object, error) in
+                if error == nil && object != nil {
+                    if today != (object!["sent"] as! Int) {
+                        self.performSegueWithIdentifier("gratitudeSegue", sender: self)
+                    }
+                } else {
+                    //if it does not exist, this creates a new record of the last gratitude date (0 is never a date)
+                    let newObject = PFObject(className: "lastGratitude")
+                    newObject["sent"] = 0
+                    newObject["user"] = PFUser.currentUser()!
+                    newObject.saveInBackground()
+                    self.performSegueWithIdentifier("gratitudeSegue", sender: self)
+                    
+                }
+                
+            }
+            
+        }
+    }
+    
     func queryLegacies() {
         //clears legacy info first
         var Names: [String] = []
@@ -504,6 +564,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                 if let notifications = objects {
                     self.notifications = notifications
                     self.feedTable.layoutIfNeeded()
+                    
                     self.pieChartView.layoutIfNeeded()
                     
                 }
@@ -546,11 +607,12 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         let color = self.colorSet[legacyIndex!]
         if currentTable == "Awards" {
             cell.colorView.backgroundColor = color
-            cell.titleLabel.text = ("\(emoji) \(legacy.uppercaseString): \(awardee)")
+            cell.titleLabel.text = ("\(legacy): \(awardee)")
             cell.bodyLabel.text = message
             cell.arcLabel.text = (String(format: "%.0f", arcs))
             cell.awarderLabel.text = "-\(awarder) on \(date)"
             cell.arcTitleLabel.text = "ARCS"
+            cell.emojiLabel.text = emoji
         }
         if currentTable == "Gratitudes" {
             cell.bodyLabel.text = message
@@ -559,6 +621,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
             cell.titleLabel.text = "\(awarder):"
             cell.colorView.backgroundColor = UIColor.clearColor()
             cell.arcTitleLabel.text = "ARC"
+            cell.emojiLabel.text = ""
             
             
         }
@@ -569,41 +632,53 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        //if the table will be empty, we create a label that says why
+        if self.notifications.count == 0 {
+          
+            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, self.feedTable.bounds.size.width, self.feedTable.bounds.size.height))
+            if currentTable == "Awards" {
+            }
+            if currentTable == "Gratitudes" {
+                if userRole == "admin" {
+                    noDataLabel.text = "💔\n" +
+                    "Staff are not yet able to send or receive Gratitudes.\n" +
+                    "Want to? Submit a suggestion in the Settings menu."
+                } else {
+                    noDataLabel.text = "💔\n" +
+                    "No Gratitudes yet, try giving your own!"
+                }
+            }
+ 
+            noDataLabel.textColor = UIColor.grayColor()
+            noDataLabel.textAlignment = NSTextAlignment.Center
+            noDataLabel.numberOfLines = 5
+            noDataLabel.adjustsFontSizeToFitWidth = true
+        
+            
+            self.feedTable.backgroundView = noDataLabel
+        } else {
+            self.feedTable.backgroundView = nil
+        }
+        
         return self.notifications.count
     }
 
-    
-    
-//        let legacyEmojis = ["🏛", "💡", "🔔","⚾️","👁","🦀", "☀️", "❤️", "🌳","💰","🕯", "🔺","👑","🐙","🌐", "⛪", "🌊", "🕛", "🎨", "🚃", "📰", "⚡️", "🗡", "🏵", "⌛️"]
-//        let legacyNames = ["Civic", "Eureka", "Liberty", "Field", "Mason", "Pier", "Gate", "Union", "Vista", "Reserve", "Hunter", "Pyramid", "Laurel", "Octagon", "Plaza", "Mission", "Ocean", "North", "Tower", "Cable", "Chronicle", "Circuit", "Legion", "Labyrinth", "Lands"]
-//        let arcs = [61.3, 65.0, 41.0, 144.0, 86.4, 92.0,  97.0, 98.0, 99.0, 48.0, 51.9, 152.0, 53.0, 54.6, 59.0, 60.0,  64.6, 166.0, 70.0, 94.0, 95.2,73.0, 179.0, 80.5, 81.0]
-        
-        
-//        for index in 0...(legacyEmojis.count - 1) {
-//            var legacy = PFObject(className: "Legacies")
-//            legacy["Name"] = legacyNames[index]
-//            legacy["Emoji"] =  legacyEmojis[index]
-//            legacy["TotalArcs"] = arcs[index]
-//            legacy["Color"] = self.colorSet[index]
-//            legacy.saveInBackgroundWithBlock({ (Bool, error) -> Void in
-//            
-//                print ("yay")
-//            })
-//        }
-
-        
-        // Do any additional setup after loading the view, typically from a nib.
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //this is coming from the settings screen
     @IBAction func closeToViewController(segue:UIStoryboardSegue) {
+        self.tabBar.selectedItem = self.tabBar.items![lastTab]
     }
     
+    //this is coming from the award arcs screen
     @IBAction func cancelToViewController(segue:UIStoryboardSegue) {
+        self.tabBar.selectedItem = self.tabBar.items![lastTab]
     }
     
     
@@ -618,16 +693,21 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         
         //saves if the gratitude has been sent or not
         let query = PFQuery(className:"lastGratitude")
-        query.fromLocalDatastore()
         query.getFirstObjectInBackgroundWithBlock { (object, error) in
             if error == nil && object != nil {
                 object!["sent"] = today
-                object!.pinInBackground()
+                object!.saveInBackground()
             } else {
                 print (error)
             }
         }
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
+        //sets the tab bar to return to the last selected value
+        self.tabBar.selectedItem = self.tabBar.items![lastTab]
+        
+        //sets the ability to award a gratitude to false and removes the badge
+        self.tabBar.items![1].enabled = false
+        self.tabBar.items![1].badgeValue = "✓"
             
         
         if let gratitudeTableViewController = segue.sourceViewController as? GratitudeTableViewController {
@@ -813,6 +893,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         //return UIStatusBarStyle.Default
         
     }
+
 
 
 }

@@ -30,7 +30,11 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func findPeople(completionBlock:PFQueryArrayResultBlock) -> PFQuery {
-        let searchText = self.personSearchBar?.text ?? ""
+        var searchText = self.personSearchBar?.text ?? ""
+        //makes sure search text is not empty and searches for a space instead (spaces are in between every name)
+        if searchText == "" {
+            searchText = " "
+        }
         let userQuery = PFUser.query()
         if let awardersLegacy = PFUser.currentUser()?["Legacy"] as? String {
             userQuery?.whereKey("Legacy", notEqualTo: awardersLegacy)
@@ -76,6 +80,27 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   
+        if self.foundPeople?.count ?? 0 == 0 {
+            
+            
+            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, self.personTableView.bounds.size.width, self.personTableView.bounds.size.width))
+            
+            noDataLabel.text = "🕵🏻\n" +
+            "No students found"
+            noDataLabel.textColor = UIColor.grayColor()
+            noDataLabel.textAlignment = NSTextAlignment.Center
+            noDataLabel.numberOfLines = 5
+            noDataLabel.adjustsFontSizeToFitWidth = true
+            
+            self.personTableView.backgroundView = noDataLabel
+            self.personTableView.separatorColor = UIColor.clearColor()
+            
+        } else {
+            self.personTableView.backgroundView = nil
+            self.personTableView.separatorColor = UIColor.lightGrayColor()
+        }
+        
         return self.foundPeople?.count ?? 0
     }
     
