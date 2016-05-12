@@ -141,6 +141,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         updateMiddle(newName, score: newScore)
         queryNotifications(newName)
         
+        let chartParams = ["Legacy": newName]
+        Flurry.logEvent("Chart Tapped", withParameters: chartParams)
+        
       
         
     }
@@ -295,6 +298,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     }
     
     func refresh() {
+
+        Flurry.logEvent("Refresh")
+        
         if currentTable == "Awards" {
             //hides the label so it doesnt pop up til the rest does
             self.tableguideLabel.hidden = true
@@ -338,8 +344,10 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
         if item == self.tabBar.items![1]{
             if let role = PFUser.currentUser()?["Role"] {
                 if role as? String == "F" || role as? String == "E" {
+                    Flurry.logEvent("Gratitude Segue")
                     self.performSegueWithIdentifier("gratitudeSegue", sender: self)
                 } else {
+                    Flurry.logEvent("Award Segue")
                     self.performSegueWithIdentifier("awardSegue", sender: self)
                 }
             }
@@ -671,13 +679,23 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     }
     
     
-    //this is coming from the settings screen
+    //this is coming from the settings or the gratitude screen screen
     @IBAction func closeToViewController(segue:UIStoryboardSegue) {
+        
+        //logs that the "Later" button was pressed if the segue was from the gratitude view controller
+        if let gratitudeTableViewController = segue.sourceViewController as? GratitudeTableViewController {
+            
+            Flurry.logEvent("Gratitude Later")
+        }
+        
         self.tabBar.selectedItem = self.tabBar.items![lastTab]
     }
     
     //this is coming from the award arcs screen
     @IBAction func cancelToViewController(segue:UIStoryboardSegue) {
+        if let awardArcsViewController = segue.sourceViewController as? AwardArcsViewController{
+            Flurry.logEvent("Award Cancel")
+        }
         self.tabBar.selectedItem = self.tabBar.items![lastTab]
     }
     
@@ -736,7 +754,8 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                                 notification["Notify"] = -1
                                 notification.saveInBackgroundWithBlock({ (Bool, error) in
                                     
-                                    
+                                    let gratitudeParams = ["Awardee": passedAwardee!, "Awarder": currentUser?["Name"] as! String, "Message Length": passedText.length]
+                                    Flurry.logEvent("Gratitude", withParameters: gratitudeParams as [NSObject : AnyObject])
                                     
                                     //also increments points
                                     let pointsQuery = PFQuery(className: "Legacies")
@@ -826,7 +845,8 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                                 notification["Notify"] = passedNotify
                                 notification.saveInBackgroundWithBlock({ (Bool, error) in
                                     
-                                    
+                                    let awardParams = ["Awardee": user["Name"], "Awarder": currentUser?["Name"] as! String, "Message Length": passedText.length]
+                                    Flurry.logEvent("Award", withParameters: awardParams as [NSObject : AnyObject])
                                     
                                     //also increments points
                                     let pointsQuery = PFQuery(className: "Legacies")
