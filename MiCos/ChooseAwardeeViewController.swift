@@ -43,8 +43,12 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         }
     }
     
-   func findAwardees(completionBlock:PFArrayResultBlock) -> PFQuery {
-        let searchText = self.chooseAwardeeSearchBar?.text ?? ""
+   func findAwardees(completionBlock:PFQueryArrayResultBlock) -> PFQuery {
+        var searchText = self.chooseAwardeeSearchBar?.text ?? ""
+        //makes sure search text is not empty and searches for a space instead (spaces are in between every name)
+        if searchText == "" {
+            searchText = " "
+        }
         let userQuery = PFUser.query()
         if let awardersLegacy = PFUser.currentUser()?["Legacy"] as? String {
             userQuery?.whereKey("Legacy", notEqualTo: awardersLegacy)
@@ -58,8 +62,8 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         return userQuery!
         
     }
-    func searchUpdateList(results: [AnyObject]?, error: NSError?) {
-        let awardees = results as? [PFObject] ?? []
+    func searchUpdateList(results: [PFObject]?, error: NSError?) {
+        let awardees = results ?? []
         self.foundAwardees = awardees.map({ (awardee) -> PFUser in
             return awardee as! PFUser
         })
@@ -105,7 +109,27 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
 
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
+        if self.foundAwardees?.count ?? 0 == 0 {
+            
+    
+            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, self.awardeeTableView.bounds.size.width, self.awardeeTableView.bounds.size.width))
+          
+            noDataLabel.text = "🕵🏻\n" +
+                "No students found"
+            noDataLabel.textColor = UIColor.grayColor()
+            noDataLabel.textAlignment = NSTextAlignment.Center
+            noDataLabel.numberOfLines = 5
+            noDataLabel.adjustsFontSizeToFitWidth = true
+            
+            self.awardeeTableView.backgroundView = noDataLabel
+            self.awardeeTableView.separatorColor = UIColor.clearColor()
+            
+        } else {
+            self.awardeeTableView.backgroundView = nil
+            self.awardeeTableView.separatorColor = UIColor.lightGrayColor()
+        }
+        
         return self.foundAwardees?.count ?? 0
     }
 
@@ -115,7 +139,7 @@ class ChooseAwardeeViewController: UIViewController, UISearchBarDelegate, UITabl
         let foundAwardee = foundAwardees![indexPath.row]
         //cell.legacyLabel.text = foundAwardee["Emoji"] as? String ?? "error"
         cell.nameLabel.text = foundAwardee["Name"] as? String ?? "error"
-        cell.emailLabel.text = foundAwardee["Legacy"] as? String ?? "error"
+        cell.emailLabel.text = (foundAwardee["Legacy"] as? String ?? "error").uppercaseString
 
         if selectedAwardees!.contains(foundAwardees![indexPath.row].objectId!) {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark

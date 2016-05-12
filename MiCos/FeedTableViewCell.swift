@@ -22,6 +22,7 @@ class FeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var arcTitleLabel: UILabel!
     
+    @IBOutlet weak var emojiLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

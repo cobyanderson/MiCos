@@ -29,8 +29,12 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    func findPeople(completionBlock:PFArrayResultBlock) -> PFQuery {
-        let searchText = self.personSearchBar?.text ?? ""
+    func findPeople(completionBlock:PFQueryArrayResultBlock) -> PFQuery {
+        var searchText = self.personSearchBar?.text ?? ""
+        //makes sure search text is not empty and searches for a space instead (spaces are in between every name)
+        if searchText == "" {
+            searchText = " "
+        }
         let userQuery = PFUser.query()
         if let awardersLegacy = PFUser.currentUser()?["Legacy"] as? String {
             userQuery?.whereKey("Legacy", notEqualTo: awardersLegacy)
@@ -45,8 +49,8 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
         return userQuery!
         
     }
-    func searchUpdateList(results: [AnyObject]?, error: NSError?) {
-        let awardees = results as? [PFObject] ?? []
+    func searchUpdateList(results: [PFObject]?, error: NSError?) {
+        let awardees = results ?? []
         self.foundPeople = awardees.map({ (awardee) -> PFUser in
             return awardee as! PFUser
         })
@@ -76,6 +80,27 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   
+        if self.foundPeople?.count ?? 0 == 0 {
+            
+            
+            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, self.personTableView.bounds.size.width, self.personTableView.bounds.size.width))
+            
+            noDataLabel.text = "🕵🏻\n" +
+            "No students found"
+            noDataLabel.textColor = UIColor.grayColor()
+            noDataLabel.textAlignment = NSTextAlignment.Center
+            noDataLabel.numberOfLines = 5
+            noDataLabel.adjustsFontSizeToFitWidth = true
+            
+            self.personTableView.backgroundView = noDataLabel
+            self.personTableView.separatorColor = UIColor.clearColor()
+            
+        } else {
+            self.personTableView.backgroundView = nil
+            self.personTableView.separatorColor = UIColor.lightGrayColor()
+        }
+        
         return self.foundPeople?.count ?? 0
     }
     
@@ -85,7 +110,7 @@ class ChoosePersonViewController: UIViewController, UITableViewDataSource, UITab
         
         let foundPerson = foundPeople![indexPath.row]
         cell.nameLabel.text = foundPerson["Name"] as? String ?? "error"
-        cell.emailLabel.text = foundPerson["Legacy"] as? String ?? "error"
+        cell.emailLabel.text = (foundPerson["Legacy"] as? String ?? "error").uppercaseString
         
         return cell
         
