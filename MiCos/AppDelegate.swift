@@ -60,8 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //configures parse server
         let configuration = ParseClientConfiguration {
-            $0.applicationId = "myAppId"
-            $0.clientKey = "clientkey"
+            $0.applicationId = "legacycup"
+            $0.clientKey = "minervalegacycupclientkey"
             $0.server = "https://minerva-legacy-cup.herokuapp.com/parse"
             $0.localDatastoreEnabled = true
             

@@ -47,6 +47,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     //keeps track of the last tab the user was on (gratitudes or leaderboard)
     var lastTab: Int = 0
     
+    //keeps track of the last angle the graph was at
+    var lastAngle: CGFloat = 1
+    
     //holds the role of the user (admin or student)
     var userRole: String = "student"
     
@@ -93,7 +96,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                 let range = NSMakeRange(0, self.feedTable.numberOfSections)
                 let sections = NSIndexSet(indexesInRange: range)
                 //animates the feedtable cells
-                self.feedTable.reloadSections(sections, withRowAnimation: .Bottom)
+                self.feedTable.reloadSections(sections, withRowAnimation: .Automatic)
                 self.refreshControl?.endRefreshing()
             
         }
@@ -190,7 +193,9 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
       //  pieChartView.holeColor = UIColor.whiteColor()
       //  pieChartView.holeColor = UIColor.clearColor()
         pieChartView.transparentCircleRadiusPercent = 0.75
-        pieChartView.dragDecelerationFrictionCoef = 0
+        //pieChartView.dragDecelerationFrictionCoef = 0.99
+        //pieChartView.dragDecelerationEnabled = false
+        pieChartView.rotationEnabled = false
         
         //self.pieChartView.layoutIfNeeded()
  
@@ -300,6 +305,17 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
     func refresh() {
 
         Flurry.logEvent("Refresh")
+        
+        
+        //this spins the graph for funsies
+        let randomNum = drand48()
+        let newAngle: CGFloat = (360*CGFloat(randomNum))
+        let easingOptions: [ChartEasingOption] = [.EaseInBack, .EaseInBounce,.EaseInCirc,.EaseInCubic,.EaseInElastic,.EaseInExpo,.EaseInOutBack,.EaseInOutBounce,.EaseInOutCirc,.EaseInOutCubic,.EaseInElastic,.EaseInExpo,.EaseInOutQuad,.EaseInOutQuart,.EaseInOutQuint,.EaseInOutSine,.EaseInQuad,.EaseInQuart,.EaseInQuint,.EaseInSine,.EaseOutBack,.EaseOutBounce,.EaseOutCirc,.EaseOutCubic,.EaseOutElastic,.EaseOutExpo,.EaseOutQuad,.EaseOutQuart,.EaseOutQuint,.EaseOutSine,.Linear]
+        
+        self.pieChartView.spin(duration: 0.6, fromAngle: lastAngle, toAngle: newAngle, easingOption: easingOptions[(Int((randomNum + 0.04)*31) - 1)])
+        
+        
+        self.lastAngle = newAngle
         
         if currentTable == "Awards" {
             //hides the label so it doesnt pop up til the rest does
@@ -845,6 +861,7 @@ class ViewController: UIViewController, ChartViewDelegate, UITableViewDelegate, 
                                 notification["Notify"] = passedNotify
                                 notification.saveInBackgroundWithBlock({ (Bool, error) in
                                     
+                                    //logging flurry event
                                     let awardParams = ["Awardee": user["Name"], "Awarder": currentUser?["Name"] as! String, "Message Length": passedText.length]
                                     Flurry.logEvent("Award", withParameters: awardParams as [NSObject : AnyObject])
                                     
