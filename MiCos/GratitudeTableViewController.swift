@@ -51,6 +51,7 @@ class GratitudeTableViewController: UITableViewController, UITextViewDelegate {
     func textViewDidChange(textView: UITextView) {
         self.textLength = textView.text.length
     }
+    //hides the keyboard when the return key is pressed
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             textView.resignFirstResponder()
